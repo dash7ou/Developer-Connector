@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const  DBConnect = require("./config/db");
 
-// import route
+// get app route
 const users = require("./routes/users");
 const profile = require("./routes/profile");
 const auth = require("./routes/auth");
