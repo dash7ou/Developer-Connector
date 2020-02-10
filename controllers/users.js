@@ -3,7 +3,7 @@ const ErrorRespose = require('../utils/errorResponse');
 const { validationResult } = require("express-validator");
 const asyncFun = require("../middleware/async");
 
-exports.postUser = asyncFun(async(req, res, next)=>{
+exports.postUser = asyncFun( async(req, res, next)=>{
     const errors = validationResult(req);
     let error;
     if(!errors.isEmpty()){

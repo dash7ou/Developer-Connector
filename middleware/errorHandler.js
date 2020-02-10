@@ -1,4 +1,5 @@
 const errorHandler = (err, req, res, next)=>{
+    console.log(err)
     if(!err.errorObj){
         res.status(err.statusCode || 500).send({
             success: false,
