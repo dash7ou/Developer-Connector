@@ -2,6 +2,8 @@ const User = require("../models/User");
 const ErrorRespose = require('../utils/errorResponse');
 const { validationResult } = require("express-validator");
 const asyncFun = require("../middleware/async");
+const gravatar = require("gravatar");
+
 
 exports.postUser = asyncFun( async(req, res, next)=>{
     const errors = validationResult(req);
@@ -16,7 +18,9 @@ exports.postUser = asyncFun( async(req, res, next)=>{
     }
     
     const {body: {
-        email   
+        email,
+        password,
+        name
     }}= req;
 
     let user = await User.findOne({email});
@@ -29,13 +33,24 @@ exports.postUser = asyncFun( async(req, res, next)=>{
 
         throw new ErrorRespose('', error)
     }
-    user = new User(req.body);
+
+    const avatar = gravatar.url(email, {
+        s: "200",
+        r: "pg",
+        d: "mm"
+    }, true)
+
+    user = new User({
+        email,
+        password,
+        name,
+        avatar
+    });
 
     await user.save();
     const token = user.getUserToken()
 
     return res.status(200).header("x-auth-token", `Bearer ${token}`).json({
-        message: 'user created',
-        user: user._id,
+        message: 'user created'
     })
 });
