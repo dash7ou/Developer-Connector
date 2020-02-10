@@ -22,7 +22,7 @@ exports.loginUser= asyncFun( async (req, res, next)=>{
         }
     } = req;
 
-    const user = await User.findOne({ email }).select('-password');
+    const user = await User.findOne({ email }).select('+password');
     if(!user){
         error = {
             type: 'onlyMessage',
@@ -51,6 +51,20 @@ exports.loginUser= asyncFun( async (req, res, next)=>{
 })
 
 exports.getUserProfile = (req, res, next)=>{
-    const { user } = req;
-    res.send(user)
+    const { user: {
+        _id,
+        email,
+        avatar,
+        name,
+        createdAt,
+        updatedAt
+    } } = req;
+    res.send({
+        _id,
+        name,
+        email,
+        avatar,
+        createdAt,
+        updatedAt
+    })
 }
