@@ -1,3 +1,5 @@
 {
-    "mongooseURL": "mongodb://localhost:27017/Developer-Connector"
+    "mongooseURL": "mongodb://localhost:27017/Developer-Connector",
+    "jwtSecret": "localapphahahhahahhah102****",
+    "jwtExpire": "360000"
 }
