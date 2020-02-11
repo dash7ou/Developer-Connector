@@ -13,12 +13,15 @@ const {
     addExperience,
     deleteExperience,
     addEducation,
-    deleteEducation
+    deleteEducation,
+    getGithubProfile
 } = require("../controllers/profile")
 
-route.get("/", getAllProfiles );
+
+route.get("/github/:username", getGithubProfile)
 route.get("/user/:userId", getProfileByUserId );
 route.get("/me",auth, getOwnProfile );
+route.get("/", getAllProfiles );
 route.post("/",auth, [
     body("status", " Status is required").not().isEmpty(),
     body('skills', "Skills is required").not().isEmpty()

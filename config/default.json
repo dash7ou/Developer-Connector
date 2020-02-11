@@ -1,5 +1,7 @@
 {
     "mongooseURL": "mongodb://localhost:27017/Developer-Connector",
     "jwtSecret": "localapphahahhahahhah102****",
-    "jwtExpire": "360000"
+    "jwtExpire": "360000",
+    "githubClientId": "f1b92c9a52161c79b856",
+    "githubClientSecret": "dc9f7e6efa86189ea0bcbfa608ab35519df80ed5"
 }

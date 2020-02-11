@@ -3,6 +3,7 @@ const User  = require("../models/User");
 const Profile = require("../models/Profile");
 const ErrorRespose= require("../utils/errorResponse");
 const { validationResult } = require("express-validator");
+const getGithubProfile = require("../utils/getGithubProfile");
 
 exports.getOwnProfile = asyncFun( async (req, res, next)=>{
     let error;
@@ -440,4 +441,20 @@ exports.deleteEducation = asyncFun(async(req , res, next)=>{
 
     res.status(200).send(profile)
 
+})
+
+
+/**
+ * @route   GET api/v1/profile/github/:username
+ * @desc    Get user repo from github
+ * @access  Public
+ */
+exports.getGithubProfile = asyncFun(async( req, res , next)=>{
+    const {
+        params: {username}
+    }= req;
+
+    const data = await getGithubProfile(username);
+
+    res.status(200).send(data)
 })
