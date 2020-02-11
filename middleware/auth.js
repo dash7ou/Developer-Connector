@@ -18,7 +18,15 @@ module.exports = asyncFun(async (req,res, next)=>{
     }
     try{
         const decode = jwt.verify(token, config.get("jwtSecret"));
-        const user = await User.findById(decode._id)
+        const user = await User.findById(decode._id);
+        if(!user){
+            error = {
+                type: 'onlyMessage',
+                statusCode: 401,
+                message: 'authorization denied'
+            }
+            return next(new ErrorRespose("", error))
+        }
         req.user = user;
         next();
     }catch(err){

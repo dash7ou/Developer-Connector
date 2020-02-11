@@ -1,8 +1,9 @@
 const errorHandler = (err, req, res, next)=>{
     if(!err.errorObj){
+        console.log(err.message)
         res.status(err.statusCode || 500).send({
             success: false,
-            error: err.message || 'Server Error'
+            error: 'Server Error'
         });
 
         console.error(err)
