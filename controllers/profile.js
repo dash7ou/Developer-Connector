@@ -155,3 +155,36 @@ exports.updateProfile = asyncFun(async (req, res , next)=>{
     res.status(200).send(profile)
 
 })
+
+
+exports.deleteProfile = asyncFun(async (req, res ,next)=>{
+    const {
+        params: {
+            id: profileId
+        },
+        user: {
+            _id: userId
+        }
+    } = req
+
+    const profile = await Profile.findOne({
+        _id: profileId,
+        user: userId
+    });
+
+
+    if(!profile){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 400,
+            "message": "There are problem in delete profile"
+        }
+        throw new ErrorRespose('',error)
+    }
+
+    await profile.remove();
+    res.status(200).send({
+        message: "Delete success"
+    })
+
+})
