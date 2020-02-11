@@ -108,3 +108,50 @@ exports.createProfile = asyncFun( async (req, res, next)=>{
     }
     res.status(200).send(profile)
 });
+
+
+exports.updateProfile = asyncFun(async (req, res , next)=>{
+    const errors = validationResult(req);
+    let error;
+    if(!errors.isEmpty()){
+        error = {
+            type: 'validationError',
+            statusCode: 400,
+            errors: errors.array()
+        }
+        throw new ErrorRespose('',error)
+    }
+
+    const {
+        params:{
+            id: profileId
+        },
+        user:{
+            _id: userId
+        },
+        body
+    }
+
+    let profile = await profile.findOne({
+        user: userId,
+        _id: profileId
+    })
+
+
+    if(!profile){
+        error = {
+            type: 'validationError',
+            statusCode: 404,
+            "message": "this profile not found"
+        }
+        throw new ErrorRespose('',error)
+    }
+    
+    profile = await Contact.findByIdAndUpdate(profileId, body, {
+        new: true,
+        runValidators: true,
+    })
+
+    res.status(200).send(profile)
+
+})
