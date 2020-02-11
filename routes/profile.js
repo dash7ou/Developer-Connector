@@ -7,9 +7,11 @@ const {
     getOwnProfile,
     createProfile,
     updateProfile,
-    deleteProfile
+    deleteProfile,
+    getAllProfiles
 } = require("../controllers/profile")
 
+route.get("/", getAllProfiles );
 route.get("/me",auth, getOwnProfile );
 route.post("/",auth, [
     body("status", " Status is required").not().isEmpty(),
