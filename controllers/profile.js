@@ -29,6 +29,12 @@ exports.getOwnProfile = asyncFun( async (req, res, next)=>{
 });
 
 
+exports.getAllProfiles = asyncFun(async (req, res)=>{
+    const profiles = await Profile.find().populate('user', ["name", "avatar"]);
+    res.send(profiles);
+})
+
+
 exports.createProfile = asyncFun( async (req, res, next)=>{
     const errors = validationResult(req);
     let error;
