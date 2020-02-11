@@ -130,9 +130,9 @@ exports.updateProfile = asyncFun(async (req, res , next)=>{
             _id: userId
         },
         body
-    }
+    } = req
 
-    let profile = await profile.findOne({
+    let profile = await Profile.findOne({
         user: userId,
         _id: profileId
     })
@@ -140,14 +140,14 @@ exports.updateProfile = asyncFun(async (req, res , next)=>{
 
     if(!profile){
         error = {
-            type: 'validationError',
+            type: 'onlyMessage',
             statusCode: 404,
             "message": "this profile not found"
         }
         throw new ErrorRespose('',error)
     }
-    
-    profile = await Contact.findByIdAndUpdate(profileId, body, {
+
+    profile = await Profile.findByIdAndUpdate(profileId, body, {
         new: true,
         runValidators: true,
     })
