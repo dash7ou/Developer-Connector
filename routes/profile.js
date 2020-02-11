@@ -6,7 +6,8 @@ const { body } = require("express-validator");
 const {
     getOwnProfile,
     createProfile,
-    updateProfile
+    updateProfile,
+    deleteProfile
 } = require("../controllers/profile")
 
 route.get("/me",auth, getOwnProfile );
@@ -20,4 +21,6 @@ route.put("/:id",auth, [
     body('skills', "Skills is required").not().isEmpty()
 ],updateProfile)
 
+
+route.delete("/:id", auth, deleteProfile);
 module.exports = route;

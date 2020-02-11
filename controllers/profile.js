@@ -19,7 +19,7 @@ exports.getOwnProfile = asyncFun( async (req, res, next)=>{
     if(!profile){
         error = {
             type: 'onlyMessage',
-            statusCode: 400,
+            statusCode: 404,
             message: 'there is no profile for this user'
         }
         throw new ErrorRespose('', error)
