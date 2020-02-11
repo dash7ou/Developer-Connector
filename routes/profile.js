@@ -21,17 +21,16 @@ route.post("/",auth, [
     body('skills', "Skills is required").not().isEmpty()
 ],createProfile)
 
-route.put("/:id",auth, [
-    body("status", " Status is required").not().isEmpty(),
-    body('skills', "Skills is required").not().isEmpty()
-],updateProfile)
-
 route.put("/experience", auth , [
-    body("school", " Your school is required").not().isEmpty(),
-    body("degree", " Your degree is required").not().isEmpty(),
-    body("fieldofstudy", "Field of your study is required").not().isEmpty(),
-    body("from", " From date is required").not().isEmpty()
-])
+    body("title", " title is required").not().isEmpty(),
+    body("company", " Your company is required").not().isEmpty(),
+    body("from", "From data is required").not().isEmpty()
+], addExperience)
+
+route.put("/",auth,updateProfile)
+
+
 
 route.delete("/:id", auth, deleteProfile);
+
 module.exports = route;

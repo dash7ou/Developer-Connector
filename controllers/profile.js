@@ -152,9 +152,6 @@ exports.updateProfile = asyncFun(async (req, res , next)=>{
     }
 
     const {
-        params:{
-            id: profileId
-        },
         user:{
             _id: userId
         },
@@ -162,8 +159,7 @@ exports.updateProfile = asyncFun(async (req, res , next)=>{
     } = req
 
     let profile = await Profile.findOne({
-        user: userId,
-        _id: profileId
+        user: userId
     })
 
 
@@ -176,7 +172,7 @@ exports.updateProfile = asyncFun(async (req, res , next)=>{
         throw new ErrorRespose('',error)
     }
 
-    profile = await Profile.findByIdAndUpdate(profileId, body, {
+    profile = await Profile.findByIdAndUpdate(profile._id, body, {
         new: true,
         runValidators: true,
     })
@@ -193,8 +189,8 @@ exports.updateProfile = asyncFun(async (req, res , next)=>{
  * @access Private
  */
 
-exports.addExperience = asyncFun(async (req, res)=>{
-    const errors = validationResult(req);
+exports.addExperience = asyncFun(async (req, res, next)=>{
+=    const errors = validationResult(req);
     let error;
     if(!errors.isEmpty()){
         error = {
@@ -204,9 +200,9 @@ exports.addExperience = asyncFun(async (req, res)=>{
         }
         throw new ErrorRespose('',error)
     }
-    
+
     const {
-        experience:{
+        body:{
             title,
             company,
             location,
@@ -219,7 +215,7 @@ exports.addExperience = asyncFun(async (req, res)=>{
             _id: userId
         }
     } = req;
-
+    
     const newExperience = {
         title,
         company,
@@ -230,9 +226,12 @@ exports.addExperience = asyncFun(async (req, res)=>{
         description
     }
 
+
     const profile = await Profile.findOne({
         user: userId
     })
+
+
 
     if(!profile){
         error = {
