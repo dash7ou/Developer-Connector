@@ -10,7 +10,8 @@ const {
     deleteProfile,
     getAllProfiles,
     getProfileByUserId,
-    addExperience
+    addExperience,
+    deleteExperience
 } = require("../controllers/profile")
 
 route.get("/", getAllProfiles );
@@ -30,7 +31,7 @@ route.put("/experience", auth , [
 route.put("/",auth,updateProfile)
 
 
-
+route.delete("/experience/:exp_id", auth ,deleteExperience)
 route.delete("/", auth, deleteProfile);
 
 module.exports = route;

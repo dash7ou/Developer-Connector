@@ -275,3 +275,40 @@ exports.deleteProfile = asyncFun(async (req, res ,next)=>{
     })
 
 })
+
+/**
+ * @route   DELETE api/v1/experience/:exp_id
+ * @desc    Delete experience from profile
+ * @access  Private
+*/
+
+exports.deleteExperience = asyncFun(async(req , res, next)=>{
+    const {
+        params:{
+            exp_id: expId
+        },
+        user:{
+            _id: userId
+        }
+    } = req
+
+    const profile = await Profile.findOne({
+        user: userId
+    });
+
+
+    if(!profile){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 400,
+            "message": "There are problem"
+        }
+        throw new ErrorRespose('',error)
+    }
+    const removeIndex = profile.experience.map(exp => exp.id).indexOf(expId);
+    profile.experience.splice(removeIndex, 1);
+    await profile.save();
+
+    res.status(200).send(profile)
+
+})
