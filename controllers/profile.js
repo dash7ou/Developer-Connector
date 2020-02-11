@@ -183,8 +183,70 @@ exports.updateProfile = asyncFun(async (req, res , next)=>{
 
     res.status(200).send(profile)
 
-})
+});
 
+
+
+/**
+ * @route   PUT api/v1/profile/experience
+ * @desc    Add experience
+ * @access Private
+ */
+
+exports.addExperience = asyncFun(async (req, res)=>{
+    const errors = validationResult(req);
+    let error;
+    if(!errors.isEmpty()){
+        error = {
+            type: 'validationError',
+            statusCode: 400,
+            errors: errors.array()
+        }
+        throw new ErrorRespose('',error)
+    }
+    
+    const {
+        experience:{
+            title,
+            company,
+            location,
+            from,
+            to,
+            current,
+            description
+        },
+        user: {
+            _id: userId
+        }
+    } = req;
+
+    const newExperience = {
+        title,
+        company,
+        location,
+        from,
+        to,
+        current,
+        description
+    }
+
+    const profile = await Profile.findOne({
+        user: userId
+    })
+
+    if(!profile){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 400,
+            "message": "No profile to add experience"
+        }
+        throw new ErrorRespose('',error)
+    }
+
+    profile.experience.unshift(newExperience);
+    await profile.save();
+    res.status(200).send(profile);
+})
 
 exports.deleteProfile = asyncFun(async (req, res ,next)=>{
     const {
