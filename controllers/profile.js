@@ -247,6 +247,74 @@ exports.addExperience = asyncFun(async (req, res, next)=>{
     res.status(200).send(profile);
 })
 
+
+/**
+ * @route   PUT api/v1/profile/education
+ * @desc    Add education
+ * @access Private
+ */
+
+exports.addEducation = asyncFun(async (req, res, next)=>{
+    const errors = validationResult(req);
+    console.log(errors)
+    let error;
+    if(!errors.isEmpty()){
+       error = {
+           type: 'validationError',
+           statusCode: 400,
+           errors: errors.array()
+       }
+       throw new ErrorRespose('',error)
+    }
+
+    const {
+        body:{
+           school,
+           degree,
+           fieldofstudy,
+           from,
+           to,
+           current,
+           description
+        },
+        user: {
+           _id: userId
+        }
+    } = req;
+   
+    const newEducation = {
+        school,
+        degree,
+        fieldofstudy,
+        from,
+        to,
+        current,
+        description
+    }
+
+
+    const profile = await Profile.findOne({
+       user: userId
+    })
+
+
+
+    if(!profile){
+        error = {
+           type: 'onlyMessage',
+           statusCode: 400,
+           "message": "No profile to add experience"
+        }
+       throw new ErrorRespose('',error)
+    }
+
+   profile.education.unshift(newEducation);
+   await profile.save();
+   res.status(200).send(profile);
+})
+
+
+
 exports.deleteProfile = asyncFun(async (req, res ,next)=>{
     const {
         user: {
@@ -305,8 +373,69 @@ exports.deleteExperience = asyncFun(async(req , res, next)=>{
         }
         throw new ErrorRespose('',error)
     }
+
+    const isExist = profile.experience.find(exp => exp._id === expId)
+    if(!isExist){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            "message": "Not Found"
+        }
+        throw new ErrorRespose('',error)
+    }
+
     const removeIndex = profile.experience.map(exp => exp.id).indexOf(expId);
     profile.experience.splice(removeIndex, 1);
+    await profile.save();
+
+    res.status(200).send(profile)
+
+})
+
+
+
+
+/**
+ * @route   DELETE api/v1/education/:edu_id
+ * @desc    Delete education from profile
+ * @access  Private
+*/
+
+exports.deleteEducation = asyncFun(async(req , res, next)=>{
+    const {
+        params:{
+            edu_id: eduId
+        },
+        user:{
+            _id: userId
+        }
+    } = req
+
+    const profile = await Profile.findOne({
+        user: userId
+    });
+
+
+    if(!profile){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 400,
+            "message": "There are problem"
+        }
+        throw new ErrorRespose('',error)
+    }
+    const isExist = profile.education.find(edu => edu._id === eduId)
+    if(!isExist){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            "message": "Not Found"
+        }
+        throw new ErrorRespose('',error)
+    }
+
+    const removeIndex = profile.education.map(exp => exp.id).indexOf(eduId);
+    profile.education.splice(removeIndex, 1);
     await profile.save();
 
     res.status(200).send(profile)
