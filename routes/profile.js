@@ -31,6 +31,6 @@ route.put("/",auth,updateProfile)
 
 
 
-route.delete("/:id", auth, deleteProfile);
+route.delete("/", auth, deleteProfile);
 
 module.exports = route;

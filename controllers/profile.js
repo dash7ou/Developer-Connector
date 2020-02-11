@@ -190,7 +190,7 @@ exports.updateProfile = asyncFun(async (req, res , next)=>{
  */
 
 exports.addExperience = asyncFun(async (req, res, next)=>{
-=    const errors = validationResult(req);
+     const errors = validationResult(req);
     let error;
     if(!errors.isEmpty()){
         error = {
@@ -249,16 +249,12 @@ exports.addExperience = asyncFun(async (req, res, next)=>{
 
 exports.deleteProfile = asyncFun(async (req, res ,next)=>{
     const {
-        params: {
-            id: profileId
-        },
         user: {
             _id: userId
         }
     } = req
 
     const profile = await Profile.findOne({
-        _id: profileId,
         user: userId
     });
 
