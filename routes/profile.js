@@ -9,7 +9,8 @@ const {
     updateProfile,
     deleteProfile,
     getAllProfiles,
-    getProfileByUserId
+    getProfileByUserId,
+    addExperience
 } = require("../controllers/profile")
 
 route.get("/", getAllProfiles );
@@ -25,6 +26,12 @@ route.put("/:id",auth, [
     body('skills', "Skills is required").not().isEmpty()
 ],updateProfile)
 
+route.put("/experience", auth , [
+    body("school", " Your school is required").not().isEmpty(),
+    body("degree", " Your degree is required").not().isEmpty(),
+    body("fieldofstudy", "Field of your study is required").not().isEmpty(),
+    body("from", " From date is required").not().isEmpty()
+])
 
 route.delete("/:id", auth, deleteProfile);
 module.exports = route;

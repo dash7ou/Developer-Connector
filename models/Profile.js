@@ -80,7 +80,6 @@ const ProfileSchema = mongoose.Schema({
             },
             current:{
                 type: Boolean,
-                required: true
             },
             description:{
                 type: String
