@@ -455,6 +455,15 @@ exports.getGithubProfile = asyncFun(async( req, res , next)=>{
     }= req;
 
     const data = await getGithubProfile(username);
+    console.log(data)
+    if(data === 404){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            "message": "No github profile found"
+        }
+        throw new ErrorRespose('',error)
+    }
 
     res.status(200).send(data)
 })

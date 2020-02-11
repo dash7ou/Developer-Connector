@@ -24,15 +24,11 @@ const getGitHubProfile = async (username) => {
                 message: 'No Github profile'
             })
         }
-        
         return res.data;
 	} catch (err) {
-        console.log(err)
-        throw new ErrorResponse("", {
-            type: 'onlyMessage',
-            statusCode: 500,
-            message: 'server error'
-        })
+        if(err.response.status === 404){
+            return 404
+        }
     }
 };
 
