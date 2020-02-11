@@ -35,6 +35,29 @@ exports.getAllProfiles = asyncFun(async (req, res)=>{
 })
 
 
+exports.getProfileByUserId = asyncFun(async (req, res)=>{
+    const {
+        params:{
+            userId
+        }
+    } = req;
+
+    const profile = await Profile.findOne({
+        user: userId
+    }).populate('user', ["name", "avatar"]);
+
+    if(!profile){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            message: 'Profile not found'
+        }
+        throw new ErrorRespose('', error)
+    }
+
+    res.send(profile);
+})
+
 exports.createProfile = asyncFun( async (req, res, next)=>{
     const errors = validationResult(req);
     let error;
