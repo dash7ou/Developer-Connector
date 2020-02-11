@@ -212,6 +212,7 @@ exports.deleteProfile = asyncFun(async (req, res ,next)=>{
     }
 
     await profile.remove();
+    await User.findByIdAndRemove({_id : userId})
     res.status(200).send({
         message: "Delete success"
     })
