@@ -76,7 +76,7 @@ exports.createPost = asyncFun( async (req, res, next)=>{
  * @route   PUT /api/v1/posts/liked/:id
  * @desc    user liked post or remove his liked
  * @access  Private
- */
+*/
 
 exports.likedPost = asyncFun( async (req, res, next)=>{
     const {
@@ -119,6 +119,67 @@ exports.likedPost = asyncFun( async (req, res, next)=>{
 
 
 })
+
+
+/**
+ * @route   PUT /api/v1/posts/commit/:id
+ * @desc    user add commit to post
+ * @access  Private
+*/
+
+exports.addCommit = asyncFun( async (req, res, next)=>{
+    const errors = validationResult(req);
+    let error;
+    if(!errors.isEmpty()){
+        error = {
+            type: 'validationError',
+            statusCode: 400,
+            errors: errors.array()
+        }
+        throw new ErrorResponse('',error)
+    }
+    
+    const {
+        user:{
+            _id: userId,
+            avatar
+        },
+        params:{
+            id: postId
+        },
+        body:{
+            text,
+            name
+        }
+
+    } = req;
+
+    const post = await Post.findById(postId);
+    if(!post){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            message: "Post not found."
+        }
+        throw new ErrorResponse('',error)
+    }
+    post.commit.unshift({
+        user: userId,
+        text,
+        name,
+        avatar
+    });
+    await post.save();
+    res.status(200).send({
+        message: "Liked post",
+        post
+    });
+
+
+})
+
+
+
 exports.deletePost = asyncFun(async (req, res , next)=>{
     const {
         user:{

@@ -7,7 +7,8 @@ const {
     getPosts,
     getPost,
     deletePost,
-    likedPost
+    likedPost,
+    addCommit
 } = require("../controllers/posts");
 
 
@@ -16,7 +17,10 @@ route.get("/", auth , getPosts);
 route.get("/:id", auth, getPost);
 
 
-route.put("/liked/:id", auth, likedPost)
+route.put("/liked/:id", auth, likedPost);
+route.put("/commit/:id",[
+    body("text","You must add text to your commit").not().isEmpty()
+], auth, addCommit)
 
 route.post("/", [
     body("text", "You must enter text for your commit").not().isEmpty()
