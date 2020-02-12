@@ -5,6 +5,19 @@ const Post = require("../models/Post");
 const { validationResult } = require("express-validator");
 
 
+
+
+
+exports.getPosts = asyncFun(async ( req , res , next) =>{
+    const posts = await Post.find().sort({createdAt: -1});
+    res.status(200).send(posts)
+})
+
+
+// exports.getPost = asyncFun(async (req ,res ,next)=>{
+
+// })
+
 exports.createPost = asyncFun( async (req, res, next)=>{
     const errors = validationResult(req);
     let error;
@@ -36,7 +49,8 @@ exports.createPost = asyncFun( async (req, res, next)=>{
         avatar
     }
 
-    const post = await new Post(newPost);
+    const post = new Post(newPost);
+    await post.save()
+    // console.log(post)
     res.status(200).send(post);
-
 })
