@@ -8,7 +8,8 @@ const {
     getPost,
     deletePost,
     likedPost,
-    addCommit
+    addCommit,
+    deleteCommit
 } = require("../controllers/posts");
 
 
@@ -26,6 +27,6 @@ route.post("/", [
     body("text", "You must enter text for your commit").not().isEmpty()
 ], auth, createPost)
 
-
+route.delete("/commit/:id/:commit_id", auth, deleteCommit)
 route.delete("/:id", auth,deletePost )
 module.exports = route;

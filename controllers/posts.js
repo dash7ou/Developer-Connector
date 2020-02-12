@@ -138,7 +138,7 @@ exports.addCommit = asyncFun( async (req, res, next)=>{
         }
         throw new ErrorResponse('',error)
     }
-    
+
     const {
         user:{
             _id: userId,
@@ -213,4 +213,68 @@ exports.deletePost = asyncFun(async (req, res , next)=>{
     res.status(200).send({
         message: "Post deleted"
     })
+})
+
+
+/**
+ * @route   DELETE /api/v1/posts/commit/:id/:commit_id
+ * @desc    delete commit
+ * @access  Private
+*/
+
+exports.deleteCommit = asyncFun(async(req, res, next)=>{
+    let error;
+    const {
+        user:{
+            _id: userId
+        },
+        params:{
+            id: postId,
+            commit_id: commitId
+        }
+    } = req;
+
+    const post = await Post.findById(postId);
+    if(!post){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            message: "Post not found."
+        }
+        throw new ErrorResponse('',error)
+    };
+
+
+    const commit = post.commit.find(com => com._id.toString() === commitId.toString());
+    if(!commit){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            message: "Comment not found."
+        }
+        throw new ErrorResponse('',error)
+    }
+
+    if(post.user.toString() === userId.toString()){
+        const index = post.commit.map(com => com._id.toString()).indexOf(commitId.toString());
+        post.commit.splice(index, 1);
+    
+        await post.save();
+        return res.status(200).send(post)
+    }
+
+    if(commit.user.toString() !== userId.toString()){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 400,
+            message: "There are problem."
+        }
+        throw new ErrorResponse('',error)
+    }
+
+    const index = post.commit.map(com => com._id.toString()).indexOf(commitId.toString());
+    post.commit.splice(index, 1);
+
+    await post.save();
+    res.status(200).send(post)
 })
