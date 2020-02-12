@@ -115,7 +115,7 @@ exports.likedPost = asyncFun( async (req, res, next)=>{
     res.status(200).send({
         message: "Liked post",
         post
-    })
+    });
 
 
 })
