@@ -4,15 +4,20 @@ const auth = require("../middleware/auth");
 const { body } = require("express-validator");
 const {
     createPost,
-    getPosts
+    getPosts,
+    getPost,
+    deletePost
 } = require("../controllers/posts");
 
 
 
-route.get("/", auth , getPosts)
+route.get("/", auth , getPosts);
+route.get("/:id", auth, getPost);
 
 route.post("/", [
     body("text", "You must enter text for your commit").not().isEmpty()
 ], auth, createPost)
 
+
+route.delete("/:id", auth,deletePost )
 module.exports = route;

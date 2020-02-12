@@ -5,9 +5,8 @@ const  asyncFun =require("./async");
 const User = require("../models/User");
 
 module.exports = asyncFun(async (req,res, next)=>{
+    let error;
     let token = req.header('x-auth-token');
-    token = token.split(' ')[1]
-    let error
     if(!token){
         error={
             type: 'onlyMessage',
@@ -16,6 +15,8 @@ module.exports = asyncFun(async (req,res, next)=>{
         }
         throw new ErrorRespose("", error);
     }
+    token = token.split(' ')[1]
+
     try{
         const decode = jwt.verify(token, config.get("jwtSecret"));
         const user = await User.findById(decode._id);

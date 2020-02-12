@@ -14,9 +14,26 @@ exports.getPosts = asyncFun(async ( req , res , next) =>{
 })
 
 
-// exports.getPost = asyncFun(async (req ,res ,next)=>{
+exports.getPost = asyncFun(async (req ,res ,next)=>{
+    let error;
+    const {
+        params :{
+            id: postId
+        }
+    } = req;
 
-// })
+    const post = await Post.findById(postId);
+    if(!post){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            message: "Post not found."
+        }
+        throw new ErrorResponse('',error)
+    }
+
+    res.status(200).send(post);
+})
 
 exports.createPost = asyncFun( async (req, res, next)=>{
     const errors = validationResult(req);
@@ -27,7 +44,7 @@ exports.createPost = asyncFun( async (req, res, next)=>{
             statusCode: 400,
             errors: errors.array()
         }
-        throw new ErrorRespose('',error)
+        throw new ErrorResponse('',error)
     }
 
 
@@ -52,4 +69,42 @@ exports.createPost = asyncFun( async (req, res, next)=>{
     const post = new Post(newPost);
     await post.save()
     res.status(200).send(post);
+})
+
+
+exports.deletePost = asyncFun(async (req, res , next)=>{
+    const {
+        user:{
+            _id: userId
+        },
+        params:{
+            id: postId
+        }
+    }= req;
+
+    const post = await Post.findById(postId);
+    if(!post){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            message: "Post not found."
+        }
+        throw new ErrorResponse('',error)
+    }
+    console.log(post.user);
+    console.log(userId)
+
+    if(post.user.toString() !== userId.toString()){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 400,
+            message: "There are problem."
+        }
+        throw new ErrorResponse('',error)
+    }
+
+    await post.remove();
+    res.status(200).send({
+        message: "Post deleted"
+    })
 })
