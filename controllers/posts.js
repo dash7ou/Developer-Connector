@@ -51,6 +51,5 @@ exports.createPost = asyncFun( async (req, res, next)=>{
 
     const post = new Post(newPost);
     await post.save()
-    // console.log(post)
     res.status(200).send(post);
 })
