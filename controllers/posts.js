@@ -72,6 +72,53 @@ exports.createPost = asyncFun( async (req, res, next)=>{
 })
 
 
+/**
+ * @route   PUT /api/v1/posts/liked/:id
+ * @desc    user liked post or remove his liked
+ * @access  Private
+ */
+
+exports.likedPost = asyncFun( async (req, res, next)=>{
+    const {
+        user:{
+            _id: userId
+        },
+        params:{
+            id: postId
+        }
+
+    } = req;
+
+    const post = await Post.findById(postId);
+    if(!post){
+        error = {
+            type: 'onlyMessage',
+            statusCode: 404,
+            message: "Post not found."
+        }
+        throw new ErrorResponse('',error)
+    }
+    const isLiked = post.likes.find(like =>  like.user.toString() === userId.toString())
+    if(isLiked){
+        const index = post.likes.map(like => like.user).indexOf(userId);
+        post.likes.splice(index, 1);
+        await post.save();
+        return res.status(200).send({
+            message: "Remove like from post",
+            post
+        })
+    }
+    post.likes.unshift({
+        user: userId
+    });
+    await post.save();
+    res.status(200).send({
+        message: "Liked post",
+        post
+    })
+
+
+})
 exports.deletePost = asyncFun(async (req, res , next)=>{
     const {
         user:{
@@ -91,8 +138,6 @@ exports.deletePost = asyncFun(async (req, res , next)=>{
         }
         throw new ErrorResponse('',error)
     }
-    console.log(post.user);
-    console.log(userId)
 
     if(post.user.toString() !== userId.toString()){
         error = {
