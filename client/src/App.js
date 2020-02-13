@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import Navbar from "./components/layout/Navbar";
+
+import 'rsuite/dist/styles/rsuite-default.css';
 import './App.css';
+
 
 const App =() => {
   return (
-    <div className="App">
-     hi
-    </div>
+    <Fragment>
+      <Navbar />
+    </Fragment>
   );
 }
 
