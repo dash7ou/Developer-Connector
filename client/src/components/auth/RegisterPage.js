@@ -27,10 +27,10 @@ const RegisterPage = ({ history })=>{
     const handleSubmit = ()=>{
         const {email , name, password2, password} = formData
         if(!email || !name || !password || !password2){
-            Alert.error('There are required feild', 5000)
+            return Alert.error('There are required feild', 5000)
         }
         if(password !== password2){
-            Alert.error('Password do not match.', 5000)
+            return Alert.error('Password do not match.', 5000)
         }
 
         console.log(formData)

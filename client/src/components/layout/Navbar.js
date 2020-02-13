@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Icon } from "rsuite"
+import { Navbar, Nav, Icon } from "rsuite";
 
 
 const MainNavbar = ()=>(
