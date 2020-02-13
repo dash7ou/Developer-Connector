@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import { BrowserRouter as Router , Route , Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import MainPage from "./components/layout/MainPage";
 
@@ -8,10 +9,12 @@ import './App.css';
 
 const App =() => {
   return (
-    <Fragment>
-      <Navbar />
-      <MainPage />
-    </Fragment>
+    <Router>
+      <Fragment>
+        <Navbar />
+        <Route exact path="/" component={MainPage} />
+      </Fragment>
+    </Router>
   );
 }
 
