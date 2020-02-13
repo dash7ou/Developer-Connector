@@ -19,8 +19,8 @@ const MainNavbar = ()=>(
         <Navbar.Body>
             <Nav pullRight>
                 <Nav.Item>Developers</Nav.Item>
-                <Nav.Item>Register</Nav.Item>
-                <Nav.Item>Login</Nav.Item>
+                <Nav.Item href="/register">Register</Nav.Item>
+                <Nav.Item href="/login">Login</Nav.Item>
             </Nav>
         </Navbar.Body>
   </Navbar>
