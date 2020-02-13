@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonToolbar } from "rsuite";
+import { Button,Icon, ButtonToolbar } from "rsuite";
 
 const MainPage = ()=>{
     return(
@@ -14,19 +14,17 @@ const MainPage = ()=>{
                     <Button
                         appearance="primary"
                         color="cyan"
-                        active
                         href="/register"
                         size="lg"
                     >
-                        sign Up
+                    <Icon icon="user-plus"  /> sign Up
                     </Button>
                     <Button
                         size="lg"
-                        active
                         href="/login"
-                        appearance="primary"
+                        appearance="default"
                     >
-                        Login
+                    <Icon icon="sign-in" /> Login
                     </Button>
                 </ButtonToolbar>
             </div>

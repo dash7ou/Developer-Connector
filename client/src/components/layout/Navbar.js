@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Icon, Dropdown } from "rsuite"
+import { Navbar, Nav, Icon } from "rsuite"
 
 
 const MainNavbar = ()=>(
@@ -18,9 +18,9 @@ const MainNavbar = ()=>(
         </Navbar.Header>
         <Navbar.Body>
             <Nav pullRight>
-                <Nav.Item>Developers</Nav.Item>
-                <Nav.Item href="/register">Register</Nav.Item>
-                <Nav.Item href="/login">Login</Nav.Item>
+                <Nav.Item icon={<Icon icon="flow"/>}>Developers</Nav.Item>
+                <Nav.Item href="/register" icon={<Icon icon="user-plus"/>}>Register</Nav.Item>
+                <Nav.Item href="/login" icon={<Icon icon="sign-in"/>} >Login</Nav.Item>
             </Nav>
         </Navbar.Body>
   </Navbar>
