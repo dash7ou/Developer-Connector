@@ -3,7 +3,9 @@ import {
     REGISTER_SUCCESS,
     CLEAR_ERRORS,
     LOAD_USER,
-    AUTH_ERROR
+    AUTH_ERROR,
+    LOGIN_USER,
+    LOGIN_FAIL
 } from "../actions/type";
 
 const initialState = {
@@ -18,6 +20,7 @@ const initialState = {
 export default (state= initialState, action) => {
     switch(action.type){
         case REGISTER_SUCCESS:
+        case LOGIN_USER:
             localStorage.setItem("token", action.token)
             return{
                 ...state,
@@ -29,6 +32,7 @@ export default (state= initialState, action) => {
                 errors: null
             }
         case REGISTER_FAIL:
+        case LOGIN_FAIL:
             localStorage.removeItem("token")
             return{
                 ...state,
