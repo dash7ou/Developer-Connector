@@ -6,7 +6,8 @@ import {
     LOAD_USER,
     AUTH_ERROR,
     LOGIN_USER,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    LOGOUT
 } from "../actions/type";
 
 import setAuthToken from "../utils/setAuthToken"
@@ -73,6 +74,12 @@ export const loginUser = data => async dispatch =>{
         })
     }
 }
+
+export const logout = _ => dispatch(
+    dispatch({
+        type: logout
+    })
+)
 
 export const clearErrors = _ => dispatch=>(
     dispatch({
