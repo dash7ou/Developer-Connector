@@ -13,10 +13,11 @@ import {
 
 import {
     loginUser,
-    clearErrors
+    clearErrors,
+    loadUser
 } from "../../actions/auth"
 
-const LoginPage = ( { clearErrors, loginUser, auth:{ errors } } )=>{
+const LoginPage = ( { clearErrors,loadUser, loginUser, auth:{ errors } } )=>{
     const [formData , setFormData ] = useState({
         email:"",
         password:""
@@ -35,6 +36,7 @@ const LoginPage = ( { clearErrors, loginUser, auth:{ errors } } )=>{
         loginUser({
             email, password
         })
+        loadUser()
     }
 
     useEffect(() => {
@@ -76,5 +78,6 @@ const mapstateToProps = state =>({
 
 export default connect(mapstateToProps , {
     loginUser,
-    clearErrors
+    clearErrors,
+    loadUser
 })(LoginPage);

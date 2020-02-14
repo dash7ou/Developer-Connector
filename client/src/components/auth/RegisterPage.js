@@ -14,10 +14,10 @@ import {
 
 // redux
 import { connect } from "react-redux";
-import { registerUser, clearErrors } from "../../actions/auth"
+import { registerUser, clearErrors , loadUser} from "../../actions/auth"
 
 
-const RegisterPage = ({ history, registerUser,clearErrors, auth: { errors , loading } })=>{
+const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { errors , loading } })=>{
     const [formData , setFormData ] = useState({
         name:"",
         email:"",
@@ -43,6 +43,7 @@ const RegisterPage = ({ history, registerUser,clearErrors, auth: { errors , load
             email,
             password
         })
+        loadUser()
     }
 
     const cancelSubmit = ()=>{
@@ -96,5 +97,6 @@ const mapStateToProps = state =>({
 
 export default connect( mapStateToProps , {
     registerUser,
-    clearErrors
+    clearErrors,
+    loadUser
 } )(RegisterPage);
