@@ -2,10 +2,17 @@ import axios from "axios";
 import {
     REGISTER_FAIL,
     REGISTER_SUCCESS,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    LOAD_USER,
+    AUTH_ERROR
 } from "../actions/type";
 
 
+// load user
+// export const loadUser = _ => async dispatch => {
+//     const user = await axios.get("/api/v1/")
+// }
+// register user
 export const registerUser = data => async dispatch=>{
     const config = {
         headers:{
