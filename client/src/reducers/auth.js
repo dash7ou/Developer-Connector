@@ -50,7 +50,7 @@ export default (state= initialState, action) => {
             return{
                 token: null,
                 isAuthenticated: null,
-                loading: true,
+                loading: false,
                 user: null,
                 message: null,
                 errors: null
