@@ -52,7 +52,7 @@ export const registerUser = data => async dispatch=>{
     }
 }
 
-export const loginUser = data => async dispatc =>{
+export const loginUser = data => async dispatch =>{
     const config = {
         headers:{
             'Content-Type': "application/json"
@@ -63,7 +63,8 @@ export const loginUser = data => async dispatc =>{
         const res = await axios.post("/api/v1/auth", body, config);
         dispatch({
             type: LOGIN_USER,
-            data: res.data
+            data: res.data,
+            token: res.headers['x-auth-token']
         })
     }catch(err){
         dispatch({

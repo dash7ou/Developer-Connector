@@ -1,4 +1,5 @@
 import  React, {useState }  from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Alert } from 'rsuite';
 import { 
@@ -10,7 +11,11 @@ import {
     Icon
 } from 'rsuite';
 
-const LoginPage = ()=>{
+import {
+    loginUser
+} from "../../actions/auth"
+
+const LoginPage = ( { loginUser } )=>{
     const [formData , setFormData ] = useState({
         email:"",
         password:""
@@ -26,7 +31,9 @@ const LoginPage = ()=>{
         if(!email || !password){
             return Alert.error('There are required feild', 5000)
         }
-        console.log(formData)
+        loginUser({
+            email, password
+        })
     }
 
 
@@ -56,4 +63,6 @@ const LoginPage = ()=>{
     )
 }
 
-export default LoginPage;
+export default connect(null , {
+    loginUser
+})(LoginPage);
