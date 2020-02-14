@@ -16,7 +16,8 @@ export const registerUser = data => async dispatch=>{
         const res = await axios("/api/v1/register", body, config);
         dispatch({
             type: REGISTER_SUCCESS,
-            data: res.data
+            data: res.data,
+            token: res.headers['x-auth-token']
         })
     }catch(err){
         console.log(err)

@@ -13,7 +13,7 @@ const initialState = {
 export default (state= initialState, action) => {
     switch(action.type){
         case REGISTER_SUCCESS:
-            localStorage.setItem("token","" )
+            localStorage.setItem("token", action.token)
             return{
                 ...state,
                 loading: false,
