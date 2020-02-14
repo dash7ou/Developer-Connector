@@ -1,4 +1,4 @@
-import  React, {useState }  from "react";
+import  React, {useState , useEffect }  from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Alert } from 'rsuite';
@@ -12,10 +12,11 @@ import {
 } from 'rsuite';
 
 import {
-    loginUser
+    loginUser,
+    clearErrors
 } from "../../actions/auth"
 
-const LoginPage = ( { loginUser } )=>{
+const LoginPage = ( { clearErrors, loginUser, auth:{ errors } } )=>{
     const [formData , setFormData ] = useState({
         email:"",
         password:""
@@ -36,6 +37,12 @@ const LoginPage = ( { loginUser } )=>{
         })
     }
 
+    useEffect(() => {
+        if(errors){
+            Alert.error(errors, 5000)
+        }
+        clearErrors();
+    }, [errors])
 
     return(
         <section className="register-page">
@@ -63,6 +70,11 @@ const LoginPage = ( { loginUser } )=>{
     )
 }
 
-export default connect(null , {
-    loginUser
+const mapstateToProps = state =>({
+    auth: state.auth
+})
+
+export default connect(mapstateToProps , {
+    loginUser,
+    clearErrors
 })(LoginPage);
