@@ -75,9 +75,9 @@ export const loginUser = data => async dispatch =>{
     }
 }
 
-export const logout = _ => dispatch(
+export const logout = _ => dispatch => (
     dispatch({
-        type: logout
+        type: LOGOUT
     })
 )
 
