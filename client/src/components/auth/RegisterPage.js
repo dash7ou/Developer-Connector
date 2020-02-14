@@ -1,6 +1,6 @@
 import  React, {useState , useEffect}  from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Alert } from 'rsuite';
 import { 
     Form,
@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 import { registerUser, clearErrors , loadUser} from "../../actions/auth"
 
 
-const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { errors , loading } })=>{
+const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { errors , isAuthenticated } })=>{
     const [formData , setFormData ] = useState({
         name:"",
         email:"",
@@ -57,6 +57,11 @@ const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { erro
         }
     }, [errors])
 
+
+    if(isAuthenticated){
+        return <Redirect to="/dashbord" />
+    }
+
     return(
         <section className="register-page">
             <h1 className="register-page--title">Sign Up</h1>
@@ -94,6 +99,13 @@ const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { erro
 const mapStateToProps = state =>({
     auth: state.auth
 });
+
+RegisterPage.propTypes ={
+    clearErrors: PropTypes.func.isRequired,
+    loadUser: PropTypes.func.isRequired,
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+}
 
 export default connect( mapStateToProps , {
     registerUser,
