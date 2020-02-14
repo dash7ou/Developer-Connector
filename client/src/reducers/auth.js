@@ -1,13 +1,16 @@
 import {
     REGISTER_FAIL,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    CLEAR_ERRORS
 } from "../actions/type";
 
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
-    loading: false,
-    user: null
+    loading: true,
+    user: null,
+    message: null,
+    errors: null
 }
 
 export default (state= initialState, action) => {
@@ -18,7 +21,10 @@ export default (state= initialState, action) => {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
-                user: action.data
+                message: action.data.message,
+                token: action.token,
+                user: null,
+                errors: null
             }
         case REGISTER_FAIL:
             localStorage.removeItem("token")
@@ -26,7 +32,18 @@ export default (state= initialState, action) => {
                 ...state,
                 loading: false,
                 isAuthenticated: false,
-                token: null
+                token: null,
+                errors: action.errors,
+                message: null
+            }
+        case CLEAR_ERRORS:
+            return{
+                token: null,
+                isAuthenticated: null,
+                loading: true,
+                user: null,
+                message: null,
+                errors: null
             }
         default:
             return state

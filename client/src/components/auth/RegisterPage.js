@@ -1,4 +1,5 @@
-import  React, {useState }  from "react";
+import  React, {useState , useEffect}  from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Alert } from 'rsuite';
 import { 
@@ -11,7 +12,12 @@ import {
     Icon
 } from 'rsuite';
 
-const RegisterPage = ({ history })=>{
+// redux
+import { connect } from "react-redux";
+import { registerUser, clearErrors } from "../../actions/auth"
+
+
+const RegisterPage = ({ history, registerUser,clearErrors, auth: { errors , loading } })=>{
     const [formData , setFormData ] = useState({
         name:"",
         email:"",
@@ -32,14 +38,23 @@ const RegisterPage = ({ history })=>{
         if(password !== password2){
             return Alert.error('Password do not match.', 5000)
         }
-
-        console.log(formData)
+        registerUser({
+            name,
+            email,
+            password
+        })
     }
 
     const cancelSubmit = ()=>{
         history.push("/")
     }
 
+    useEffect(()=>{
+        if(errors){
+            Alert.error(errors, 5000)
+            clearErrors()
+        }
+    }, [errors])
 
     return(
         <section className="register-page">
@@ -75,4 +90,11 @@ const RegisterPage = ({ history })=>{
     )
 }
 
-export default RegisterPage;
+const mapStateToProps = state =>({
+    auth: state.auth
+});
+
+export default connect( mapStateToProps , {
+    registerUser,
+    clearErrors
+} )(RegisterPage);
