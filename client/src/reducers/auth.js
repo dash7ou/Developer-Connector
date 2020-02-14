@@ -1,7 +1,9 @@
 import {
     REGISTER_FAIL,
     REGISTER_SUCCESS,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    LOAD_USER,
+    AUTH_ERROR
 } from "../actions/type";
 
 const initialState = {

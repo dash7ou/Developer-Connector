@@ -7,11 +7,26 @@ import {
     AUTH_ERROR
 } from "../actions/type";
 
+import setAuthToken from "../utils/setAuthToken"
 
 // load user
-// export const loadUser = _ => async dispatch => {
-//     const user = await axios.get("/api/v1/")
-// }
+export const loadUser = _ => async dispatch => {
+    if(localStorage.token){
+        setAuthToken(localStorage.token);
+    }
+
+    try{
+        const res = await axios.get("/api/v1/auth");
+        dispatch({
+            LOAD_USER,
+            data: res.data
+        })
+    }catch(err){
+        dispatch({
+            AUTH_ERROR
+        })
+    }
+}
 // register user
 export const registerUser = data => async dispatch=>{
     const config = {
