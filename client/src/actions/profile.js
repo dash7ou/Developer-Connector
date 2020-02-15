@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Notification } from "rsuite"
 import {
     GET_PROFILE,
     PROFILE_ERROR,
@@ -19,6 +20,11 @@ export const getProfile = _ => async dispatch =>{
             data: res.data
         })
     }catch(err){
+        Notification.success({
+			title: "Welcome to our communite",
+			placement:"topEnd",
+			description: "create your profile and connect with another developers"
+		});
         dispatch({
             type: PROFILE_ERROR,
             error: {

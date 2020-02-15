@@ -10,9 +10,6 @@ import sendNote from "../../utils/welcomeNote"
 const Dashboard = ({ getProfile, profile: { profile, loading ,error} , auth:{user } }) => {
 	useEffect( () => {
 		getProfile();
-		if(error){
-			sendNote()
-		}
 	}, []);
 
 	return loading && profile === null? <Spinner /> : (
