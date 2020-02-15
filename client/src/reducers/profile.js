@@ -32,9 +32,10 @@ export default (state = initialState, action)=>{
             }
         case CHANGE_LOADING:
             return{
-                ...initialState,
-                loading: action.loading
+                ...state,
+                loading: true
             }
+
         case CLEAR_PROFILE:
             return{
                 ...initialState,

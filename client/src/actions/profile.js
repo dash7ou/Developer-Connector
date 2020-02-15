@@ -6,9 +6,13 @@ import {
     CHANGE_LOADING
 } from "./type";
 
+
 // user get his profile
 export const getProfile = _ => async dispatch =>{
     try{
+        dispatch({
+            type: CHANGE_LOADING
+        })
         const res = await axios.get("/api/v1/profile/me");
         dispatch({
             type: GET_PROFILE,
@@ -26,12 +30,6 @@ export const getProfile = _ => async dispatch =>{
 }
 
 
-export const changeLoading = loading => dispatch=>{
-    dispatch({
-        type: CHANGE_LOADING,
-        loading
-    })
-}
 
 export const clearProfile = _ => dispatch =>{
     dispatch({
