@@ -1,7 +1,8 @@
 import {
     GET_PROFILE,
     PROFILE_ERROR,
-    CLEAR_PROFILE
+    CLEAR_PROFILE,
+    CHANGE_LOADING
 } from "../actions/type";
 
 
@@ -28,6 +29,11 @@ export default (state = initialState, action)=>{
                 ...state,
                 error: action.error.message,
                 loading: false
+            }
+        case CHANGE_LOADING:
+            return{
+                ...initialState,
+                loading: action.loading
             }
         case CLEAR_PROFILE:
             return{

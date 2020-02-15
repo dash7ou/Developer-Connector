@@ -2,7 +2,8 @@ import axios from "axios";
 import {
     GET_PROFILE,
     PROFILE_ERROR,
-    CLEAR_PROFILE
+    CLEAR_PROFILE,
+    CHANGE_LOADING
 } from "./type";
 
 // user get his profile
@@ -24,6 +25,13 @@ export const getProfile = _ => async dispatch =>{
     
 }
 
+
+export const changeLoading = loading => dispatch=>{
+    dispatch({
+        type: CHANGE_LOADING,
+        loading
+    })
+}
 
 export const clearProfile = _ => dispatch =>{
     dispatch({
