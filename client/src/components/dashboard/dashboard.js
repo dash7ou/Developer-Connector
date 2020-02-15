@@ -5,7 +5,6 @@ import Spinner from "../layout/spinner/Spinner"
 import { 
 	getProfile
 } from '../../actions/profile';
-import sendNote from "../../utils/welcomeNote"
 
 const Dashboard = ({ getProfile, profile: { profile, loading ,error} , auth:{user } }) => {
 	useEffect( () => {

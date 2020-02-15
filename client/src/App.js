@@ -5,6 +5,7 @@ import MainPage from "./components/layout/MainPage";
 import LoginPage from "./components/auth/LoginPage";
 import RegisterPage from "./components/auth/RegisterPage"
 import Dashboard from "./components/dashboard/dashboard";
+import CreateProfile from "./components/profile-forms/CreateProfile";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store/store";
@@ -39,6 +40,7 @@ const App =() => {
               <PublicRoute exact path="/login" component={LoginPage} />
               <PublicRoute exact path="/register" component={RegisterPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/create-profile" component={CreateProfile} />
             </Switch>
           </section>
         </Fragment>
