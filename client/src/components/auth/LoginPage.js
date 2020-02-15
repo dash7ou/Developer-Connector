@@ -1,7 +1,7 @@
 import  React, {useState , useEffect }  from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Alert } from 'rsuite';
 import { 
     Form,
@@ -18,7 +18,7 @@ import {
     loadUser
 } from "../../actions/auth"
 
-const LoginPage = ( { clearErrors,loadUser, loginUser, auth:{ errors, isAuthenticated } } )=>{
+const LoginPage = ( { clearErrors,loadUser, loginUser, auth:{ errors } } )=>{
     const [formData , setFormData ] = useState({
         email:"",
         password:""
@@ -46,11 +46,6 @@ const LoginPage = ( { clearErrors,loadUser, loginUser, auth:{ errors, isAuthenti
         }
         clearErrors();
     }, [errors])
-
-
-    if(isAuthenticated){
-        return <Redirect to="/dashboard" />
-    }
 
 
     return(

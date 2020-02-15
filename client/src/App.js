@@ -13,6 +13,7 @@ import setAuthToken from "./utils/setAuthToken";
 
 // routers
 import PrivateRoute from "./routers/PrivateRoute";
+import PublicRoute from "./routers/PublicRoute";
 
 import 'rsuite/dist/styles/rsuite-default.css';
 import './App.css';
@@ -36,8 +37,8 @@ const App =() => {
           <Route exact path="/" component={MainPage} />
           <section className="container">
             <Switch>
-              <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/register" component={RegisterPage} />
+              <PublicRoute exact path="/login" component={LoginPage} />
+              <PublicRoute exact path="/register" component={RegisterPage} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
           </section>
