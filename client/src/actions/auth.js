@@ -7,7 +7,8 @@ import {
     AUTH_ERROR,
     LOGIN_USER,
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT,
+    CHANGE_LOADING
 } from "../actions/type";
 
 import setAuthToken from "../utils/setAuthToken"
@@ -86,3 +87,10 @@ export const clearErrors = _ => dispatch=>(
         type: CLEAR_ERRORS,
     })
 )
+
+export const changeLoading = change => dispatch =>{
+    dispatch({
+        type: CHANGE_LOADING,
+        change
+    })
+}

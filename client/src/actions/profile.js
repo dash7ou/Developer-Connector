@@ -1,7 +1,8 @@
 import axios from "axios";
 import {
     GET_PROFILE,
-    PROFILE_ERROR
+    PROFILE_ERROR,
+    CLEAR_PROFILE
 } from "./type";
 
 // user get his profile
@@ -21,4 +22,11 @@ export const getProfile = _ => async dispatch =>{
         })
     }
     
+}
+
+
+export const clearProfile = _ => dispatch =>{
+    dispatch({
+        type: CLEAR_PROFILE
+    })
 }
