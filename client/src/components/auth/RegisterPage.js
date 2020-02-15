@@ -59,7 +59,7 @@ const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { erro
 
 
     if(isAuthenticated){
-        return <Redirect to="/dashbord" />
+        return <Redirect to="/dashboard" />
     }
 
     return(

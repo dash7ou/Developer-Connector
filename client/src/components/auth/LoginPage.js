@@ -49,7 +49,7 @@ const LoginPage = ( { clearErrors,loadUser, loginUser, auth:{ errors, isAuthenti
 
 
     if(isAuthenticated){
-        return <Redirect to="/dashbord" />
+        return <Redirect to="/dashboard" />
     }
 
 
