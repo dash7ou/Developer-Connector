@@ -20,6 +20,7 @@ export default (state = initialState, action)=>{
                 ...state,
                 profile: action.data,
                 loading: false,
+                error: null
             }
         case PROFILE_ERROR:
             return{

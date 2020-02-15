@@ -29,15 +29,15 @@ const LoginPage = ( { clearErrors,loadUser, loginUser, auth:{ errors } } )=>{
         setFormData(formValue)
     }
 
-    const handleSubmit = ()=>{
+    const handleSubmit = async ()=>{
         const {email, password} = formData
         if(!email || !password){
             return Alert.error('There are required feild', 5000)
         }
-        loginUser({
+        await loginUser({
             email, password
         })
-        loadUser()
+        await loadUser()
     }
 
     useEffect(() => {

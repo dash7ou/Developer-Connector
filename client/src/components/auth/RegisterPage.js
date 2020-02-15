@@ -30,7 +30,7 @@ const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { erro
         setFormData(formValue)
     }
 
-    const handleSubmit = ()=>{
+    const handleSubmit =async ()=>{
         const {email , name, password2, password} = formData
         if(!email || !name || !password || !password2){
             return Alert.error('There are required feild', 5000)
@@ -38,12 +38,12 @@ const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { erro
         if(password !== password2){
             return Alert.error('Password do not match.', 5000)
         }
-        registerUser({
+        await registerUser({
             name,
             email,
             password
         })
-        loadUser()
+        await loadUser()
     }
 
     const cancelSubmit = ()=>{
