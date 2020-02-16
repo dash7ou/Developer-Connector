@@ -7,13 +7,13 @@ import {
 	setLoading
 } from '../../actions/profile';
 
-const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , auth:{user } }) => {
+const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , auth:{user, loading: userLoading } }) => {
 	useEffect( () => {
 		setLoading()
 		getProfile();
 	}, []);
 
-	return loading && profile === null? <Spinner /> : (
+	return !userLoading && loading && profile === null? <Spinner /> : (
 		<Fragment>
 			<h1 className="dashboard-title">Dashboard</h1>
 			<p className="dashboard-para">

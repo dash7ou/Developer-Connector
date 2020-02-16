@@ -10,6 +10,7 @@ import {
     LOGOUT,
     CHANGE_LOADING
 } from "../actions/type";
+import { Notification } from "rsuite";
 
 import setAuthToken from "../utils/setAuthToken"
 
@@ -46,6 +47,14 @@ export const registerUser = data => async dispatch=>{
             data: res.data,
             token: res.headers['x-auth-token']
         })
+
+        await loadUser()
+
+        Notification.success({
+            title: "Welcome to our communite",
+            placement:"topEnd",
+            description: "create your profile and connect with another developers"
+        });
     }catch(err){
         dispatch({
             type: REGISTER_FAIL,
@@ -67,6 +76,12 @@ export const loginUser = data => async dispatch =>{
             type: LOGIN_USER,
             data: res.data,
             token: res.headers['x-auth-token']
+        });
+
+        Notification.success({
+            title: `Welcome Again`,
+            placement:"topEnd",
+            description: "If you need any help you can conntact with admin and we hope you be happy with our service"
         })
     }catch(err){
         dispatch({

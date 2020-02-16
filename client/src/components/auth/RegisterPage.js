@@ -15,9 +15,10 @@ import {
 // redux
 import { connect } from "react-redux";
 import { registerUser, clearErrors , loadUser} from "../../actions/auth"
+import { getProfile } from "../../actions/profile";
 
 
-const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { errors } })=>{
+const RegisterPage = ({ history, loadUser,registerUser,clearErrors, getProfile, auth: { errors } })=>{
     const [formData , setFormData ] = useState({
         name:"",
         email:"",
@@ -43,14 +44,9 @@ const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { erro
             email,
             password
         })
+
         await loadUser();
-
-
-        Notification.success({
-            title: "Welcome to our communite",
-            placement:"topEnd",
-            description: "create your profile and connect with another developers"
-        });
+        await getProfile()
     }
 
     const cancelSubmit = ()=>{
@@ -112,5 +108,6 @@ RegisterPage.propTypes ={
 export default connect( mapStateToProps , {
     registerUser,
     clearErrors,
-    loadUser
+    loadUser,
+    getProfile
 } )(RegisterPage);
