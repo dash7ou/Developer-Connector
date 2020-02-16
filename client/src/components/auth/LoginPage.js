@@ -9,7 +9,8 @@ import {
     FormControl, 
     Button,
     ButtonToolbar,
-    Icon
+    Icon,
+    Notification
 } from 'rsuite';
 
 import {
@@ -18,7 +19,7 @@ import {
     loadUser
 } from "../../actions/auth"
 
-const LoginPage = ( { clearErrors,loadUser, loginUser, auth:{ errors } } )=>{
+const LoginPage = ( { clearErrors,loadUser, loginUser , auth:{ errors } } )=>{
     const [formData , setFormData ] = useState({
         email:"",
         password:""
@@ -38,6 +39,13 @@ const LoginPage = ( { clearErrors,loadUser, loginUser, auth:{ errors } } )=>{
             email, password
         })
         await loadUser()
+
+        Notification.success({
+            title: `Welcome Again`,
+            placement:"topEnd",
+            description: "If you need any help you can conntact with admin and we hope you be happy with our service"
+        })
+        
     }
 
     useEffect(() => {
@@ -82,11 +90,11 @@ LoginPage.propTypes ={
 }
 
 const mapstateToProps = state =>({
-    auth: state.auth
+    auth: state.auth,
 })
 
 export default connect(mapstateToProps , {
     loginUser,
     clearErrors,
-    loadUser
+    loadUser,
 })(LoginPage);

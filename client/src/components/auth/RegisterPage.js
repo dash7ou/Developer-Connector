@@ -1,7 +1,7 @@
 import  React, {useState , useEffect}  from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Alert } from 'rsuite';
+import { Alert, Notification } from 'rsuite';
 import { 
     Form,
     FormGroup, 
@@ -43,7 +43,14 @@ const RegisterPage = ({ history, loadUser,registerUser,clearErrors, auth: { erro
             email,
             password
         })
-        await loadUser()
+        await loadUser();
+
+
+        Notification.success({
+            title: "Welcome to our communite",
+            placement:"topEnd",
+            description: "create your profile and connect with another developers"
+        });
     }
 
     const cancelSubmit = ()=>{

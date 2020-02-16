@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { Icon, Button } from "rsuite";
 import Spinner from "../layout/spinner/Spinner"
 import { 
-	getProfile
+	getProfile,
+	setLoading
 } from '../../actions/profile';
 
-const Dashboard = ({ getProfile, profile: { profile, loading ,error} , auth:{user } }) => {
+const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , auth:{user } }) => {
 	useEffect( () => {
+		setLoading()
 		getProfile();
 	}, []);
 
@@ -40,4 +42,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
 	getProfile,
+	setLoading
 })(Dashboard);
