@@ -6,7 +6,8 @@ import {
     FormControl,
     HelpBlock,
     ButtonToolbar,
-    Button
+    Button,
+    Alert
 }  from "rsuite"
 
 import SocailMediaInput from "./SocailMediaInput";
@@ -53,7 +54,19 @@ const CreateProfile = ({ history })=>{
         })
     }
 
-    console.log(formData)
+    const onCreateProfile = ()=>{
+        if(!status){
+            return Alert.error('You need to choose your status.', 5000);
+        }
+
+        if(!skills){
+            return Alert.error('You need to add your skills.', 5000);
+        }
+
+        
+
+    }
+
     return(
         <div>
             <h1 className="header_form"> Create Your Profile </h1>
@@ -141,6 +154,7 @@ const CreateProfile = ({ history })=>{
                     <ButtonToolbar>
                         <Button
                             appearance="primary"
+                            onClick={onCreateProfile}
                         >
                             Create Profile
                         </Button>
