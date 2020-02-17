@@ -4,7 +4,8 @@ import {
     GET_PROFILE,
     PROFILE_ERROR,
     CLEAR_PROFILE,
-    CHANGE_LOADING
+    CHANGE_LOADING,
+    CREATE_PROFILE
 } from "./type";
 
 
@@ -19,11 +20,6 @@ export const getProfile = _ => async dispatch =>{
             type: GET_PROFILE,
             data: res.data
         })
-        // Notification.success({
-        //     title: `Welcome Again ${res.data.user.name}`,
-        //     placement:"topEnd",
-        //     description: "If you need any help you can conntact with admin and we hope you be happy with our service"
-        // })
     }catch(err){
         if(err.response.status === 404){
             Notification.warning({
@@ -40,6 +36,29 @@ export const getProfile = _ => async dispatch =>{
         })
     }
     
+}
+
+export const createProfile = (data) => async dispatch =>{
+    try{
+        const config = {
+            headers:{
+                'Content-Type': "application/json"
+            }
+        }
+        const body = JSON.stringify({ ...data });
+        const res = await axios.post("/api/v1/profile", body, config);
+        dispatch({
+            type: CREATE_PROFILE,
+            data: res.data
+        })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
+    }
 }
 
 export const setLoading = _ => dispatch=>{

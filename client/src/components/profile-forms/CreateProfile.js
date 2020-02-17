@@ -63,7 +63,6 @@ const CreateProfile = ({ history })=>{
             return Alert.error('You need to add your skills.', 5000);
         }
 
-        
 
     }
 
