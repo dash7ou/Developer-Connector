@@ -8,7 +8,7 @@ import {
 
 import SocailMediaInput from "./SocailMediaInput";
 
-const CreateProfile = ()=>{
+const CreateProfile = ({ history })=>{
     const [formData , setFormData] = useState({
         company: "",
         website: "",
@@ -119,7 +119,7 @@ const CreateProfile = ()=>{
                     />
                     <HelpBlock>Tell us little about your self </HelpBlock>
                 </FormGroup>
-                <SocailMediaInput />
+                <SocailMediaInput history={history}/>
             </Form>
         </div>
     )
