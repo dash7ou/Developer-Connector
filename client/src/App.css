@@ -91,13 +91,13 @@ a {
 
 
 .header_form {
-    color: red;
-    padding: 0.5rem
+    color: #0c48f7;
+    padding: 0.5rem 0
 }
 
 .form__main-para {
-    font-size: 1.5rem;
-    padding: 0.1rem 1rem;
+    font-size: 1.2rem;
+    padding: 0.1rem 0rem;
 }
 
 .form__para {

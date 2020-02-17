@@ -6,6 +6,8 @@ import {
     FormControl,HelpBlock
 }  from "rsuite"
 
+import SocailMediaInput from "./SocailMediaInput";
+
 const CreateProfile = ()=>{
     const [formData , setFormData] = useState({
         company: "",
@@ -96,11 +98,11 @@ const CreateProfile = ()=>{
                 </FormGroup>
                 <FormGroup>
                     <FormControl name='location' type='location' placeholder='Location' />
-                    <HelpBlock> City & state suggested (eg. Gaza,Khanyouns) </HelpBlock>
+                    <HelpBlock> City & state suggested (eg. Gaza, Khanyouns) </HelpBlock>
                 </FormGroup>
                 <FormGroup>
                     <FormControl name='skills' type='skills' placeholder='*Skills' />
-                    <HelpBlock> Please add your skills (eg. HTML,CSS,Python)</HelpBlock>
+                    <HelpBlock> Please add your skills (eg. HTML, CSS, Python)</HelpBlock>
 
                 </FormGroup>
                 <FormGroup>
@@ -117,7 +119,7 @@ const CreateProfile = ()=>{
                     />
                     <HelpBlock>Tell us little about your self </HelpBlock>
                 </FormGroup>
-
+                <SocailMediaInput />
             </Form>
         </div>
     )
