@@ -7,23 +7,19 @@ import {
     Icon
 } from "rsuite";
 
-const SocailMediaInput = ({history})=>{
+const SocailMediaInput = ()=>{
     const [ show , setShow ] = useState(false)
     return(
         <Fragment>
         <Button 
             appearance="primary"
             onClick={() => setShow(!show)}
+            block
         >
-            Show Social Media Links
-        </Button>
-        <Button
-            onClick={()=> history.push("/dashboard")}
-        >
-            Cancel
+            Add Social Media Links{"    "}<Icon icon="arrow-down"/>
         </Button>
         <Animation.Collapse in={show}>
-            <div>
+            <div className="social-media-inputs">
                 <InputGroup>
                     <InputGroup.Addon>
                         <Icon icon="github" />
@@ -36,11 +32,31 @@ const SocailMediaInput = ({history})=>{
                     </InputGroup.Addon>
                     <Input placeholder="Facebook" />
                 </InputGroup>
+                <InputGroup>
+                    <InputGroup.Addon>
+                        <Icon icon="twitter-square" />
+                    </InputGroup.Addon>
+                    <Input placeholder="Twitter" />
+                </InputGroup>
+                <InputGroup>
+                    <InputGroup.Addon>
+                        <Icon icon="linkedin-square" />
+                    </InputGroup.Addon>
+                    <Input placeholder="LinkedIn" />
+                </InputGroup>
+                <InputGroup>
+                    <InputGroup.Addon>
+                        <Icon icon="instagram" />
+                    </InputGroup.Addon>
+                    <Input placeholder="Instagram" />
+                </InputGroup>
             </div>
         </Animation.Collapse>
         </Fragment>
     )
 };
+
+// linkedin-square instagram
 
 
 export default SocailMediaInput;

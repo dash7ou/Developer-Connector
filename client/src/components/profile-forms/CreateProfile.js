@@ -3,7 +3,10 @@ import {
     Form , 
     SelectPicker,
     FormGroup,
-    FormControl,HelpBlock
+    FormControl,
+    HelpBlock,
+    ButtonToolbar,
+    Button
 }  from "rsuite"
 
 import SocailMediaInput from "./SocailMediaInput";
@@ -119,7 +122,21 @@ const CreateProfile = ({ history })=>{
                     />
                     <HelpBlock>Tell us little about your self </HelpBlock>
                 </FormGroup>
-                <SocailMediaInput history={history}/>
+                <SocailMediaInput />
+                <div className="form-button">
+                    <ButtonToolbar>
+                        <Button
+                            appearance="primary"
+                        >
+                            Create Profile
+                        </Button>
+                        <Button
+                            onClick={()=> history.push("/")}
+                        >
+                            Cancel
+                        </Button>
+                    </ButtonToolbar>
+                </div>
             </Form>
         </div>
     )
