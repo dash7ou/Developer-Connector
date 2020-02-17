@@ -1,4 +1,4 @@
-import React , {useState } from "react";
+import React , {useState, useEffect } from "react";
 import {
     Form , 
     SelectPicker,
@@ -7,15 +7,19 @@ import {
     HelpBlock,
     ButtonToolbar,
     Button,
-    Alert
+    Alert,
+    ControlLabel
 }  from "rsuite"
 import { connect } from "react-redux";
 import SocailMediaInput from "./SocailMediaInput";
 import {
-    createProfile
+    createProfile,
+    getProfile,
+    setLoading
 } from "../../actions/profile";
+import Spiner from "../layout/spinner/Spinner"
 
-const CreateProfile = ({ history, createProfile })=>{
+const CreateProfile = ({ history, createProfile, profile: {profile}})=>{
     const [formData , setFormData] = useState({
         company: "",
         website: "",
@@ -71,7 +75,11 @@ const CreateProfile = ({ history, createProfile })=>{
 
     }
 
-    return(
+    useEffect(()=>{
+        console.log(profile)
+    }, [])
+
+    return (
         <div>
             <h1 className="header_form"> Create Your Profile </h1>
             <p className="form__main-para">Let's get some information to make your profile stand out</p>
@@ -172,9 +180,14 @@ const CreateProfile = ({ history, createProfile })=>{
             </Form>
         </div>
     )
+    
 }
 
+const mapStateToProps = state => ({
+    profile: state.profile
+})
 
-export default connect(null , {
-    createProfile
+
+export default connect(mapStateToProps , {
+    createProfile,
 })(CreateProfile);
