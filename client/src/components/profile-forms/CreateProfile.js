@@ -9,10 +9,13 @@ import {
     Button,
     Alert
 }  from "rsuite"
-
+import { connect } from "react-redux";
 import SocailMediaInput from "./SocailMediaInput";
+import {
+    createProfile
+} from "../../actions/profile";
 
-const CreateProfile = ({ history })=>{
+const CreateProfile = ({ history, createProfile })=>{
     const [formData , setFormData] = useState({
         company: "",
         website: "",
@@ -54,7 +57,7 @@ const CreateProfile = ({ history })=>{
         })
     }
 
-    const onCreateProfile = ()=>{
+    const onCreateProfile = async ()=>{
         if(!status){
             return Alert.error('You need to choose your status.', 5000);
         }
@@ -63,6 +66,8 @@ const CreateProfile = ({ history })=>{
             return Alert.error('You need to add your skills.', 5000);
         }
 
+        await createProfile(formData);
+        history.push("/dashboard")
 
     }
 
@@ -170,4 +175,6 @@ const CreateProfile = ({ history })=>{
 }
 
 
-export default CreateProfile;
+export default connect(null , {
+    createProfile
+})(CreateProfile);
