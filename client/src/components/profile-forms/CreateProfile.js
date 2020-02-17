@@ -40,16 +40,30 @@ const CreateProfile = ({ history })=>{
         instagram
     } = formData;
 
+    const onChange = (formValue) =>{
+        setFormData({
+            ...formData,
+            ...formValue
+        })
+    }
+    const onChangeSelect = (selected)=>{
+        setFormData({
+            ...formData,
+            status: selected
+        })
+    }
 
+    console.log(formData)
     return(
         <div>
             <h1 className="header_form"> Create Your Profile </h1>
             <p className="form__main-para">Let's get some information to make your profile stand out</p>
             <p className="form__para"> * = required field</p>
-            <Form fluid>
+            <Form fluid onChange={(formValue) => onChange(formValue)}>
                 <FormGroup>
                     <SelectPicker
-                        data=""
+                        value={FormData.status}
+                        onChange={(data)=> onChangeSelect(data)}
                         block
                         placeholder="*Select Profession Status"
                         data={
@@ -115,7 +129,7 @@ const CreateProfile = ({ history })=>{
                 </FormGroup>
                 <FormGroup>
                     <FormControl 
-                        name="textarea" 
+                        name="bio" 
                         rows={5}
                         placeholder="A short bio about your self"
                         componentClass="textarea" 
