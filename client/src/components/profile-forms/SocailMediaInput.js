@@ -16,39 +16,39 @@ const SocailMediaInput = ()=>{
             onClick={() => setShow(!show)}
             block
         >
-            Add Social Media Links{"    "}<Icon icon="arrow-down"/>
+        <Icon icon="group"/> Add Social Media Links{"    "}<Icon icon="arrow-down"/>
         </Button>
         <Animation.Collapse in={show}>
             <div className="social-media-inputs">
                 <InputGroup>
                     <InputGroup.Addon>
-                        <Icon icon="github" />
+                        <Icon icon="youtube-play" />
                     </InputGroup.Addon>
-                    <Input placeholder="Github" />
+                    <Input placeholder="Youtube" name="youtube"/>
                 </InputGroup>
                 <InputGroup>
                     <InputGroup.Addon>
-                        <Icon icon="facebook" />
+                        <Icon icon="facebook-square" />
                     </InputGroup.Addon>
-                    <Input placeholder="Facebook" />
+                    <Input placeholder="Facebook" name="facebook" />
                 </InputGroup>
                 <InputGroup>
                     <InputGroup.Addon>
                         <Icon icon="twitter-square" />
                     </InputGroup.Addon>
-                    <Input placeholder="Twitter" />
+                    <Input placeholder="Twitter" name="twitter"/>
                 </InputGroup>
                 <InputGroup>
                     <InputGroup.Addon>
                         <Icon icon="linkedin-square" />
                     </InputGroup.Addon>
-                    <Input placeholder="LinkedIn" />
+                    <Input placeholder="LinkedIn" name="linkedin"/>
                 </InputGroup>
                 <InputGroup>
                     <InputGroup.Addon>
                         <Icon icon="instagram" />
                     </InputGroup.Addon>
-                    <Input placeholder="Instagram" />
+                    <Input placeholder="Instagram" name="instagram"/>
                 </InputGroup>
             </div>
         </Animation.Collapse>
