@@ -27,7 +27,7 @@ const CreateProfile = ({ history, createProfile })=>{
         facebook: "",
         linkedin: "",
         youtube: "",
-        instagram: ""
+        instagram: "",
     })
 
     const {
