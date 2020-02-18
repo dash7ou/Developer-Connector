@@ -94,7 +94,9 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 				twitter
 			};
 			const profileKeys = Object.keys(formData);
-			const arrayOfOrginalData = Object.values(orginalProfile).filter((val) => val !== undefined);
+			const arrayOfKeysOrginalData = profileKeys
+				.map((ele) => (orginalProfile[ele] ? ele : undefined))
+				.filter((ele) => ele !== undefined);
 			const orginalData = arrayOfKeysOrginalData.reduce((ele, current) => {
 				ele[current] = orginalProfile[current];
 				return ele;
