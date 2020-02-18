@@ -1,18 +1,22 @@
 import React, {useState} from "react";
+import { connect } from "react-redux";
+import {
+    addExperience
+} from "../../actions/profile"
 import {
     Form,
     FormControl,
     FormGroup,
-    HelpBlock,
     ButtonToolbar,
     Button,
     Icon,
     DatePicker,
     ControlLabel,
     Toggle,
+    Notification
 } from "rsuite";
 
-const AddExperience = ({history})=>{
+const AddExperience = ({history, addExperience})=>{
     const [ dataForm , setDataForm ] = useState({
         title:"",
         company:"",
@@ -30,8 +34,14 @@ const AddExperience = ({history})=>{
         })
     }
 
-    const onAddExperience = () =>{
-        console.log(dataForm)
+    const onAddExperience =async () =>{
+        await addExperience(dataForm);
+        history.push("/dashboard");
+		Notification.success({
+			title: "Add Experience",
+			placement:"topEnd",
+			description: "Success add your experience, you can show it in your profile"
+		});
     }
 
     return(
@@ -105,5 +115,7 @@ const AddExperience = ({history})=>{
 
 
 
-export default AddExperience
+export default connect(null, {
+    addExperience
+})(AddExperience)
 
