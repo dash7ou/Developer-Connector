@@ -5,7 +5,8 @@ import {
     PROFILE_ERROR,
     CLEAR_PROFILE,
     CHANGE_LOADING,
-    CREATE_PROFILE
+    CREATE_PROFILE,
+    UPDATE_PROFILE
 } from "./type";
 
 
@@ -51,6 +52,29 @@ export const createProfile = (data) => async dispatch =>{
             type: CREATE_PROFILE,
             data: res.data
         })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
+    }
+}
+
+export const updateProfile = (data) => async dispatch =>{
+    try{
+        const config = {
+            headers:{
+                'Content-Type': "application/json"
+            }
+        }
+        const body = JSON.stringify({ ...data });
+        const res = await axios.put("/api/v1/profile", body, config);
+        dispatch({
+            type: UPDATE_PROFILE,
+            data: res.data
+        });
     }catch(err){
         dispatch({
             type: PROFILE_ERROR,
