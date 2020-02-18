@@ -4,7 +4,8 @@ import {
     CLEAR_PROFILE,
     CHANGE_LOADING,
     CREATE_PROFILE,
-    UPDATE_PROFILE
+    UPDATE_PROFILE,
+    ADD_EXPERIENCE
 } from "../actions/type";
 
 
@@ -47,6 +48,12 @@ export default (state = initialState, action)=>{
             return{
                 ...state,
                 loading: false,
+                profile: action.data
+            }
+        case ADD_EXPERIENCE:
+            return{
+                ...state,
+                loading:false,
                 profile: action.data
             }
         case CLEAR_PROFILE:
