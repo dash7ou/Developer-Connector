@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Form, SelectPicker, FormGroup, FormControl, HelpBlock, ButtonToolbar, Button, Alert } from 'rsuite';
 import { connect } from 'react-redux';
 import SocailMediaInput from './SocailMediaInput';
-import { createProfile } from '../../actions/profile';
+import { createProfile, updateProfile } from '../../actions/profile';
 
-const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
+const CreateProfile = ({ history, createProfile,updateProfile, profile: { profile } }) => {
 	const [ formData, setFormData ] = useState({
 		company: '',
 		website: '',
@@ -59,6 +59,35 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 		await createProfile(formData);
 		history.push('/dashboard');
 	};
+
+	const onUpdateProfile = async ()=>{
+		if (!status) {
+			return Alert.error('You need to choose your status.', 5000);
+		}
+
+		if (!skills) {
+			return Alert.error('You need to add your skills.', 5000);
+		}
+		const newData ={
+			company,
+			website,
+			status,
+			skills,
+			githubusername,
+			bio,
+			location,
+			socialmedia:{
+				twitter,
+				facebook,
+				linkedin,
+				youtube,
+				instagram
+			}
+		}
+
+		await updateProfile(newData);
+		history.push("/dashboard")
+	}
 	useEffect(() => {
 		if (profile) {
 			if (history.location.pathname === '/create-profile') history.push('/update-profile');
@@ -177,7 +206,7 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 				<SocailMediaInput socialmedia={{ facebook, twitter, instagram, youtube, linkedin }} />
 				<div className='form-button'>
 					<ButtonToolbar>
-						<Button appearance='primary' onClick={onCreateProfile}>
+						<Button appearance='primary' onClick={profile? onUpdateProfile:  onCreateProfile }>
 							{profile ? 'Update Profile' : 'Create Profile'}
 						</Button>
 						<Button onClick={() => history.push('/')}>Cancel</Button>
@@ -193,5 +222,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-	createProfile
+	createProfile,
+	updateProfile
 })(CreateProfile);
