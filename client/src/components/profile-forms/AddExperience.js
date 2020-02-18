@@ -13,6 +13,7 @@ import {
     DatePicker,
     ControlLabel,
     Toggle,
+    Alert,
     Notification
 } from "rsuite";
 
@@ -35,6 +36,10 @@ const AddExperience = ({history, addExperience})=>{
     }
 
     const onAddExperience =async () =>{
+        const { company, title} = dataForm;
+        if(!company || !title){
+			return Alert.error('There are some required feild you need to add it', 5000);
+        }
         await addExperience(dataForm);
         history.push("/dashboard");
 		Notification.success({
