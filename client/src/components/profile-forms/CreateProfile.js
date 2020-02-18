@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-	Form,
-	SelectPicker,
-	FormGroup,
-	FormControl,
-	HelpBlock,
-	ButtonToolbar,
-	Button,
-	Alert,
-	ControlLabel
-} from 'rsuite';
+import { Form, SelectPicker, FormGroup, FormControl, HelpBlock, ButtonToolbar, Button, Alert } from 'rsuite';
 import { connect } from 'react-redux';
 import SocailMediaInput from './SocailMediaInput';
 import { createProfile } from '../../actions/profile';
@@ -36,6 +26,7 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 		skills,
 		githubusername,
 		bio,
+		location,
 		twitter,
 		facebook,
 		linkedin,
@@ -68,32 +59,21 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 		await createProfile(formData);
 		history.push('/dashboard');
 	};
-
 	useEffect(() => {
 		if (profile) {
-			const {
-				company,
-				skills,
-				website,
-				githubusername,
-				bio,
-				status,
-				socialmedia: { facebook, instagram, youtube, linkedin, twitter }
-			} = profile;
+			if (history.location.pathname === '/create-profile') history.push('/update-profile');
+			const { company, skills, website, githubusername, bio, status, location, socialmedia } = profile;
 			const orginalProfile = {
 				company,
 				skills,
 				website,
 				githubusername,
 				bio,
+				location,
 				status,
-				facebook,
-				instagram,
-				youtube,
-				linkedin,
-				twitter
+				...socialmedia
 			};
-			const profileKeys = Object.keys(formData);
+			const profileKeys = Object.keys(orginalProfile);
 			const arrayOfKeysOrginalData = profileKeys
 				.map((ele) => (orginalProfile[ele] ? ele : undefined))
 				.filter((ele) => ele !== undefined);
@@ -101,7 +81,10 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 				ele[current] = orginalProfile[current];
 				return ele;
 			}, {});
-			console.log(orginalData);
+			setFormData({
+				...formData,
+				...orginalData
+			});
 		}
 	}, []);
 
@@ -115,6 +98,7 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 				<FormGroup>
 					<SelectPicker
 						onChange={(data) => onChangeSelect(data)}
+						value={status}
 						block
 						placeholder='*Select Profession Status'
 						data={[
@@ -156,15 +140,15 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 					<HelpBlock> Give as an idea of where you are at in your career </HelpBlock>
 				</FormGroup>
 				<FormGroup>
-					<FormControl name='company' type='company' placeholder='Company' />
+					<FormControl name='company' type='company' placeholder='Company' value={company} />
 					<HelpBlock> Could be your company or one you work for</HelpBlock>
 				</FormGroup>
 				<FormGroup>
-					<FormControl name='website' type='website' placeholder='Website' />
+					<FormControl name='website' type='website' placeholder='Website' value={website} />
 					<HelpBlock> Could be your website or company website</HelpBlock>
 				</FormGroup>
 				<FormGroup>
-					<FormControl name='location' type='location' placeholder='Location' />
+					<FormControl name='location' type='location' placeholder='Location' value={location} />
 					<HelpBlock> City & state suggested (eg. Gaza, Khanyouns) </HelpBlock>
 				</FormGroup>
 				<FormGroup>
@@ -172,7 +156,12 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 					<HelpBlock> Please add your skills (eg. HTML, CSS, Python)</HelpBlock>
 				</FormGroup>
 				<FormGroup>
-					<FormControl name='githubusername' type='githubusername' placeholder='Github Username' />
+					<FormControl
+						name='githubusername'
+						type='githubusername'
+						placeholder='Github Username'
+						value={githubusername}
+					/>
 					<HelpBlock> if you want your last repos and Github link, include your username</HelpBlock>
 				</FormGroup>
 				<FormGroup>
@@ -181,14 +170,15 @@ const CreateProfile = ({ history, createProfile, profile: { profile } }) => {
 						rows={5}
 						placeholder='A short bio about your self'
 						componentClass='textarea'
+						value={bio}
 					/>
 					<HelpBlock>Tell us little about your self </HelpBlock>
 				</FormGroup>
-				<SocailMediaInput />
+				<SocailMediaInput socialmedia={{ facebook, twitter, instagram, youtube, linkedin }} />
 				<div className='form-button'>
 					<ButtonToolbar>
 						<Button appearance='primary' onClick={onCreateProfile}>
-							Create Profile
+							{profile ? 'Update Profile' : 'Create Profile'}
 						</Button>
 						<Button onClick={() => history.push('/')}>Cancel</Button>
 					</ButtonToolbar>
