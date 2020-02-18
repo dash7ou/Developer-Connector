@@ -5,7 +5,8 @@ import {
     CHANGE_LOADING,
     CREATE_PROFILE,
     UPDATE_PROFILE,
-    ADD_EXPERIENCE
+    ADD_EXPERIENCE,
+    Add_EDUCATION
 } from "../actions/type";
 
 
@@ -39,18 +40,9 @@ export default (state = initialState, action)=>{
                 loading: true
             }
         case CREATE_PROFILE:
-            return{
-                ...state,
-                loading: false,
-                profile: action.data
-            }
         case UPDATE_PROFILE:
-            return{
-                ...state,
-                loading: false,
-                profile: action.data
-            }
         case ADD_EXPERIENCE:
+        case Add_EDUCATION:
             return{
                 ...state,
                 loading:false,
