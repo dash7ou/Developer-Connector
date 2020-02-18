@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, SelectPicker, FormGroup, FormControl, HelpBlock, ButtonToolbar, Button, Alert } from 'rsuite';
+import { Form, SelectPicker, FormGroup, FormControl, HelpBlock, ButtonToolbar, Button, Alert, Notification, Icon } from 'rsuite';
 import { connect } from 'react-redux';
 import SocailMediaInput from './SocailMediaInput';
 import { createProfile, updateProfile } from '../../actions/profile';
@@ -86,7 +86,12 @@ const CreateProfile = ({ history, createProfile,updateProfile, profile: { profil
 		}
 
 		await updateProfile(newData);
-		history.push("/dashboard")
+		history.push("/dashboard");
+		Notification.success({
+			title: "Update Profile",
+			placement:"topEnd",
+			description: "Success update your profile."
+		});
 	}
 	useEffect(() => {
 		if (profile) {
@@ -206,10 +211,10 @@ const CreateProfile = ({ history, createProfile,updateProfile, profile: { profil
 				<SocailMediaInput socialmedia={{ facebook, twitter, instagram, youtube, linkedin }} />
 				<div className='form-button'>
 					<ButtonToolbar>
+						<Button onClick={() => history.push('/')}><Icon icon="back-arrow"/> Cancel</Button>
 						<Button appearance='primary' onClick={profile? onUpdateProfile:  onCreateProfile }>
-							{profile ? 'Update Profile' : 'Create Profile'}
+							<Icon icon={profile ? "edit" : "plus-circle"}/> {profile ? 'Update Profile' : 'Create Profile'}
 						</Button>
-						<Button onClick={() => history.push('/')}>Cancel</Button>
 					</ButtonToolbar>
 				</div>
 			</Form>
