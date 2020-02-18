@@ -21,7 +21,9 @@ const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , aut
 			</p>
 			{ profile !== null ? (
 				<Fragment>
-					has
+					<Button color="blue" href="/update-profile">
+						<Icon icon="plus-circle"  />  Update
+					</Button>
 				</Fragment>
 			): (
 				<div className="para-button">

@@ -54,6 +54,7 @@ export default (state= initialState, action) => {
         case AUTH_ERROR:
         case LOGOUT:
             localStorage.removeItem("token")
+            localStorage.removeItem("state")
             return{
                 token: null,
                 isAuthenticated: null,
