@@ -6,7 +6,8 @@ import {
     CLEAR_PROFILE,
     CHANGE_LOADING,
     CREATE_PROFILE,
-    UPDATE_PROFILE
+    UPDATE_PROFILE,
+    ADD_EXPERIENCE
 } from "./type";
 
 
@@ -73,6 +74,29 @@ export const updateProfile = (data) => async dispatch =>{
         const res = await axios.put("/api/v1/profile", body, config);
         dispatch({
             type: UPDATE_PROFILE,
+            data: res.data
+        });
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
+    }
+}
+
+export const addExperience = data => async dispatch =>{
+    try{
+        const config = {
+            headers:{
+                'Content-Type': "application/json"
+            }
+        }
+        const body = JSON.stringify({ ...data });
+        const res = await axios.put("/api/v1/profile/experience", body, config);
+        dispatch({
+            type: ADD_EXPERIENCE,
             data: res.data
         });
     }catch(err){
