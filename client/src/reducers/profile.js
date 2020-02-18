@@ -3,7 +3,8 @@ import {
     PROFILE_ERROR,
     CLEAR_PROFILE,
     CHANGE_LOADING,
-    CREATE_PROFILE
+    CREATE_PROFILE,
+    UPDATE_PROFILE
 } from "../actions/type";
 
 
@@ -37,6 +38,12 @@ export default (state = initialState, action)=>{
                 loading: true
             }
         case CREATE_PROFILE:
+            return{
+                ...state,
+                loading: false,
+                profile: action.data
+            }
+        case UPDATE_PROFILE:
             return{
                 ...state,
                 loading: false,
