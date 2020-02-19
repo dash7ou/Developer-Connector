@@ -1,12 +1,16 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux"
+import { Table, Icon , Button} from 'rsuite';
+import {
+    deleteExperience
+} from "../../actions/profile"
 
-import { Table, Icon } from 'rsuite';
-const { Column, HeaderCell, Cell } = Table;
 
 
-const Experience = ({experience})=>{
-    const onDelete = ()=>{
-
+const Experience = ({experience, deleteExperience})=>{
+    const { Column, HeaderCell, Cell } = Table;
+    const onDelete = (data)=>{
+       console.log(data)
     }
     return (
         <Fragment>
@@ -43,17 +47,24 @@ const Experience = ({experience})=>{
                     <Cell dataKey="to" />
                 </Column>
 
-                <Column width={500} >
+                <Column width={500} resizable>
                     <HeaderCell>Description</HeaderCell>
-                    <Cell dataKey="description" />
+                    <Cell dataKey="description"/>
                 </Column>
                 <Column width={70} fixed="right">
                     <HeaderCell>Action</HeaderCell>
                     <Cell>
-                        <span style={{"cursor":"pointer"}}>
-                            <a onClick={onDelete}> <Icon icon="trash-o"/> </a>
+                    {rowData => {
+                      function handleAction() {
+                        deleteExperience(rowData._id)
+                      }
+                      return (
+                        <span>
+                          <a onClick={handleAction}> <Icon icon="trash-o"/> </a>
                         </span>
-                    </Cell>
+                      );
+                    }}
+                  </Cell>
                 </Column>
             </Table>
       </div>
@@ -62,4 +73,6 @@ const Experience = ({experience})=>{
 }
 
 
-export default Experience
+export default connect(null, {
+    deleteExperience
+})(Experience)
