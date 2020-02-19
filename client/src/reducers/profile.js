@@ -8,7 +8,9 @@ import {
     ADD_EXPERIENCE,
     Add_EDUCATION,
     DELETE_EDUCATION,
-    DELETE_EXPERIENCE
+    DELETE_EXPERIENCE,
+    GET_PROFILES,
+    GET_REPOS
 } from "../actions/type";
 
 
@@ -51,6 +53,11 @@ export default (state = initialState, action)=>{
                 ...state,
                 loading:false,
                 profile: action.data
+            }
+        case GET_PROFILES:
+            return{
+                ...state,
+                profiles: action.data
             }
         case CLEAR_PROFILE:
             return{

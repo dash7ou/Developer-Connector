@@ -10,7 +10,9 @@ import {
     ADD_EXPERIENCE,
     Add_EDUCATION,
     DELETE_EDUCATION,
-    DELETE_EXPERIENCE
+    DELETE_EXPERIENCE,
+    GET_PROFILES,
+    GET_REPOS
 } from "./type";
 
 
@@ -40,7 +42,23 @@ export const getProfile = _ => async dispatch =>{
             }
         })
     }
-    
+}
+
+export const getProfiles = _ => async dispatch =>{
+    try{
+        const res = await axios.get(`api/v1/profile`);
+        dispatch({
+            type: GET_PROFILES,
+            data: res.data
+        })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
+    }
 }
 
 export const createProfile = (data) => async dispatch =>{
