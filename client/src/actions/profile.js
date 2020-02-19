@@ -8,7 +8,9 @@ import {
     CREATE_PROFILE,
     UPDATE_PROFILE,
     ADD_EXPERIENCE,
-    Add_EDUCATION
+    Add_EDUCATION,
+    DELETE_EDUCATION,
+    DELETE_EXPERIENCE
 } from "./type";
 
 
@@ -132,6 +134,25 @@ export const addEducation = data => async dispatch=>{
         })
     }
 }
+export const deleteExperience = id => async dispatch=>{
+    try{
+        const res = await axios.delete(`/api/v1/profile/experience/${id}`);
+        dispatch({
+            type: DELETE_EXPERIENCE,
+            data: res.data
+        });
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
+    }
+
+}
+
+
 
 export const setLoading = _ => dispatch=>{
     dispatch({
