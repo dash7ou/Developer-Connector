@@ -342,7 +342,7 @@ exports.deleteEducation = asyncFun(async (req, res, next) => {
 		};
 		throw new ErrorRespose('', error);
 	}
-	const isExist = profile.education.find((edu) => edu._id === eduId);
+	const isExist = profile.education.find((edu) => edu._id.toString() === eduId);
 	if (!isExist) {
 		error = {
 			type: 'onlyMessage',
@@ -352,7 +352,7 @@ exports.deleteEducation = asyncFun(async (req, res, next) => {
 		throw new ErrorRespose('', error);
 	}
 
-	const removeIndex = profile.education.map((exp) => exp.id).indexOf(eduId);
+	const removeIndex = profile.education.map((exp) => exp.id.toString()).indexOf(eduId);
 	profile.education.splice(removeIndex, 1);
 	await profile.save();
 
