@@ -57,7 +57,14 @@ export default (state = initialState, action)=>{
         case GET_PROFILES:
             return{
                 ...state,
+                loading: false,
                 profiles: action.data
+            }
+        case GET_REPOS:
+            return{
+                ...state,
+                loading: false,
+                repos: action.data
             }
         case CLEAR_PROFILE:
             return{

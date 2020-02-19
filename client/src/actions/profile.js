@@ -61,6 +61,23 @@ export const getProfiles = _ => async dispatch =>{
     }
 }
 
+export const getRepos = username => async dispatch=>{
+    try{
+        const res = await axios.get(`/api/v1/profile/github/${username}`);
+        dispatch({
+            type: GET_REPOS,
+            data: res.data
+        })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
+    }
+}
+
 export const createProfile = (data) => async dispatch =>{
     try{
         const config = {
