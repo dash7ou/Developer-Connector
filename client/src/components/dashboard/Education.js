@@ -2,37 +2,37 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux"
 import { Table, Icon , Button} from 'rsuite';
 import {
-    deleteExperience
+    deleteEducation
 } from "../../actions/profile"
 
 
 
-const Experience = ({experience, deleteExperience})=>{
+const Education = ({education, deleteEducation})=>{
     const { Column, HeaderCell, Cell } = Table;
 
     return (
         <Fragment>
-        <h3 className="table-header">Experience Credentials</h3>
+        <h3 className="table-header">Education Credentials</h3>
         <div className="table">
             <Table
-                data={experience}
+                data={education}
                 bordered
                 autoHeight
                 cellBordered
             >
                 <Column width={200} fixed>
-                    <HeaderCell>Title</HeaderCell>
-                    <Cell dataKey="title" />
+                    <HeaderCell>School</HeaderCell>
+                    <Cell dataKey="school" />
                 </Column>
 
                 <Column width={250}>
-                    <HeaderCell>Company</HeaderCell>
-                    <Cell dataKey="company" />
+                    <HeaderCell>Degree</HeaderCell>
+                    <Cell dataKey="degree" />
                 </Column>
 
                 <Column width={200}>
-                    <HeaderCell>Location</HeaderCell>
-                    <Cell dataKey="location" />
+                    <HeaderCell>Feild Of Study</HeaderCell>
+                    <Cell dataKey="feildOfStudy" />
                 </Column>
 
                 <Column width={200}>
@@ -49,7 +49,7 @@ const Experience = ({experience, deleteExperience})=>{
                     <Cell dataKey="current" />
                 </Column>
                 <Column width={500} resizable>
-                    <HeaderCell>Description</HeaderCell>
+                    <HeaderCell>Program Description</HeaderCell>
                     <Cell dataKey="description"/>
                 </Column>
                 <Column width={70} fixed="right">
@@ -57,7 +57,7 @@ const Experience = ({experience, deleteExperience})=>{
                     <Cell>
                     {rowData => {
                       function handleAction() {
-                        deleteExperience(rowData._id)
+                        deleteEducation(rowData._id)
                       }
                       return (
                         <span>
@@ -75,5 +75,5 @@ const Experience = ({experience, deleteExperience})=>{
 
 
 export default connect(null, {
-    deleteExperience
-})(Experience)
+    deleteEducation
+})(Education)
