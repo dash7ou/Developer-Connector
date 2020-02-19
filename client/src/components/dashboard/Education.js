@@ -32,7 +32,7 @@ const Education = ({education, deleteEducation})=>{
 
                 <Column width={200}>
                     <HeaderCell>Feild Of Study</HeaderCell>
-                    <Cell dataKey="feildOfStudy" />
+                    <Cell dataKey="fieldofstudy" />
                 </Column>
 
                 <Column width={200}>
