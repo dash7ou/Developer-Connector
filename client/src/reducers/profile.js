@@ -6,7 +6,9 @@ import {
     CREATE_PROFILE,
     UPDATE_PROFILE,
     ADD_EXPERIENCE,
-    Add_EDUCATION
+    Add_EDUCATION,
+    DELETE_EDUCATION,
+    DELETE_EXPERIENCE
 } from "../actions/type";
 
 
@@ -43,6 +45,8 @@ export default (state = initialState, action)=>{
         case UPDATE_PROFILE:
         case ADD_EXPERIENCE:
         case Add_EDUCATION:
+        case DELETE_EXPERIENCE:
+        case DELETE_EDUCATION:
             return{
                 ...state,
                 loading:false,
