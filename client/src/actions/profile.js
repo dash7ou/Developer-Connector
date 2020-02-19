@@ -153,35 +153,22 @@ export const deleteExperience = id => async dispatch=>{
 }
 
 
-// export const deleteEducation = id => async dispatch =>{
-//     try{
-//         const res = await axios.delete(`/api/v1/profile/education/${id}`);
-//         dispatch({
-//             type: DELETE_EDUCATION,
-//             data: res.data
-//         });
-//     }catch(err){
-//         dispatch({
-//             type: PROFILE_ERROR,
-//             error:{
-//                 message: err.response.data.error
-//             }
-//         })
-//     }
-
-// }
-
-
-export const deleteEducation => id => async dispatch =>{
+export const deleteEducation = id => async dispatch =>{
     try{
         const res = await axios.delete(`/api/v1/profile/education/${id}`);
         dispatch({
             type: DELETE_EDUCATION,
             data: res.data
-        })
+        });
     }catch(err){
-
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
     }
+
 }
 export const setLoading = _ => dispatch=>{
     dispatch({
