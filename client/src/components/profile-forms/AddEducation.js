@@ -36,8 +36,8 @@ const AddEducation = ({history, addEducation})=>{
     }
 
     const onAddEducation =async () =>{
-        const { school, degree} = dataForm;
-        if(!school || !degree){
+        const { school, degree, fieldofstudy} = dataForm;
+        if(!school || !degree || !fieldofstudy){
 			return Alert.error('There are some required feild you need to add it', 5000);
         }
         await addEducation(dataForm);
@@ -65,7 +65,7 @@ const AddEducation = ({history, addEducation})=>{
                 </FormGroup>
 
                 <FormGroup>
-                    <FormControl name='fieldofstudy'  placeholder='Field Of Study'  />
+                    <FormControl name='fieldofstudy'  placeholder='*Field Of Study'  />
                 </FormGroup>
 
                 <FormGroup>
