@@ -121,3 +121,11 @@ a {
 .form__main-para--small {
     font-size: 1rem;
 }
+
+.table-header {
+    margin: 3rem 0 1rem 0
+}
+
+.table {
+    margin: 1rem;
+}

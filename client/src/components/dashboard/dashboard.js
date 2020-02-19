@@ -7,6 +7,8 @@ import {
 	setLoading
 } from '../../actions/profile';
 
+import Experience from "./Experience"
+
 const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , auth:{user, loading: userLoading } }) => {
 	useEffect( () => {
 		setLoading()
@@ -32,6 +34,7 @@ const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , aut
 							<Icon icon="mortar-board"  />  Add Education
 						</Button>
 					</ButtonToolbar>
+					<Experience experience ={profile.experience}/>
 				</section>
 			): (
 				<div className="para-button">
@@ -41,6 +44,7 @@ const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , aut
 				  	</Button>
 				</div>
 			)}
+
 		</Fragment>
 	)
 };
