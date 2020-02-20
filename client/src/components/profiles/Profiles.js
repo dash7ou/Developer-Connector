@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import Spinner from "../layout/spinner/Spinner";
+import ProfilesItem from "./ProfilesItem";
 import {
     getProfiles
 } from "../../actions/profile"
@@ -8,10 +9,15 @@ import {
 const Profiles = ({profile:{ profiles }, getProfiles})=>{
     useEffect(()=>{
         getProfiles();
-    })
+    }, [])
 
     return (!profiles ? (<Spinner />) :(
-        profiles.map(profile => <div>test</div>)
+        <section>
+            <h1 className="header_form">Developers</h1>
+            <p className="form__main-para"> Browse and connect with developers </p>  
+            {profiles.map(profile => <ProfilesItem profile={profile}/>)}
+        </section>
+
     ))
 }
 
