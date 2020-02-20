@@ -12,7 +12,8 @@ import {
     DELETE_EDUCATION,
     DELETE_EXPERIENCE,
     GET_PROFILES,
-    GET_REPOS
+    GET_REPOS,
+    GET_PROFILEBYID
 } from "./type";
 
 
@@ -46,9 +47,26 @@ export const getProfile = _ => async dispatch =>{
 
 export const getProfiles = _ => async dispatch =>{
     try{
-        const res = await axios.get(`api/v1/profile`);
+        const res = await axios.get(`/api/v1/profile`);
         dispatch({
             type: GET_PROFILES,
+            data: res.data
+        })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
+    }
+}
+
+export const getProfileById = userId = async dispatch =>{
+    try{
+        const res = await axios.get(`/api/v1/profile/user/${userId}`);
+        dispatch({
+            type: GET_PROFILEBYID,
             data: res.data
         })
     }catch(err){

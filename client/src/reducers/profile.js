@@ -10,7 +10,8 @@ import {
     DELETE_EDUCATION,
     DELETE_EXPERIENCE,
     GET_PROFILES,
-    GET_REPOS
+    GET_REPOS,
+    GET_PROFILEBYID
 } from "../actions/type";
 
 
@@ -18,6 +19,7 @@ const initialState = {
     profile: null,
     profiles: [],
     repos: [],
+    showProfile: null,
     loading: true,
     error: null
 }
@@ -65,6 +67,12 @@ export default (state = initialState, action)=>{
                 ...state,
                 loading: false,
                 repos: action.data
+            }
+        case GET_PROFILEBYID:
+            return{
+                ...state,
+                loading: false,
+                showProfile: action.data
             }
         case CLEAR_PROFILE:
             return{
