@@ -6,7 +6,7 @@ import {
     getProfiles
 } from "../../actions/profile"
 
-const Profiles = ({profile:{ profiles }, getProfiles})=>{
+const Profiles = ({profile:{ profiles }, getProfiles, history})=>{
     useEffect(()=>{
         getProfiles();
     }, [])
@@ -15,7 +15,7 @@ const Profiles = ({profile:{ profiles }, getProfiles})=>{
         <section>
             <h1 className="header_form">Developers</h1>
             <p className="form__main-para"> Browse and connect with developers </p>  
-            {profiles.map(profile => <ProfilesItem profile={profile}/>)}
+            {profiles.map(profile => <ProfilesItem profile={profile} history={history} key={profile._id}/>)}
         </section>
 
     ))

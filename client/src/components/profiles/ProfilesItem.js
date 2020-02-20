@@ -1,8 +1,12 @@
 import React from 'react';
 import { Button, Icon } from 'rsuite';
 
-const ProfilesItem = ({ profile }) => {
-	const { user: {_id:userId, avatar, name }, company, status, location, skills } = profile;
+const ProfilesItem = ({ profile, history }) => {
+	const { user: {_id:userId, avatar, name }, _id ,company,status, location, skills } = profile;
+
+	const onGetProfile = ()=>{
+		history.push(`/developers/${userId}`)
+	}
 
 	return (
 		<article className='dev-card'>
@@ -24,11 +28,11 @@ const ProfilesItem = ({ profile }) => {
 							)}
 						</p>
 					</div>
-					<Button href={`/profiles/${userId}`} color='blue'> <Icon icon="profile"/> View Profile</Button>
+					<Button onClick={onGetProfile} color='blue'> <Icon icon="profile"/> View Profile</Button>
 				</div>
 				<div className='dev-card_skills'>
 					{skills.map((x) => (
-						<p>
+						<p key={userId}>
 							<Icon icon='check-square-o' /> {x}
 						</p>
 					))}
