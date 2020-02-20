@@ -9,6 +9,7 @@ import CreateProfile from "./components/profile-forms/CreateProfile";
 import AddEducation from "./components/profile-forms/AddEducation";
 import AddExperience from "./components/profile-forms/AddExperience";
 import Profiles from "./components/profiles/Profiles";
+import Profile from "./components/profiles/Profile";
 
 // Redux
 import { Provider } from "react-redux";
@@ -22,6 +23,7 @@ import PublicRoute from "./routers/PublicRoute";
 
 import 'rsuite/dist/styles/rsuite-default.css';
 import './App.css';
+import profile from './reducers/profile';
 
 
 if(localStorage.token){
@@ -44,6 +46,7 @@ const App =() => {
               <PublicRoute exact path="/login" component={LoginPage} />
               <PublicRoute exact path="/register" component={RegisterPage} />
               <PublicRoute exact path="/developers" component={Profiles} />
+              <PublicRoute exact path="/profiles/:id" component={Profile} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/create-profile" component={CreateProfile} />
               <PrivateRoute exact path="/update-profile" component={CreateProfile} />
