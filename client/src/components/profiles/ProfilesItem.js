@@ -1,47 +1,44 @@
-import React from "react";
-import { 
-    Button 
-} from "rsuite";
+import React from 'react';
+import { Button, Icon } from 'rsuite';
 
-const ProfilesItem = ({ profile })=>{
-    const {
-        user: {
-            avatar,
-            name
-        },
-        company,
-        status,
-        location,
-        skills
-    } = profile;
-    
-    return(
-        <article className="dev-card">
-            <div className ="dev-card__photo">
-                <img src={avatar} />
-            </div>
-            <div className="dev-card__info">
-                <div className="dev-card__main-info">
-                    <div className="space">
-                        <h2 className="para-title">{name}</h2>
-                        <p className="para-normal">{status} {company && <span>{company}</span>}</p>
-                        <p>{location && <span>{location}</span>}</p>
-                    </div>
-                    <Button color="blue">View Profile</Button>
-                </div>
-                <div className="dev-card_skills">
-                    {
-                        skills.map(x => <p>{x}</p>)
-                    }
-                </div>
-            </div>
-        </article>
-    )
-}
+const ProfilesItem = ({ profile }) => {
+	const { user: {_id:userId, avatar, name }, company, status, location, skills } = profile;
 
+	return (
+		<article className='dev-card'>
+			<div className='dev-card__photo'>
+				<img src={avatar} />
+			</div>
+			<div className='dev-card__info'>
+				<div className='dev-card__main-info'>
+					<div className='space'>
+						<h2 className='para-title'>{name}</h2>
+						<p className='para-normal'>
+							{status} {company && <span>{company}</span>}
+						</p>
+						<p>
+							{location && (
+								<span>
+									<Icon icon='map-marker' /> {location}
+								</span>
+							)}
+						</p>
+					</div>
+					<Button href={`/profiles/${userId}`} color='blue'> <Icon icon="profile"/> View Profile</Button>
+				</div>
+				<div className='dev-card_skills'>
+					{skills.map((x) => (
+						<p>
+							<Icon icon='check-square-o' /> {x}
+						</p>
+					))}
+				</div>
+			</div>
+		</article>
+	);
+};
 
 export default ProfilesItem;
-
 
 /**
  * ocialmedia: {twitter: "kudfhksfhdkjha", facebook: "lkdsjdladkj", instagram: "kfjsdljkjasdflkjfdlaskjl"}
