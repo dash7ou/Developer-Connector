@@ -9,7 +9,7 @@ const NotAuthNav = ()=>{
             <NavbarHeader />            
             <Navbar.Body>
                 <Nav pullRight>
-                    <Nav.Item icon={<Icon icon="flow"/>}>Developers</Nav.Item>
+                    <Nav.Item href="/developers" icon={<Icon icon="flow"/>}>Developers</Nav.Item>
                     <Nav.Item href="/register" icon={<Icon icon="user-plus"/>}>Register</Nav.Item>
                     <Nav.Item href="/login" icon={<Icon icon="sign-in"/>} >Login</Nav.Item>
                 </Nav>

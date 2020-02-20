@@ -8,6 +8,8 @@ import Dashboard from "./components/dashboard/dashboard";
 import CreateProfile from "./components/profile-forms/CreateProfile";
 import AddEducation from "./components/profile-forms/AddEducation";
 import AddExperience from "./components/profile-forms/AddExperience";
+import Profiles from "./components/profiles/Profiles";
+
 // Redux
 import { Provider } from "react-redux";
 import store from "./store/store";
@@ -41,6 +43,7 @@ const App =() => {
             <Switch>
               <PublicRoute exact path="/login" component={LoginPage} />
               <PublicRoute exact path="/register" component={RegisterPage} />
+              <PublicRoute exact path="/developers" component={Profiles} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/create-profile" component={CreateProfile} />
               <PrivateRoute exact path="/update-profile" component={CreateProfile} />
