@@ -45,8 +45,8 @@ const App =() => {
             <Switch>
               <PublicRoute exact path="/login" component={LoginPage} />
               <PublicRoute exact path="/register" component={RegisterPage} />
-              <PublicRoute exact path="/developers" component={Profiles} />
-              <PublicRoute path="/developers/:id" component={Profile} />
+              <Route exact path="/developers" component={Profiles} />
+              <Route path="/developers/:id" component={Profile} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/create-profile" component={CreateProfile} />
               <PrivateRoute exact path="/update-profile" component={CreateProfile} />

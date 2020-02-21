@@ -9,7 +9,7 @@ const ProfilesItem = ({ profile, history }) => {
 	}
 
 	return (
-		<article className='dev-card'>
+		<article className='dev-card' >
 			<div className='dev-card__photo'>
 				<img src={avatar} />
 			</div>
