@@ -243,3 +243,44 @@ a {
 	text-align: center;
 	padding: .5rem;
 }
+
+.exp-and-edu {
+	display: flex;
+}
+
+.exps,
+.edus {
+	padding: 1rem;
+	border: 1px solid #ccc;
+	width: 49%;
+	margin-top: 1rem;
+}
+
+.edus {
+	margin-left: 1rem;
+}
+
+.exps h1,
+.edus h1 {
+	color: #4298d4;
+	padding: 0 0 0.7rem 0;
+	font-size: 1.7rem;
+}
+
+
+.exp,
+.edu {
+	padding: 1rem 0;
+	border-top: 1px solid #ccc;
+}
+
+.exp-title,
+.edu-title {
+	font-size: 1.2rem;
+	font-weight: bolder;
+}
+
+.edu-para span,
+.exp-para span {
+	font-weight: bolder;
+}
