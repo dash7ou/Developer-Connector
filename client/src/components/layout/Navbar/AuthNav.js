@@ -12,10 +12,10 @@ import {
 } from "../../../actions/profile";
 
 
-const AuthNav = ( { logout, clearProfile })=>{
+const AuthNav = ( {history, logout, clearProfile })=>{
     const clearAll = ()=>{
         logout();
-        clearProfile()
+        clearProfile();
     }
     return (
         <Navbar className="navbar" appearance="inverse">
