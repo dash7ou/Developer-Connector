@@ -34,16 +34,16 @@ const Profile = ({ history , profile:{ showProfile }, getProfileById, auth:{isAu
                 <article className="user-page">
                     <div className="user-page__main">
                         <img src={showProfile.user.avatar} />
-                        <h1>{showProfile.user.name}</h1>
+                        <h1 className="user-page__name">{showProfile.user.name}</h1>
                         <h4>{showProfile.status} at {showProfile.company}</h4>
-                        {showProfile.location && <p>{showProfile.location}</p>}
+                        {showProfile.location && <p className="user-page__location"> <Icon icon="map-marker"/>  {showProfile.location}</p>}
                         <div className="user-page__socialmedia">
-                            {showProfile.website && <a><Icon icon="globe" size="2x"/></a>}
-                            {showProfile.socialmedia.twitter && <a>  <Icon icon='twitter-square' size="2x" /> </a>}
-                            {showProfile.socialmedia.facebook && <a> <Icon icon='facebook-square' size="2x"/> </a>}
-                            {showProfile.socialmedia.linkedin && <a> <Icon icon='linkedin-square' size="2x"/> </a>}
-                            {showProfile.socialmedia.instagram && <a> <Icon icon='instagram' size="2x"/> </a>}
-                            {showProfile.socialmedia.youtube && <a> <Icon icon='youtube-play'size="2x" /> </a>}
+                            {showProfile.website && <a><Icon icon="globe" size="2x" inverse/></a>}
+                            {showProfile.socialmedia.twitter && <a>  <Icon icon='twitter-square' size="2x" inverse/> </a>}
+                            {showProfile.socialmedia.facebook && <a> <Icon icon='facebook-square' size="2x" inverse/> </a>}
+                            {showProfile.socialmedia.linkedin && <a> <Icon icon='linkedin-square' size="2x" inverse/> </a>}
+                            {showProfile.socialmedia.instagram && <a> <Icon icon='instagram' size="2x" inverse/> </a>}
+                            {showProfile.socialmedia.youtube && <a> <Icon icon='youtube-play'size="2x" inverse/> </a>}
                         </div>
                     </div>
                     <div className="user-page__about">
@@ -53,7 +53,7 @@ const Profile = ({ history , profile:{ showProfile }, getProfileById, auth:{isAu
                         </div>
                         <div className="user-page__skills">
                             <h4>Skill Set</h4>
-                            {showProfile.skills.map(skill => <span>{skill}</span>)}                     
+                            <div className="user-page__skill">{showProfile.skills.map(skill => <span> <Icon icon='check-square-o' /> {skill}</span>)}</div>                  
                         </div>
                     </div>
                 </article>
@@ -62,15 +62,6 @@ const Profile = ({ history , profile:{ showProfile }, getProfileById, auth:{isAu
     )
 }
 
-
-
-/**
- * twitter(pin):"www.twitter.com"
-facebook(pin):"www.fb.com"
-linkedin(pin):"www.linkedin.com"
-instagram(pin):"www.instegram.com"
-youtube(pin):"www.youtube.com" 
- */
 const mapStateToProps = state => ({
     profile: state.profile,
     auth: state.auth

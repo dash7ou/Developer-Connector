@@ -17,6 +17,7 @@ a {
 	width: 100vw;
 	height: 100vh;
 }
+
 .space {
 	margin-bottom: 2rem;
 }
@@ -158,4 +159,87 @@ a {
 	width: 20vw;
 	align-items: center;
 	padding: 2rem;
+}
+
+.user-page {
+	margin-top: 2rem;
+}
+
+.user-page__main {
+	background-color: #4298d4;
+	padding: 1rem;
+	text-align: center;
+	margin-bottom: 1rem;
+	color: white;
+}
+
+.user-page__main img {
+	border: 1px solid #ccc;
+	border-radius: 50%;
+}
+
+.user-page__name {
+	font-size: 2.2rem;
+}
+
+
+.user-page__location {
+	padding: 0.5rem;
+	font-weight: bold;
+}
+
+.user-page__socialmedia {
+	padding: 1rem;
+}
+
+
+
+.user-page__socialmedia a {
+	padding: 0.4rem;
+}
+
+.user-page__about {
+	background-color: #cccccc42;
+	padding: 2rem;
+	align-items: center;
+	color: #383030;
+
+}
+
+
+.user-page__bio {
+	border-bottom: 1px solid #ccc;
+	align-items: center;
+	padding-bottom: 2rem;
+	margin-bottom: 1rem;
+}
+
+
+.user-page__about h4 {
+	color: #4298d4;
+	margin: 0 auto;
+	text-align: center;
+	padding: 0.2rem;
+}
+
+.user-page__bio p {
+	text-align: center;
+}
+
+
+
+
+.user-page__skills p {
+	text-align: center;
+}
+
+
+.user-page__skill {
+	display: flex;
+	flex-direction: row;
+}
+
+.user-page__skill span {
+	text-align: center;
+	padding: .5rem;
 }
