@@ -2,16 +2,17 @@ import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import Spinner from "../layout/spinner/Spinner"
 import {
-    getProfileById
+    getProfileById,
+    getRepos
 } from "../../actions/profile";
 import {
     Button,
     ButtonToolbar,
     Icon
 } from "rsuite";
+import ProfileRepos from "./ProfileRepos";
 
-
-const Profile = ({ history , profile:{ showProfile }, getProfileById, auth:{isAuthenticated, user} }) =>{
+const Profile = ({ history , profile:{ showProfile, repos }, getProfileById,getRepos, auth:{isAuthenticated, user} }) =>{
     useEffect(()=>{
         const {
             location:{
@@ -21,6 +22,7 @@ const Profile = ({ history , profile:{ showProfile }, getProfileById, auth:{isAu
 
         const url = pathname.split("/");
         getProfileById(url[2])
+        getRepos(showProfile.githubusername)
     }, []);
 
 
@@ -94,6 +96,7 @@ const Profile = ({ history , profile:{ showProfile }, getProfileById, auth:{isAu
                        
                     </article>
                 }
+                <ProfileRepos repos={repos}/>
             </section>
         )
     )
@@ -105,5 +108,6 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps,  {
-    getProfileById
+    getProfileById,
+    getRepos
 } )(Profile);
