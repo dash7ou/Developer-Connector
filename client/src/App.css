@@ -182,7 +182,6 @@ a {
 	font-size: 2.2rem;
 }
 
-
 .user-page__location {
 	padding: 0.5rem;
 	font-weight: bold;
@@ -191,8 +190,6 @@ a {
 .user-page__socialmedia {
 	padding: 1rem;
 }
-
-
 
 .user-page__socialmedia a {
 	padding: 0.4rem;
@@ -203,9 +200,7 @@ a {
 	padding: 2rem;
 	align-items: center;
 	color: #383030;
-
 }
-
 
 .user-page__bio {
 	border-bottom: 1px solid #ccc;
@@ -213,7 +208,6 @@ a {
 	padding-bottom: 2rem;
 	margin-bottom: 1rem;
 }
-
 
 .user-page__about h4 {
 	color: #4298d4;
@@ -226,13 +220,9 @@ a {
 	text-align: center;
 }
 
-
-
-
 .user-page__skills p {
 	text-align: center;
 }
-
 
 .user-page__skill {
 	display: flex;
@@ -266,7 +256,6 @@ a {
 	padding: 0 0 0.7rem 0;
 	font-size: 1.7rem;
 }
-
 
 .exp,
 .edu {
@@ -311,11 +300,11 @@ a {
 
 .repo-desc {
 	font-size: 1rem;
-	padding: 0 1rem
+	padding: 0 1rem;
 }
 
 .posts {
-	padding: 1rem
+	padding: 1rem;
 }
 
 .posts-title {
@@ -327,7 +316,7 @@ a {
 }
 
 .post {
-	margin: 1rem 0;
+	margin: 1rem 0 0 0;
 	padding: 1rem;
 	border: 1px solid #dec5c5;
 	display: flex;
@@ -335,16 +324,41 @@ a {
 
 .post__user-photo {
 	align-items: center;
+	width: 20%;
+	text-align: left;
 }
 
 .post__user-photo img {
 	border: 1px solid #ccc;
 	border-radius: 50%;
-	width: 40%;
+	width: 60%;
 }
 
 .post__user-photo p {
-	padding: 0.7rem 1.3rem;
+	padding: 0.7rem 1.6rem;
 	color: #4298d4;
 	font-weight: bolder;
+}
+
+/* .post-info {
+	width: 70%;
+} */
+.post_disc {
+	padding-top: 1.2rem;
+	width: 100%;
+}
+
+.post-date {
+	color: #dec5c5;
+	padding-bottom: 1rem;
+}
+
+.post-buttons {
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+.post-buttons span {
+	color: white;
 }
