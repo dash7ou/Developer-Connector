@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../layout/spinner/Spinner';
-import { getPosts, addLiked, clearPosts } from '../../actions/post';
+import { getPosts, addLiked, clearPosts, deletePost } from '../../actions/post';
 import Post from "./postsItem";
 
 
-const Posts = ({ getPosts,addLiked, post: { posts }, auth:{user: {_id : author}}}) => {
+const Posts = ({ getPosts,addLiked,deletePost, post: { posts }, auth:{user: {_id : author}}}) => {
 	useEffect(() => {
         getPosts();
         return ()=>{
@@ -19,7 +19,7 @@ const Posts = ({ getPosts,addLiked, post: { posts }, auth:{user: {_id : author}}
             <p className="posts__main-para">Welcome to the community</p>
             {
                 posts.length>0 ? (
-                    posts.map((post,index) => <Post key={index} post={post} author={author} addLiked={addLiked}/>)
+                    posts.map((post,index) => <Post key={index} post={post} author={author} addLiked={addLiked} deletePost={deletePost}/>)
                 ):(<h5 className="posts-no">No post untill now</h5>)
             }
         </section>
@@ -33,5 +33,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
     getPosts,
-    addLiked
+    addLiked,
+    deletePost
 })(Posts);

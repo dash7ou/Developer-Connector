@@ -52,6 +52,13 @@ export default (state = initialState, action)=>{
                 errors: null,
                 posts
             }
+        case DELETED_POST:
+            return{
+                ...state,
+                loading:false,
+                errors: null,
+                posts: [...state.posts.filter(post => post._id.toString() === action.data)]
+            }
         case CLEAR_POSTS:
             return initialState
         default:

@@ -1,11 +1,15 @@
 import React from 'react';
 import { ButtonGroup, Button, Icon } from 'rsuite';
 
-const Post = ({ post, author, addLiked }) => {
-	const onLiked = ()=>{
+const Post = ({ post, author, addLiked , deletePost}) => {
+	const onLiked = async ()=>{
 		const postId = post._id.toString();
 		const user = author.toString()
-		addLiked(postId, user)
+		await addLiked(postId, user)
+	}
+	const onDeletePost = async ()=>{
+		const postId = post._id.toString();
+		await deletePost(postId)
 	}
 
 	return (
@@ -26,7 +30,7 @@ const Post = ({ post, author, addLiked }) => {
 							<Button color='green'>
 								<span>{post.commit.length}</span> <Icon icon='commenting-o' /> Discussion
 							</Button>
-							{post.user._id.toString() === author.toString() && <Button color='red'>
+							{post.user._id.toString() === author.toString() && <Button color='red' onClick={onDeletePost}>
 								<Icon icon='trash' />
 							</Button>}
 						</ButtonGroup>
@@ -38,3 +42,6 @@ const Post = ({ post, author, addLiked }) => {
 };
 
 export default Post;
+
+
+/// @mutasem%2729@#$

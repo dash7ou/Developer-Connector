@@ -47,7 +47,7 @@ export const addLiked = (post, user) => async dispatch =>{
 
 export const deletePost = id => async dispatch =>{
     try{
-        const res = await post.delete(`/api/v1/posts/${id}`);
+        const res = await axios.delete(`/api/v1/posts/${id}`);
         dispatch({
             type: DELETED_POST,
             data: id
