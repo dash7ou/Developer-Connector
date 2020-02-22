@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/spinner/Spinner';
 import { getPosts, addLiked, clearPosts, deletePost } from '../../actions/post';
 import Post from "./postsItem";
-
+import AddPostForm from "./AddPostForm";
 
 const Posts = ({ getPosts,addLiked,deletePost, post: { posts }, auth:{user: {_id : author}}}) => {
 	useEffect(() => {
@@ -17,6 +17,7 @@ const Posts = ({ getPosts,addLiked,deletePost, post: { posts }, auth:{user: {_id
         <section className="posts">
             <h1 className="posts-title">Posts</h1>
             <p className="posts__main-para">Welcome to the community</p>
+            <AddPostForm />
             {
                 posts.length>0 ? (
                     posts.map((post,index) => <Post key={index} post={post} author={author} addLiked={addLiked} deletePost={deletePost}/>)

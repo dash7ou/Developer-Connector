@@ -25,3 +25,4 @@ export const POST_ERROR = 'POST_ERROR';
 export const ADD_LIKES = 'ADD_LIKES';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
 export const DELETED_POST = 'DELETED_POST';
+export const ADD_POST = 'ADD_POST';

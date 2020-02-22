@@ -42,6 +42,3 @@ const Post = ({ post, author, addLiked , deletePost}) => {
 };
 
 export default Post;
-
-
-/// @mutasem%2729@#$
