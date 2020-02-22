@@ -20,6 +20,11 @@ export default (state = initialState, action)=>{
                 loading: false,
                 errors: null
             }
+        case POST_ERROR:
+            return{
+                loading: false,
+                errors: action.error
+            }
         default:
             return initialState
     }
