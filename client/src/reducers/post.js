@@ -2,7 +2,8 @@ import {
     GET_POSTS,
     POST_ERROR,
     ADD_LIKES,
-    CLEAR_POSTS
+    CLEAR_POSTS,
+    DELETED_POST
 } from "../actions/type";
 
 
@@ -29,7 +30,6 @@ export default (state = initialState, action)=>{
                 errors: action.error
             }
         case ADD_LIKES:
-            console.log()
             const posts =state.posts.map(post => {
                 if(post._id.toString() === action.post) {
                     post.likes = post.likes.map(like => like.user? like.user.toString(): like)

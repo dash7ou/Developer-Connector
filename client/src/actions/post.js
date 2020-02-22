@@ -3,7 +3,8 @@ import{
     GET_POSTS,
     POST_ERROR,
     ADD_LIKES,
-    CLEAR_POSTS
+    CLEAR_POSTS,
+    DELETED_POST
 }from "./type";
 
 
@@ -34,7 +35,6 @@ export const addLiked = (post, user) => async dispatch =>{
             post
         })
     }catch(err){
-        console.log(err)
         dispatch({
             type: POST_ERROR,
             error:{
@@ -45,6 +45,23 @@ export const addLiked = (post, user) => async dispatch =>{
     }
 }
 
+export const deletePost = id => async dispatch =>{
+    try{
+        const res = await post.delete(`/api/v1/posts/${id}`);
+        dispatch({
+            type: DELETED_POST,
+            data: id
+        })
+    }catch(err){
+        dispatch({
+            type: POST_ERROR,
+            error:{
+                message: err.response.data.error,
+                statusCode : err.response.status
+            }
+        })
+    }
+}
 
 export const clearPosts = ()=> dispatch =>{
     dispatch({
