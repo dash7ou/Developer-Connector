@@ -2,7 +2,8 @@ import axios from "axios";
 import{
     GET_POSTS,
     POST_ERROR,
-    ADD_LIKES
+    ADD_LIKES,
+    CLEAR_POSTS
 }from "./type";
 
 
@@ -24,14 +25,16 @@ export const getPosts = _ => async dispatch =>{
     }
 }
 
-export const addLiked = post => async dispatch =>{
+export const addLiked = (post, user) => async dispatch =>{
     try{
         const res = await axios.put(`/api/v1/posts/liked/${post}`);
         dispatch({
             type: ADD_LIKES,
-            data: res.data
+            user,
+            post
         })
     }catch(err){
+        console.log(err)
         dispatch({
             type: POST_ERROR,
             error:{
@@ -40,4 +43,11 @@ export const addLiked = post => async dispatch =>{
             }
         })
     }
+}
+
+
+export const clearPosts = ()=> dispatch =>{
+    dispatch({
+        type: CLEAR_POSTS
+    })
 }

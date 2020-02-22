@@ -1,6 +1,8 @@
 import {
     GET_POSTS,
-    POST_ERROR
+    POST_ERROR,
+    ADD_LIKES,
+    CLEAR_POSTS
 } from "../actions/type";
 
 
@@ -14,7 +16,6 @@ const initialState = {
 export default (state = initialState, action)=>{
     switch(action.type){
         case GET_POSTS:
-            console.log("add posts", action.data)
             return{
                 ...state,
                 posts: action.data,
@@ -27,6 +28,32 @@ export default (state = initialState, action)=>{
                 loading: false,
                 errors: action.error
             }
+        case ADD_LIKES:
+            console.log()
+            const posts =state.posts.map(post => {
+                if(post._id.toString() === action.post) {
+                    post.likes = post.likes.map(like => like.user? like.user.toString(): like)
+                    if(post.likes.includes(action.user)){
+                        post.likes= [ ...post.likes.filter(like => like !== action.user) ]
+                        return post
+                    }
+                    post.likes = [
+                        ...post.likes,
+                        action.user
+                    ]
+                    return post
+
+                }
+                return post
+            })
+            return{
+                ...state,
+                loading:false,
+                errors: null,
+                posts
+            }
+        case CLEAR_POSTS:
+            return initialState
         default:
             return state
     }

@@ -1,10 +1,11 @@
 import React from 'react';
 import { ButtonGroup, Button, Icon } from 'rsuite';
 
-const Post = ({ post, author }) => {
+const Post = ({ post, author, addLiked }) => {
 	const onLiked = ()=>{
-		const post = post._id.toString();
-		
+		const postId = post._id.toString();
+		const user = author.toString()
+		addLiked(postId, user)
 	}
 
 	return (
