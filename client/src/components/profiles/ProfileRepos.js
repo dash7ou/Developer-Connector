@@ -1,21 +1,17 @@
 import React, {useEffect} from "react";
-import {connect} from "react-redux";
-import {
-    getRepos
-} from "../../actions/profile";
-
+import Spinner from "../layout/spinner/Spinner";
 import {
     Button,
     ButtonGroup
 } from "rsuite"
 
-const ProfileRepos = ({username ,getRepos,profile:{ repos}})=>{
+const ProfileRepos = ({ username, getRepos, repos })=>{
     useEffect(()=>{
         getRepos(username)
-    }, [])
+    }, []);
 
     return(
-        repos && repos.length >0 &&
+        !repos ? <Spinner /> : (repos.length > 0 &&
             <article className="repos">
                 <h1 className="repos-title">Github Repos</h1>
                 {repos.map((repo, index)=>
@@ -37,11 +33,8 @@ const ProfileRepos = ({username ,getRepos,profile:{ repos}})=>{
                 )
                 }
             </article>
-    )
+    ))
 }
 
-const mapStateToProps = state =>({
-    profile: state.profile
-})
 
-export default connect(mapStateToProps, {getRepos})(ProfileRepos);
+export default ProfileRepos

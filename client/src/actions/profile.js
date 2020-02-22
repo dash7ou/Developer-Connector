@@ -13,7 +13,9 @@ import {
     DELETE_EXPERIENCE,
     GET_PROFILES,
     GET_REPOS,
-    GET_PROFILEBYID
+    GET_PROFILEBYID,
+    CLEAR_ERRORS,
+    CLEAR_REPOS
 } from "./type";
 
 
@@ -80,6 +82,7 @@ export const getProfileById = userId => async dispatch =>{
 }
 
 export const getRepos = username => async dispatch=>{
+    console.log(username, "thisz acction")
     try{
         const res = await axios.get(`/api/v1/profile/github/${username}`);
         dispatch({
@@ -87,12 +90,10 @@ export const getRepos = username => async dispatch=>{
             data: res.data
         })
     }catch(err){
-        dispatch({
-            type: PROFILE_ERROR,
-            error:{
-                message: err.response.data.error
-            }
-        })
+            dispatch({
+                type: GET_REPOS,
+                data: []
+            })
     }
 }
 
@@ -186,6 +187,12 @@ export const addEducation = data => async dispatch=>{
             }
         })
     }
+}
+
+export const clearRepos = ()=> dispatch => {
+    dispatch({
+        type: CLEAR_REPOS
+    })
 }
 export const deleteExperience = id => async dispatch=>{
     try{

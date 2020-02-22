@@ -19,3 +19,4 @@ export const DELETE_EDUCATION = 'DELETE_EDUCATION';
 export const GET_PROFILES = 'GET_PROFILES';
 export const GET_REPOS = 'GET_REPOS';
 export const GET_PROFILEBYID = 'GET_PROFILEBYID';
+export const CLEAR_REPOS ='CLEAR_REPOS'
