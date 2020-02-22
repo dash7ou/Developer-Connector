@@ -5,7 +5,7 @@ import { getPosts } from '../../actions/post';
 import Post from "./postsItem";
 
 
-const Posts = ({ getPosts, post: { posts }}) => {
+const Posts = ({ getPosts, post: { posts }, auth:{user: {_id : author}}}) => {
 	useEffect(() => {
 		getPosts();
 	}, []);
@@ -16,7 +16,7 @@ const Posts = ({ getPosts, post: { posts }}) => {
             <p className="posts__main-para">Welcome to the community</p>
             {
                 posts.length>0 ? (
-                    posts.map(post => <Post post={post}/>)
+                    posts.map(post => <Post post={post} author={author}/>)
                 ):(<h5 className="posts-no">No post untill now</h5>)
             }
         </section>
@@ -25,6 +25,7 @@ const Posts = ({ getPosts, post: { posts }}) => {
 
 const mapStateToProps = (state) => ({
     post: state.post,
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, {

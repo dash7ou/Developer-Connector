@@ -1,7 +1,12 @@
 import React from 'react';
 import { ButtonGroup, Button, Icon } from 'rsuite';
 
-const Post = ({ post }) => {
+const Post = ({ post, author }) => {
+	const onLiked = ()=>{
+		const post = post._id.toString();
+		
+	}
+
 	return (
 		<div className='post'>
 			<div className='post__user-photo'>
@@ -14,18 +19,15 @@ const Post = ({ post }) => {
 					<p className='post-date'>{post.createdAt}</p>
 					<div className='post-buttons'>
 						<ButtonGroup>
-							<Button>
-								<Icon icon='thumbs-o-up' />
-							</Button>
-							<Button>
-								<Icon icon='thumbs-o-down' />
+							<Button onClick={onLiked}>
+								{post.likes.length}  <Icon icon='thumbs-o-up' />
 							</Button>
 							<Button color='green'>
-								<span>{post.commit.length}</span>, Discussion
+								<span>{post.commit.length}</span> <Icon icon='commenting-o' /> Discussion
 							</Button>
-							<Button color='red'>
+							{post.user._id.toString() === author.toString() && <Button color='red'>
 								<Icon icon='trash' />
-							</Button>
+							</Button>}
 						</ButtonGroup>
 					</div>
 				</div>

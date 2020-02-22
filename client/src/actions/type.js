@@ -22,3 +22,4 @@ export const GET_PROFILEBYID = 'GET_PROFILEBYID';
 export const CLEAR_REPOS ='CLEAR_REPOS';
 export const GET_POSTS = 'GET_POSTS';
 export const POST_ERROR = 'POST_ERROR';
+export const ADD_LIKES = 'ADD_LIKES';
