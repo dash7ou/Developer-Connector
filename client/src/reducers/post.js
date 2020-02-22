@@ -3,7 +3,8 @@ import {
     POST_ERROR,
     ADD_LIKES,
     CLEAR_POSTS,
-    DELETED_POST
+    DELETED_POST,
+    ADD_POST
 } from "../actions/type";
 
 

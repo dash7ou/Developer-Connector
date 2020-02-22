@@ -4,7 +4,8 @@ import{
     POST_ERROR,
     ADD_LIKES,
     CLEAR_POSTS,
-    DELETED_POST
+    DELETED_POST,
+    ADD_POST
 }from "./type";
 
 
@@ -47,10 +48,34 @@ export const addLiked = (post, user) => async dispatch =>{
 
 export const deletePost = id => async dispatch =>{
     try{
-        const res = await axios.delete(`/api/v1/posts/${id}`);
+        await axios.delete(`/api/v1/posts/${id}`);
         dispatch({
             type: DELETED_POST,
             data: id
+        })
+    }catch(err){
+        dispatch({
+            type: POST_ERROR,
+            error:{
+                message: err.response.data.error,
+                statusCode : err.response.status
+            }
+        })
+    }
+}
+
+export const addPost = text => async dispatch =>{
+    const config = {
+        headers:{
+            'Content-Type': "application/json"
+        }
+    }
+    const body = JSON.stringify({ text });
+    try{
+        const res = await axios.post("/api/v1/posts", body, config);
+        dispatch({
+            type: ADD_POST,
+            data: res.data
         })
     }catch(err){
         dispatch({

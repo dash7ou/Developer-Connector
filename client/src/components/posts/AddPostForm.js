@@ -11,7 +11,7 @@ const AddPostForm = ()=>{
         setText(val)
     }
     const onAddPost = ()=>{
-        
+        console.log(text)
     }
     return(
         <div className="add-post">
