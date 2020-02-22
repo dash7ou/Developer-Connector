@@ -14,6 +14,7 @@ const initialState = {
 export default (state = initialState, action)=>{
     switch(action.type){
         case GET_POSTS:
+            console.log("add posts", action.data)
             return{
                 ...state,
                 posts: action.data,
@@ -22,10 +23,11 @@ export default (state = initialState, action)=>{
             }
         case POST_ERROR:
             return{
+                ...state,
                 loading: false,
                 errors: action.error
             }
         default:
-            return initialState
+            return state
     }
 }

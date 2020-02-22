@@ -24,6 +24,7 @@ const AuthNav = ( {history, logout, clearProfile })=>{
                 <Nav pullRight>
                     <Nav.Item href="/dashboard" icon={<Icon icon="dashboard"/>} >Dashboard</Nav.Item>
                     <Nav.Item href="/developers" icon={<Icon icon="flow"/>}>Developers</Nav.Item>
+                    <Nav.Item href="/posts" icon={<Icon icon="frame"/>}>Posts</Nav.Item>
                     <Nav.Item icon={<Icon icon="sign-out"/>} onClick={clearAll}>Logout</Nav.Item>
                 </Nav>
             </Navbar.Body>
