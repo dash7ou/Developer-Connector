@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../layout/spinner/Spinner';
 import { getPosts } from '../../actions/post';
-import Post from "./Post";
+import Post from "./postsItem";
 
 
 const Posts = ({ getPosts, post: { posts }}) => {
@@ -11,12 +11,12 @@ const Posts = ({ getPosts, post: { posts }}) => {
 	}, []);
 
     return !posts? <Spinner/>: (
-        <section>
+        <section className="posts">
             <h1 className="posts-title">Posts</h1>
             <p className="posts__main-para">Welcome to the community</p>
             {
                 posts.length>0 ? (
-                    posts.map(post => <Post />)
+                    posts.map(post => <Post post={post}/>)
                 ):(<h5 className="posts-no">No post untill now</h5>)
             }
         </section>

@@ -313,3 +313,38 @@ a {
 	font-size: 1rem;
 	padding: 0 1rem
 }
+
+.posts {
+	padding: 1rem
+}
+
+.posts-title {
+	color: #4298d4;
+}
+
+.posts__main-para {
+	font-size: 1.5rem;
+}
+
+.post {
+	margin: 1rem 0;
+	padding: 1rem;
+	border: 1px solid #dec5c5;
+	display: flex;
+}
+
+.post__user-photo {
+	align-items: center;
+}
+
+.post__user-photo img {
+	border: 1px solid #ccc;
+	border-radius: 50%;
+	width: 40%;
+}
+
+.post__user-photo p {
+	padding: 0.7rem 1.3rem;
+	color: #4298d4;
+	font-weight: bolder;
+}

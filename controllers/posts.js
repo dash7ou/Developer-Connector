@@ -9,7 +9,7 @@ const { validationResult } = require("express-validator");
 
 
 exports.getPosts = asyncFun(async ( req , res , next) =>{
-    const posts = await Post.find().sort({createdAt: -1});
+    const posts = await Post.find().populate('user', [ 'name' ]).sort({createdAt: -1});
     res.status(200).send(posts)
 })
 
