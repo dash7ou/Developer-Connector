@@ -5,13 +5,15 @@ import {
     Icon
 }from "rsuite"
 
-const AddPostForm = ()=>{
+const AddPostForm = ({addPost, getPosts})=>{
     const [text, setText] = useState("")
     const onChange = (val)=>{
         setText(val)
     }
-    const onAddPost = ()=>{
-        console.log(text)
+    const onAddPost = async ()=>{
+        await addPost(text)
+        await getPosts()
+        setText("")
     }
     return(
         <div className="add-post">
@@ -21,6 +23,7 @@ const AddPostForm = ()=>{
                 rows={5} 
                 style={{ width: '100%' }} 
                 placeholder="Add Your Post" 
+                value={text}
             />
             <Button onClick={onAddPost} color="green" style={{'margin': '0.5rem 0 0 0.5rem'}}><Icon icon="plus-square-o"/> Add Post</Button>
         </div>

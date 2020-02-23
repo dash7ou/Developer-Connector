@@ -11,11 +11,15 @@ import {
     clearProfile
 } from "../../../actions/profile";
 
+import {
+    clearPosts
+} from "../../../actions/post"
 
-const AuthNav = ( {history, logout, clearProfile })=>{
+const AuthNav = ( {history, logout, clearProfile , clearPosts})=>{
     const clearAll = ()=>{
         logout();
         clearProfile();
+        clearPosts()
     }
     return (
         <Navbar className="navbar" appearance="inverse">
@@ -41,5 +45,6 @@ AuthNav.propTypes ={
 
 export default connect(null, {
     logout,
-    clearProfile
+    clearProfile,
+    clearPosts
 } )(AuthNav);

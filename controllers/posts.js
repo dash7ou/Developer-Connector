@@ -66,8 +66,9 @@ exports.createPost = asyncFun( async (req, res, next)=>{
         avatar
     }
 
-    const post = new Post(newPost);
+    let post = new Post(newPost);
     await post.save()
+    post = post.populate("user", ['name'])
     res.status(200).send(post);
 })
 

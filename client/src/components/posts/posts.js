@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../layout/spinner/Spinner';
-import { getPosts, addLiked, clearPosts, deletePost } from '../../actions/post';
+import { getPosts, addLiked, clearPosts, deletePost, addPost } from '../../actions/post';
 import Post from "./postsItem";
 import AddPostForm from "./AddPostForm";
 
-const Posts = ({ getPosts,addLiked,deletePost, post: { posts }, auth:{user: {_id : author}}}) => {
+const Posts = ({ getPosts,addLiked,deletePost,addPost, post: { posts }, auth:{user: {_id : author}}}) => {
+    console.log(author)
 	useEffect(() => {
         getPosts();
         return ()=>{
@@ -17,7 +18,7 @@ const Posts = ({ getPosts,addLiked,deletePost, post: { posts }, auth:{user: {_id
         <section className="posts">
             <h1 className="posts-title">Posts</h1>
             <p className="posts__main-para">Welcome to the community</p>
-            <AddPostForm />
+            <AddPostForm addPost={addPost} getPosts={getPosts}/>
             {
                 posts.length>0 ? (
                     posts.map((post,index) => <Post key={index} post={post} author={author} addLiked={addLiked} deletePost={deletePost}/>)
@@ -35,5 +36,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
     getPosts,
     addLiked,
-    deletePost
+    deletePost,
+    addPost
 })(Posts);

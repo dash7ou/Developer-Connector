@@ -39,8 +39,8 @@ export default (state = initialState, action)=>{
                         return post
                     }
                     post.likes = [
-                        ...post.likes,
-                        action.user
+                        action.user,
+                        ...post.likes
                     ]
                     return post
 
@@ -52,6 +52,15 @@ export default (state = initialState, action)=>{
                 loading:false,
                 errors: null,
                 posts
+            }
+        case ADD_POST:
+            return{
+                ...state,
+                loading: false,
+                posts: [
+                    ...state.posts,
+                    action.data
+                ]
             }
         case DELETED_POST:
             return{

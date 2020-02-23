@@ -78,6 +78,7 @@ export const addPost = text => async dispatch =>{
             data: res.data
         })
     }catch(err){
+        console.log(err)
         dispatch({
             type: POST_ERROR,
             error:{

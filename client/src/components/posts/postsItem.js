@@ -12,8 +12,20 @@ const Post = ({ post, author, addLiked , deletePost}) => {
 		await deletePost(postId)
 	}
 
+
+	const show = ()=>{
+		if(!post.user._id){
+			return author && post.user.toString() === author.toString()
+		}
+		return author && post.user._id.toString() === author.toString()
+	}
+
+	let showDelete = show()
+
+
+
 	return (
-		<div className='post'>
+		post && author && <div className='post'>
 			<div className='post__user-photo'>
 				<img src={post.avatar} />
 				<p>{post.user.name}</p>
@@ -30,7 +42,7 @@ const Post = ({ post, author, addLiked , deletePost}) => {
 							<Button color='green'>
 								<span>{post.commit.length}</span> <Icon icon='commenting-o' /> Discussion
 							</Button>
-							{post.user._id.toString() === author.toString() && <Button color='red' onClick={onDeletePost}>
+							{showDelete && <Button color='red' onClick={onDeletePost}>
 								<Icon icon='trash' />
 							</Button>}
 						</ButtonGroup>
