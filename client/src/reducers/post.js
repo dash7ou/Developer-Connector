@@ -71,7 +71,7 @@ export default (state = initialState, action)=>{
                 errors: null,
                 posts: [...state.posts.filter(post => post._id.toString() === action.data)]
             }
-        case ADD_POST:
+        case GET_POST:
             return{
                 ...state,
                 post: action.data,
