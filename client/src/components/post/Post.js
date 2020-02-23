@@ -8,6 +8,7 @@ import {
     getPost,
     clearPost
 }from "../../actions/post";
+import AddCommentForm from "./AddCommentForm"
 
 const Post = ({ history, getPost, clearPost, post:{post} })=>{
     useEffect(()=>{
@@ -44,6 +45,7 @@ const Post = ({ history, getPost, clearPost, post:{post} })=>{
                         </div>
                     </div>
                 </div>
+                <AddCommentForm />
             </section>
         )
     )
