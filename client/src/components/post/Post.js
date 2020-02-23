@@ -6,13 +6,14 @@ import {
 import { connect } from "react-redux";
 import {
     getPost,
-    clearPost
+    clearPost,
+    addComment
 }from "../../actions/post";
 import AddCommentForm from "./AddCommentForm"
 
-const Post = ({ history, getPost, clearPost, post:{post} })=>{
+const Post = ({ history, getPost, clearPost,addComment, post:{post, loading} })=>{
+    const postId = history.location.pathname.split("/")[2].toString();
     useEffect(()=>{
-        const postId = history.location.pathname.split("/")[2].toString();
         getPost(postId)
     }, [])
     const backPostsPage = ()=>{
@@ -30,7 +31,7 @@ const Post = ({ history, getPost, clearPost, post:{post} })=>{
 	}
 
     return(
-        !post? <Spinner/> : (
+        typeof post.user !== "object" ? <Spinner/> : (
             <section>
                 <Button onClick={backPostsPage}>Back to posts page</Button>
                 <div className='post'>
@@ -45,7 +46,7 @@ const Post = ({ history, getPost, clearPost, post:{post} })=>{
                         </div>
                     </div>
                 </div>
-                <AddCommentForm />
+                <AddCommentForm addComment={addComment} postId={postId} getPost={getPost}/>
             </section>
         )
     )
@@ -57,5 +58,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
     getPost,
-    clearPost
+    clearPost,
+    addComment
 })(Post);

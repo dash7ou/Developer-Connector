@@ -5,12 +5,14 @@ import{
     Button
 }from "rsuite";
 
-const AddCommentForm = ()=>{
+const AddCommentForm = ({ addComment , postId, getPost })=>{
     const [text ,setText ] = useState("");
     const onChange = (text)=>{
         setText(text);
     }
-    const onAddComment = ()=>{
+    const onAddComment = async ()=>{
+        await addComment(text, postId);
+        await getPost(postId)
         setText("")
     }
     return(
