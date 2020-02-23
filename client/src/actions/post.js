@@ -5,7 +5,9 @@ import{
     ADD_LIKES,
     CLEAR_POSTS,
     DELETED_POST,
-    ADD_POST
+    ADD_POST,
+    GET_POST,
+    CLEAR_POST
 }from "./type";
 
 import { Notification } from "rsuite";
@@ -93,7 +95,6 @@ export const addPost = text => async dispatch =>{
             description: "Add post success, now other user can like and add comment to your post"
         });
     }catch(err){
-        console.log(err)
         dispatch({
             type: POST_ERROR,
             error:{
@@ -102,6 +103,31 @@ export const addPost = text => async dispatch =>{
             }
         })
     }
+}
+
+
+export const getPost = id => async dispatch=>{
+    try{
+        const res = await axios.get(`/api/v1/posts/${id}`);
+        dispatch({
+            type: GET_POST,
+            data: res.data
+        })
+    }catch(err){
+        dispatch({
+            type: POST_ERROR,
+            error:{
+                message: err.response.data.error,
+                statusCode : err.response.status
+            }
+        })
+    }
+}
+
+export const clearPost = _ => dispatch=>{
+    dispatch({
+        type: CLEAR_POST
+    })
 }
 
 export const clearPosts = ()=> dispatch =>{
