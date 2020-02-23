@@ -21,7 +21,7 @@ const Posts = ({ getPosts,addLiked,deletePost,addPost, post: { posts }, auth:{us
             <AddPostForm addPost={addPost} getPosts={getPosts}/>
             {
                 posts.length>0 ? (
-                    posts.map((post,index) => <Post key={index} post={post} author={author} addLiked={addLiked} deletePost={deletePost}/>)
+                    posts.map((post,index) => <Post key={index} post={post} author={author} addLiked={addLiked} deletePost={deletePost} getPosts={getPosts}/>)
                 ):(<h5 className="posts-no">No post untill now</h5>)
             }
         </section>

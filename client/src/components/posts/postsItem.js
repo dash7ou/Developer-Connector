@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonGroup, Button, Icon } from 'rsuite';
 
-const Post = ({ post, author, addLiked , deletePost}) => {
+const Post = ({ post, author, addLiked , deletePost , getPosts}) => {
 	const onLiked = async ()=>{
 		const postId = post._id.toString();
 		const user = author.toString()
@@ -9,7 +9,8 @@ const Post = ({ post, author, addLiked , deletePost}) => {
 	}
 	const onDeletePost = async ()=>{
 		const postId = post._id.toString();
-		await deletePost(postId)
+		await deletePost(postId);
+		await getPosts()
 	}
 
 
