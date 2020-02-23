@@ -31,7 +31,9 @@ const Post = ({ post, author, addLiked , deletePost , getPosts, history}) => {
 		user= author && post.user._id.toString()
 		history.push(`/developers/${user}`)	
 	}
-
+	const onPostPage = ()=>{
+		history.push(`/post/${post._id}`)
+	}
 	return (
 		post && author && <div className='post'>
 			<div className='post__user-photo'>
@@ -47,7 +49,7 @@ const Post = ({ post, author, addLiked , deletePost , getPosts, history}) => {
 							<Button onClick={onLiked}>
 								{post.likes.length}  <Icon icon='thumbs-o-up' />
 							</Button>
-							<Button color='green'>
+							<Button color='green' onClick={onPostPage}>
 								<span>{post.commit.length}</span> <Icon icon='commenting-o' /> Discussion
 							</Button>
 							{showDelete && <Button color='red' onClick={onDeletePost}>
