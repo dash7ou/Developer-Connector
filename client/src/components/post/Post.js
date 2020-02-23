@@ -1,10 +1,23 @@
 import React from "react";
+import {
+    Button
+} from "rsuite";
+import { connect } from "react-redux";
 
-const Post = ()=>{
+const Post = ({ history })=>{
+    const backPostsPage = ()=>{
+        history.push("/posts")
+    }
     return(
-        <div>here we show the post</div>
+        <section>
+            <Button onClick={backPostsPage}>Back to posts page</Button>
+
+        </section>
     )
 };
 
+const mapStateToProps = state => ({
+    post: state.post
+})
 
-export default Post;
+export default connect(mapStateToProps, {})(Post);
