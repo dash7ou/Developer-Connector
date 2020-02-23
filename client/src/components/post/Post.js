@@ -37,8 +37,8 @@ const Post = ({ history, getPost, clearPost, post:{post} })=>{
                         <img src={post.avatar} onClick={getProfile}/>
                         <p>{post.user.name}</p>
                     </div>
-                    <div className='post_info'>
-                        <div className='post_text'>{post.text}</div>
+                    <div className='post_info single'>
+                        <p className='post_text'>{post.text}</p>
                         <div className='post_disc'>
                             <p className='post-date'>{post.createdAt}</p>
                         </div>

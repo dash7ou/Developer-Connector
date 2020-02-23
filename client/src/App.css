@@ -317,7 +317,7 @@ a {
 
 .post {
 	margin: 1rem 0 0 0;
-	padding: 1rem;
+	padding: 2rem 0rem;
 	border: 1px solid #dec5c5;
 	display: flex;
 }
@@ -325,7 +325,7 @@ a {
 .post__user-photo {
 	align-items: center;
 	width: 20%;
-	text-align: left;
+	text-align: center;
 }
 
 .post__user-photo img {
@@ -336,17 +336,26 @@ a {
 }
 
 .post__user-photo p {
-	padding: 0.7rem 1rem;
+	padding: 0.7rem 0;
 	color: #4298d4;
 	font-weight: bolder;
 }
 
-/* .post-info {
-	width: 70%;
-} */
+.post_text {
+	vertical-align: middle;
+	/* padding: 2rem 0; */
+}
+
+.post_info {
+	vertical-align: middle;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
 .post_disc {
-	padding-top: 1.2rem;
 	width: 100%;
+	text-align: center;
 }
 
 .post-date {
@@ -367,4 +376,8 @@ a {
 
 .add-post {
 	margin: 1rem 0;
+}
+
+.single {
+	padding: 1.8rem 0 0 0;
 }

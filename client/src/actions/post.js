@@ -7,7 +7,9 @@ import{
     DELETED_POST,
     ADD_POST,
     GET_POST,
-    CLEAR_POST
+    CLEAR_POST,
+    ADD_COMMENT,
+    DELETE_COMMENT
 }from "./type";
 
 import { Notification } from "rsuite";
@@ -113,6 +115,36 @@ export const getPost = id => async dispatch=>{
             type: GET_POST,
             data: res.data
         })
+    }catch(err){
+        dispatch({
+            type: POST_ERROR,
+            error:{
+                message: err.response.data.error,
+                statusCode : err.response.status
+            }
+        })
+    }
+}
+
+export const addComment = (text, post) => async dispatch =>{
+    const config = {
+        headers:{
+            'Content-Type': "application/json"
+        }
+    }
+    const body = JSON.stringify({ text });
+    try{
+        const res = await axios.post(`/api/v1/posts/commit/${post}`, body, config);
+        dispatch({
+            type: ADD_COMMENT,
+            data: res.data
+        })
+
+        Notification.success({
+            title: "Add Comment",
+            placement:"topEnd",
+            description: "Add comment success, now other user can see it"
+        });
     }catch(err){
         dispatch({
             type: POST_ERROR,

@@ -41,7 +41,7 @@ const Post = ({ post, author, addLiked , deletePost , getPosts, history}) => {
 				<p>{post.user.name}</p>
 			</div>
 			<div className='post_info'>
-				<div className='post_text'>{post.text}</div>
+				<p className='post_text'>{post.text}</p>
 				<div className='post_disc'>
 					<p className='post-date'>{post.createdAt}</p>
 					<div className='post-buttons'>
