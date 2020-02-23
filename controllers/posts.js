@@ -22,7 +22,7 @@ exports.getPost = asyncFun(async (req ,res ,next)=>{
         }
     } = req;
 
-    const post = await Post.findById(postId);
+    const post = await Post.findById(postId).populate('user', [ 'name' ]);
     if(!post){
         error = {
             type: 'onlyMessage',

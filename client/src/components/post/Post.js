@@ -19,10 +19,33 @@ const Post = ({ history, getPost, clearPost, post:{post} })=>{
         clearPost()
     }
 
+    const getProfile = ()=>{
+		let user;
+		if(!post.user._id){
+			user =post.user.toString() 
+		}
+		user= post.user._id.toString()
+		history.push(`/developers/${user}`)	
+	}
+
     return(
-        !post? <Spinner/> : <section>
-            <Button onClick={backPostsPage}>Back to posts page</Button>
-        </section>
+        !post? <Spinner/> : (
+            <section>
+                <Button onClick={backPostsPage}>Back to posts page</Button>
+                <div className='post'>
+                    <div className='post__user-photo'>
+                        <img src={post.avatar} onClick={getProfile}/>
+                        <p>{post.user.name}</p>
+                    </div>
+                    <div className='post_info'>
+                        <div className='post_text'>{post.text}</div>
+                        <div className='post_disc'>
+                            <p className='post-date'>{post.createdAt}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
     )
 };
 
