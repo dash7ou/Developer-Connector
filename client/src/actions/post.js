@@ -8,6 +8,9 @@ import{
     ADD_POST
 }from "./type";
 
+import { Notification } from "rsuite";
+
+
 
 export const getPosts = _ => async dispatch =>{
     try{
@@ -53,6 +56,12 @@ export const deletePost = id => async dispatch =>{
             type: DELETED_POST,
             data: id
         })
+
+        Notification.success({
+            title: "Delete Post",
+            placement:"topEnd",
+            description: "deleted post suceess."
+        });
     }catch(err){
         dispatch({
             type: POST_ERROR,
@@ -77,6 +86,12 @@ export const addPost = text => async dispatch =>{
             type: ADD_POST,
             data: res.data
         })
+
+        Notification.success({
+            title: "Add Post",
+            placement:"topEnd",
+            description: "Add post success, now other user can like and add comment to your post"
+        });
     }catch(err){
         console.log(err)
         dispatch({
