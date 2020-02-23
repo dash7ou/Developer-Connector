@@ -134,7 +134,7 @@ export const addComment = (text, post) => async dispatch =>{
     }
     const body = JSON.stringify({ text });
     try{
-        const res = await axios.post(`/api/v1/posts/commit/${post}`, body, config);
+        const res = await axios.put(`/api/v1/posts/commit/${post}`, body, config);
         dispatch({
             type: ADD_COMMENT,
             data: res.data
@@ -144,6 +144,30 @@ export const addComment = (text, post) => async dispatch =>{
             title: "Add Comment",
             placement:"topEnd",
             description: "Add comment success, now other user can see it"
+        });
+    }catch(err){
+        dispatch({
+            type: POST_ERROR,
+            error:{
+                message: err.response.data.error,
+                statusCode : err.response.status
+            }
+        })
+    }
+}
+
+export const deleteComment = (post , comment ) => async dispatch =>{
+    try{
+        await axios.delete(`/api/v1/posts/${post}/${comment}`);
+        dispatch({
+            type: DELETE_COMMENT,
+            data: id
+        })
+
+        Notification.success({
+            title: "Delete Comment",
+            placement:"topEnd",
+            description: "Deleted comment suceess."
         });
     }catch(err){
         dispatch({
