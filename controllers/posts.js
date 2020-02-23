@@ -143,14 +143,14 @@ exports.addCommit = asyncFun( async (req, res, next)=>{
     const {
         user:{
             _id: userId,
-            avatar
+            avatar,
+            name
         },
         params:{
             id: postId
         },
         body:{
-            text,
-            name
+            text
         }
 
     } = req;

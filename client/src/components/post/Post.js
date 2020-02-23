@@ -9,7 +9,8 @@ import {
     clearPost,
     addComment
 }from "../../actions/post";
-import AddCommentForm from "./AddCommentForm"
+import AddCommentForm from "./AddCommentForm";
+import CommentItem from "./CommentItem"
 
 const Post = ({ history, getPost, clearPost,addComment, post:{post, loading} })=>{
     const postId = history.location.pathname.split("/")[2].toString();
@@ -31,7 +32,7 @@ const Post = ({ history, getPost, clearPost,addComment, post:{post, loading} })=
 	}
 
     return(
-        typeof post.user !== "object" ? <Spinner/> : (
+        post && typeof post.user === "object" ? (
             <section>
                 <Button onClick={backPostsPage}>Back to posts page</Button>
                 <div className='post'>
@@ -47,8 +48,13 @@ const Post = ({ history, getPost, clearPost,addComment, post:{post, loading} })=
                     </div>
                 </div>
                 <AddCommentForm addComment={addComment} postId={postId} getPost={getPost}/>
+                {
+                    post.commit.length > 0 && post.commit.map(comment =>(
+                        <CommentItem comment={comment}/>
+                    ))
+                }
             </section>
-        )
+        ) : <Spinner/> 
     )
 };
 
