@@ -6,7 +6,9 @@ import {
     DELETED_POST,
     ADD_POST,
     GET_POST,
-    CLEAR_POST
+    CLEAR_POST,
+    ADD_COMMENT,
+    DELETE_COMMENT
 } from "../actions/type";
 
 
@@ -84,6 +86,23 @@ export default (state = initialState, action)=>{
                 post: null,
                 loading: false,
                 error: null
+            }
+        case ADD_COMMENT:
+            return{
+                ...state,
+                post:action.data,
+                loading: false,
+                error: null
+            }
+        case DELETE_COMMENT:
+            return{
+                ...state,
+                post: {
+                    ...state.post,
+                    commit:[
+                        ...state.post.commit.filter(com => com._id.toString() !== action.comment)
+                    ]
+                }
             }
         case CLEAR_POSTS:
             return initialState
