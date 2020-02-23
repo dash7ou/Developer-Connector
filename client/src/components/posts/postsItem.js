@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonGroup, Button, Icon } from 'rsuite';
 
-const Post = ({ post, author, addLiked , deletePost , getPosts}) => {
+const Post = ({ post, author, addLiked , deletePost , getPosts, history}) => {
 	const onLiked = async ()=>{
 		const postId = post._id.toString();
 		const user = author.toString()
@@ -23,12 +23,19 @@ const Post = ({ post, author, addLiked , deletePost , getPosts}) => {
 
 	let showDelete = show()
 
-
+	const getProfile = ()=>{
+		let user;
+		if(!post.user._id){
+			user = author && post.user.toString() 
+		}
+		user= author && post.user._id.toString()
+		history.push(`/developers/${user}`)	
+	}
 
 	return (
 		post && author && <div className='post'>
 			<div className='post__user-photo'>
-				<img src={post.avatar} />
+				<img src={post.avatar} onClick={getProfile}/>
 				<p>{post.user.name}</p>
 			</div>
 			<div className='post_info'>

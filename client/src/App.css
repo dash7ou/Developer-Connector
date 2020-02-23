@@ -332,10 +332,11 @@ a {
 	border: 1px solid #ccc;
 	border-radius: 50%;
 	width: 60%;
+	cursor: pointer;
 }
 
 .post__user-photo p {
-	padding: 0.7rem 1.6rem;
+	padding: 0.7rem 1rem;
 	color: #4298d4;
 	font-weight: bolder;
 }

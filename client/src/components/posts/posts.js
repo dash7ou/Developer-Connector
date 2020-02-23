@@ -5,7 +5,7 @@ import { getPosts, addLiked, clearPosts, deletePost, addPost } from '../../actio
 import Post from "./postsItem";
 import AddPostForm from "./AddPostForm";
 
-const Posts = ({ getPosts,addLiked,deletePost,addPost, post: { posts }, auth:{user: {_id : author}}}) => {
+const Posts = ({ history ,getPosts,addLiked,deletePost,addPost, post: { posts }, auth:{user: {_id : author}}}) => {
     console.log(author)
 	useEffect(() => {
         getPosts();
@@ -21,7 +21,7 @@ const Posts = ({ getPosts,addLiked,deletePost,addPost, post: { posts }, auth:{us
             <AddPostForm addPost={addPost} getPosts={getPosts}/>
             {
                 posts.length>0 ? (
-                    posts.map((post,index) => <Post key={index} post={post} author={author} addLiked={addLiked} deletePost={deletePost} getPosts={getPosts}/>)
+                    posts.map((post,index) => <Post key={index} post={post} author={author} addLiked={addLiked} deletePost={deletePost} getPosts={getPosts} history={history} />)
                 ):(<h5 className="posts-no">No post untill now</h5>)
             }
         </section>
