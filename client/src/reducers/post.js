@@ -4,7 +4,9 @@ import {
     ADD_LIKES,
     CLEAR_POSTS,
     DELETED_POST,
-    ADD_POST
+    ADD_POST,
+    GET_POST,
+    CLEAR_POST
 } from "../actions/type";
 
 
@@ -68,6 +70,20 @@ export default (state = initialState, action)=>{
                 loading:false,
                 errors: null,
                 posts: [...state.posts.filter(post => post._id.toString() === action.data)]
+            }
+        case ADD_POST:
+            return{
+                ...state,
+                post: action.data,
+                loading: false,
+                error: null
+            }
+        case CLEAR_POST:
+            return{
+                ...state,
+                post: null,
+                loading: false,
+                error: null
             }
         case CLEAR_POSTS:
             return initialState
