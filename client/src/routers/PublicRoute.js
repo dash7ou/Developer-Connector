@@ -4,7 +4,7 @@ import { Route , Redirect} from "react-router-dom";
 
 const PublicRoute = ({ auth: {isAuthenticated, loading, user }, component: Component, ...rest})=>{
     return(
-        !loading&& typeof user === 'object' &&
+        !loading&& !user &&
         <Route {...rest} render={props =>
             !isAuthenticated ? (
                 <Component {...props} />
