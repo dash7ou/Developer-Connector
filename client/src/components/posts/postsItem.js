@@ -43,7 +43,7 @@ const Post = ({ post, author, addLiked , deletePost , getPosts, history}) => {
 			<div className='post_info'>
 				<p className='post_text'>{post.text}</p>
 				<div className='post_disc'>
-					<p className='post-date'>{post.createdAt}</p>
+					<p className='post-date'>post on {post.createdAt}</p>
 					<div className='post-buttons'>
 						<ButtonGroup>
 							<Button onClick={onLiked}>

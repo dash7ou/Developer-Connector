@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import Spinner from "../layout/spinner/Spinner";
 import {
-    Button
+    Button, Icon
 } from "rsuite";
 import { connect } from "react-redux";
 import {
@@ -39,7 +39,7 @@ const Post = ({ history, getPost, clearPost,addComment,deleteComment, post:{post
     return(
         post && typeof post.user === "object" ? (
             <section>
-                <Button onClick={backPostsPage}>Back to posts page</Button>
+                <Button onClick={backPostsPage}> <Icon icon='arrow-circle-left' /> Back to posts page</Button>
                 <div className='post'>
                     <div className='post__user-photo'>
                         <img src={post.avatar} onClick={getProfile}/>
@@ -56,7 +56,14 @@ const Post = ({ history, getPost, clearPost,addComment,deleteComment, post:{post
                 <div className="comment-items">
                     {
                         post.commit.length > 0 && post.commit.map(comment =>(
-                            <CommentItem comment={comment} key={comment._id} deleteComment={deleteComment} userLogin={userLogin} post={post._id}/>
+                            <CommentItem 
+                                comment={comment} 
+                                key={comment._id} 
+                                deleteComment={deleteComment} 
+                                userLogin={userLogin} 
+                                post={post._id}
+                                history={history}
+                            />
                         ))
                     }
                 </div>

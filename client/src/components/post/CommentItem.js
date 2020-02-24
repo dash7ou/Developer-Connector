@@ -4,7 +4,7 @@ import {
     Icon
 } from "rsuite"
 
-const CommentItem = ({comment, deleteComment, userLogin, post})=>{
+const CommentItem = ({history, comment, deleteComment, userLogin, post})=>{
     const {
         avatar,
         name,
@@ -17,9 +17,14 @@ const CommentItem = ({comment, deleteComment, userLogin, post})=>{
         await deleteComment(postId , commentId)
         
     }
+    const onGetProfile = ()=>{
+        const userId = comment.user.toString();
+        history.push(`/developers/${userId}`)
+    }
+    
     return(
         <div className="comment">
-            <div className="comment__avatar">
+            <div className="comment__avatar" onClick={onGetProfile}>
                 <img src={avatar}/>
                 {name && <p className="comment__name">{name}</p>}
             </div>

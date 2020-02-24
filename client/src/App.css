@@ -412,6 +412,7 @@ a {
 	height: 50%;
 	padding: 1rem;
 	width: 20%;
+	cursor: pointer;
 }
 
 .comment__avatar img {
