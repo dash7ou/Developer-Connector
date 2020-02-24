@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const  DBConnect = require("./config/db");
 
 // get app route
@@ -36,6 +37,15 @@ connection().then(_=>{
 
   // handle any error
   app.use(errorHandler)
+
+  // Serve static assets in producation
+  if(process.env.NODE_ENV === "production"){
+    // set static folder
+    app.use(express.static('client/build'));
+    app.get('*', (req,res)=>{
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+  }
 
 }).catch((err)=>{
   console.log(err)
