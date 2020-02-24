@@ -7,6 +7,7 @@ const users = require("./routes/users");
 const profile = require("./routes/profile");
 const auth = require("./routes/auth");
 const posts = require("./routes/posts");
+const error404 = require("./controllers/404page");
 
 const errorHandler = require("./middleware/errorHandler");
 
@@ -31,6 +32,7 @@ connection().then(_=>{
   app.use('/api/v1/profile', profile);
   app.use('/api/v1/auth', auth);
   app.use('/api/v1/posts', posts)
+  app.use(error404);
 
   // handle any error
   app.use(errorHandler)
