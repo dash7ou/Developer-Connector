@@ -2,7 +2,8 @@ import React ,{useState} from "react";
 import {
     Input,
     Button,
-    Icon
+    Icon,
+    Alert
 }from "rsuite"
 
 const AddPostForm = ({addPost, getPosts})=>{
@@ -11,6 +12,9 @@ const AddPostForm = ({addPost, getPosts})=>{
         setText(val)
     }
     const onAddPost = async ()=>{
+        if(text.length === 0){
+            return Alert.error("Your post must be more than 6 character", 5000);
+        }
         await addPost(text)
         await getPosts()
         setText("")

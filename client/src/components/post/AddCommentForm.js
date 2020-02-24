@@ -2,7 +2,8 @@ import React , { useState } from "react";
 import{
     Input,
     Icon,
-    Button
+    Button,
+    Alert
 }from "rsuite";
 
 const AddCommentForm = ({ addComment , postId, getPost })=>{
@@ -11,6 +12,9 @@ const AddCommentForm = ({ addComment , postId, getPost })=>{
         setText(text);
     }
     const onAddComment = async ()=>{
+        if(text.length === 0){
+            return Alert.error("Your comment must be not empty", 5000);
+        }
         await addComment(text, postId);
         await getPost(postId)
         setText("")
