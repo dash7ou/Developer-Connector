@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Icon } from 'rsuite';
 
 const ProfilesItem = ({ profile, history }) => {
-	const { user: {_id:userId, avatar, name }, _id ,company,status, location, skills } = profile;
+	const { user: {_id:userId, avatar, name } ,company,status, location, skills } = profile;
 
 	const onGetProfile = ()=>{
 		history.push(`/developers/${userId}`)
@@ -11,7 +11,7 @@ const ProfilesItem = ({ profile, history }) => {
 	return (
 		<article className='dev-card' >
 			<div className='dev-card__photo'>
-				<img src={avatar} />
+				<img src={avatar} alt="user_photo" />
 			</div>
 			<div className='dev-card__info'>
 				<div className='dev-card__main-info'>

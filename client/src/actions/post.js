@@ -36,7 +36,7 @@ export const getPosts = _ => async dispatch =>{
 
 export const addLiked = (post, user) => async dispatch =>{
     try{
-        const res = await axios.put(`/api/v1/posts/liked/${post}`);
+        await axios.put(`/api/v1/posts/liked/${post}`);
         dispatch({
             type: ADD_LIKES,
             user,

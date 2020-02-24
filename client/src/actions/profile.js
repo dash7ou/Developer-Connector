@@ -14,7 +14,6 @@ import {
     GET_PROFILES,
     GET_REPOS,
     GET_PROFILEBYID,
-    CLEAR_ERRORS,
     CLEAR_REPOS
 } from "./type";
 

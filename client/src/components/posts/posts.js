@@ -6,7 +6,6 @@ import Post from "./postsItem";
 import AddPostForm from "./AddPostForm";
 
 const Posts = ({ history ,getPosts,addLiked,deletePost,addPost, post: { posts }, auth:{user: {_id : author}}}) => {
-    console.log(author)
 	useEffect(() => {
         getPosts();
         return ()=>{

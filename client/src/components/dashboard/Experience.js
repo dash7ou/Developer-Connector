@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux"
-import { Table, Icon , Button} from 'rsuite';
+import { Table, Icon } from 'rsuite';
 import {
     deleteExperience
 } from "../../actions/profile"

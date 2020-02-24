@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Alert } from 'rsuite';
-import { Form, FormGroup, FormControl, Button, ButtonToolbar, Icon, Notification } from 'rsuite';
+import { Form, FormGroup, FormControl, Button, ButtonToolbar, Icon } from 'rsuite';
 
 import { loginUser, clearErrors, loadUser } from '../../actions/auth';
 import { getProfile } from '../../actions/profile';

@@ -16,7 +16,6 @@ const getGitHubProfile = async (username) => {
 				'githubClientId'
 			)}&client_secret=${config.get('githubClientSecret')}`,conf
         );
-        console.log(res.data)
         if(!res){
             throw new ErrorResponse("", {
                 type: 'onlyMessage',

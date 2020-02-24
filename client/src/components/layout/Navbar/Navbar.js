@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import AuthNav from "./AuthNav";
 import NotAuthNav from "./NotAuthNav";
 import { connect } from "react-redux";

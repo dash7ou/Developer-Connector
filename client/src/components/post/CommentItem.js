@@ -25,7 +25,7 @@ const CommentItem = ({history, comment, deleteComment, userLogin, post})=>{
     return(
         <div className="comment">
             <div className="comment__avatar" onClick={onGetProfile}>
-                <img src={avatar}/>
+                <img src={avatar} alt="user_img"/>
                 {name && <p className="comment__name">{name}</p>}
             </div>
             <div className="comment__info">

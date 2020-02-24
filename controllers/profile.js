@@ -218,7 +218,6 @@ exports.addExperience = asyncFun(async (req, res, next) => {
 
 exports.addEducation = asyncFun(async (req, res, next) => {
 	const errors = validationResult(req);
-	console.log(errors);
 	let error;
 	if (!errors.isEmpty()) {
 		error = {
@@ -368,7 +367,6 @@ exports.getGithubProfile = asyncFun(async (req, res, next) => {
 	const { params: { username } } = req;
 
 	const data = await getGithubProfile(username);
-	console.log(data);
 	if (data === 404) {
 		error = {
 			type: 'onlyMessage',

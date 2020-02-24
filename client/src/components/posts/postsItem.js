@@ -37,7 +37,7 @@ const Post = ({ post, author, addLiked , deletePost , getPosts, history}) => {
 	return (
 		post && author && <div className='post'>
 			<div className='post__user-photo'>
-				<img src={post.avatar} onClick={getProfile}/>
+				<img src={post.avatar} onClick={getProfile} alt="user_photo"/>
 				<p>{post.user.name}</p>
 			</div>
 			<div className='post_info'>
