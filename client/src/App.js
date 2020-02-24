@@ -56,7 +56,6 @@ const App =() => {
               <PrivateRoute exact path="/profile/add-education" component={AddEducation} />
               <PrivateRoute exact path="/posts" component={Posts} />
               <PrivateRoute exact path="/post/:id" component={Post} />
-              <Route  component={NotFoundPage}/>
             </Switch>
           </section>
         </Fragment>
