@@ -22,7 +22,7 @@ const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , aut
 			<p className="dashboard-para">
 				<Icon icon="user-circle" size="2x"/> Welcome { user && user.name}
 			</p>
-			{ profile !== null ? (
+			{ typeof profile === "object" ? (
 				<section style={{"margin": "1.5rem 0.7rem", "alignItems": "center"}}>
 					<ButtonToolbar>
 						<Button color="blue" href="/update-profile">
