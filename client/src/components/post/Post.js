@@ -48,11 +48,13 @@ const Post = ({ history, getPost, clearPost,addComment, post:{post, loading} })=
                     </div>
                 </div>
                 <AddCommentForm addComment={addComment} postId={postId} getPost={getPost}/>
-                {
-                    post.commit.length > 0 && post.commit.map(comment =>(
-                        <CommentItem comment={comment}/>
-                    ))
-                }
+                <div className="comment-items">
+                    {
+                        post.commit.length > 0 && post.commit.map(comment =>(
+                            <CommentItem comment={comment} key={comment._id}/>
+                        ))
+                    }
+                </div>
             </section>
         ) : <Spinner/> 
     )
