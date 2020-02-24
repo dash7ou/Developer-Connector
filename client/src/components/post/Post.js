@@ -13,7 +13,7 @@ import {
 import AddCommentForm from "./AddCommentForm";
 import CommentItem from "./CommentItem"
 
-const Post = ({ history, getPost, clearPost,addComment, post:{post, loading} })=>{
+const Post = ({ history, getPost, clearPost,addComment,deleteComment, post:{post, loading} })=>{
     const postId = history.location.pathname.split("/")[2].toString();
     useEffect(()=>{
         getPost(postId)
@@ -22,14 +22,18 @@ const Post = ({ history, getPost, clearPost,addComment, post:{post, loading} })=
         history.push("/posts")
         clearPost()
     }
-
-    const getProfile = ()=>{
+    const getUser = ()=>{
 		let user;
 		if(!post.user._id){
-			user =post.user.toString() 
+            user =post.user.toString()
+            return user
 		}
-		user= post.user._id.toString()
-		history.push(`/developers/${user}`)	
+        user= post.user._id.toString()
+        return user
+    }
+    const getProfile = ()=>{
+        const user = getUser();
+		history.push(`/developers/${user}`);	
 	}
 
     return(
@@ -52,7 +56,7 @@ const Post = ({ history, getPost, clearPost,addComment, post:{post, loading} })=
                 <div className="comment-items">
                     {
                         post.commit.length > 0 && post.commit.map(comment =>(
-                            <CommentItem comment={comment} key={comment._id} deleteComment={deleteComment}/>
+                            <CommentItem comment={comment} key={comment._id} deleteComment={deleteComment} getUser={getUser} post={post._id}/>
                         ))
                     }
                 </div>
@@ -68,5 +72,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
     getPost,
     clearPost,
-    addComment
+    addComment,
+    deleteComment
 })(Post);

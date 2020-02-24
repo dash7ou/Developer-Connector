@@ -4,13 +4,19 @@ import {
     Icon
 } from "rsuite"
 
-const CommentItem = ({comment, deleteComment})=>{
+const CommentItem = ({comment, deleteComment, getUser, post})=>{
     const {
         avatar,
         name,
         text,
         createdAt
-    } = comment
+    } = comment;
+    const onDelete = async ()=>{
+        const postId = post.toString();
+        const commentId = comment._id.toString()
+        await deleteComment(postId , commentId)
+        
+    }
     return( 
         <div className="comment">
             <div className="comment__avatar">
@@ -23,7 +29,7 @@ const CommentItem = ({comment, deleteComment})=>{
                     <p className="comment_date">post on {createdAt}</p>
                 </div>
                 <div className="comment_delete">
-                    <Button color="red"><Icon icon='trash' /></Button>
+                    <Button color="red" onClick={onDelete}><Icon icon='trash' /></Button>
                 </div>
             </div>
         </div>
