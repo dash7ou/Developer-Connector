@@ -12,6 +12,7 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profiles/Profile";
 import Posts from "./components/posts/posts";
 import Post from "./components/post/Post";
+import NotFoundPage from "./components/layout/errors/NotFoundPage";
 
 // Redux
 import { Provider } from "react-redux";
@@ -55,6 +56,7 @@ const App =() => {
               <PrivateRoute exact path="/profile/add-education" component={AddEducation} />
               <PrivateRoute exact path="/posts" component={Posts} />
               <PrivateRoute exact path="/post/:id" component={Post} />
+              <Route  component={NotFoundPage}/>
             </Switch>
           </section>
         </Fragment>
