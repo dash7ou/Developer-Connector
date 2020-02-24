@@ -14,6 +14,15 @@ const errorHandler = require("./middleware/errorHandler");
 
 const PORT = process.env.PORT || 5000;
 
+  // Serve static assets in production
+  if(process.env.NODE_ENV === "production"){
+    // set static folder
+    app.use(express.static('client/build'));
+    app.get('*', (req,res)=>{
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+  }
+
 const connection = async ()=>{
   try{
     await DBConnect();
@@ -38,14 +47,7 @@ connection().then(_=>{
   // handle any error
   app.use(errorHandler)
 
-  // Serve static assets in producation
-  if(process.env.NODE_ENV === "production"){
-    // set static folder
-    app.use(express.static('client/build'));
-    app.get('*', (req,res)=>{
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
-  }
+
 
 }).catch((err)=>{
   console.log(err)
