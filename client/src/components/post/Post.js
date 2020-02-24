@@ -13,7 +13,7 @@ import {
 import AddCommentForm from "./AddCommentForm";
 import CommentItem from "./CommentItem"
 
-const Post = ({ history, getPost, clearPost,addComment,deleteComment, post:{post, loading} })=>{
+const Post = ({ history, getPost, clearPost,addComment,deleteComment, post:{post, loading}, auth:{user: {_id : userLogin}}})=>{
     const postId = history.location.pathname.split("/")[2].toString();
     useEffect(()=>{
         getPost(postId)
@@ -56,7 +56,7 @@ const Post = ({ history, getPost, clearPost,addComment,deleteComment, post:{post
                 <div className="comment-items">
                     {
                         post.commit.length > 0 && post.commit.map(comment =>(
-                            <CommentItem comment={comment} key={comment._id} deleteComment={deleteComment} getUser={getUser} post={post._id}/>
+                            <CommentItem comment={comment} key={comment._id} deleteComment={deleteComment} userLogin={userLogin} post={post._id}/>
                         ))
                     }
                 </div>
@@ -66,7 +66,8 @@ const Post = ({ history, getPost, clearPost,addComment,deleteComment, post:{post
 };
 
 const mapStateToProps = state => ({
-    post: state.post
+    post: state.post,
+    auth: state.auth
 })
 
 export default connect(mapStateToProps, {
