@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 import {
     getPost,
     clearPost,
-    addComment
+    addComment,
+    deleteComment
 }from "../../actions/post";
 import AddCommentForm from "./AddCommentForm";
 import CommentItem from "./CommentItem"
@@ -51,7 +52,7 @@ const Post = ({ history, getPost, clearPost,addComment, post:{post, loading} })=
                 <div className="comment-items">
                     {
                         post.commit.length > 0 && post.commit.map(comment =>(
-                            <CommentItem comment={comment} key={comment._id}/>
+                            <CommentItem comment={comment} key={comment._id} deleteComment={deleteComment}/>
                         ))
                     }
                 </div>

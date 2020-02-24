@@ -428,4 +428,19 @@ a {
 	vertical-align: middle;
 	margin: auto 0;
 	text-align: left;
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
+}
+
+.comment_delete {
+	width: 100%;
+	padding: 1rem 0;
+	text-align: right;
+	width: 10%;
+	height: 100%;
+}
+
+.comment_delete {
+	vertical-align: bottom;
 }
