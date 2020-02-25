@@ -39,6 +39,12 @@ connection().then(_=>{
   app.use('/api/v1/auth', auth);
   app.use('/api/v1/posts', posts)
 
+
+  app.use(error404);
+
+  // handle any error
+  app.use(errorHandler)
+
   // Serve static assets in production
   if(process.env.NODE_ENV === "production"){
     // set static folder
@@ -51,12 +57,6 @@ connection().then(_=>{
     })
     
   }
-  app.use(error404);
-
-  // handle any error
-  app.use(errorHandler)
-
-
 
 }).catch((err)=>{
   console.log(err)
