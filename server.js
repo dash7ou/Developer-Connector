@@ -38,6 +38,19 @@ connection().then(_=>{
   app.use('/api/v1/profile', profile);
   app.use('/api/v1/auth', auth);
   app.use('/api/v1/posts', posts)
+
+  // Serve static assets in production
+  if(process.env.NODE_ENV === "production"){
+    // set static folder
+    const publicPath = path.join(__dirname, "./client/build");
+
+    app.use(express.static(publicPath));
+    
+    app.get("*", (req ,res)=>{
+      res.sendFile(path.join(publicPath, 'index.html'))
+    })
+    
+  }
   app.use(error404);
 
   // handle any error
@@ -51,15 +64,3 @@ connection().then(_=>{
 
 
 
-// Serve static assets in production
-if(process.env.NODE_ENV === "production"){
-  // set static folder
-  const publicPath = path.join(__dirname, "./client/build");
-
-  app.use(express.static(publicPath));
-  
-  app.get("*", (req ,res)=>{
-    res.sendFile(path.join(publicPath, 'index.html'))
-  })
-  
-}
