@@ -1,5 +1,5 @@
 {
-    "mongooseURL": "mongodb://localhost:27017/Developer-Connector",
+    "mongooseURL": "mongodb+srv://dashzou:mohammed@cluster0-1mmwc.mongodb.net/test?retryWrites=true&w=majority",
     "jwtSecret": "localapphahahhahahhah102****",
     "jwtExpire": "360000",
     "githubClientId": "f1b92c9a52161c79b856",
