@@ -17,18 +17,6 @@ const PORT = process.env.PORT || 5000;
 
 
 
-  // Serve static assets in production
-  if(process.env.NODE_ENV === "production"){
-    // set static folder
-    const publicPath = path.join(__dirname, "./client/build");
-
-    app.use(express.static(publicPath));
-    
-    app.get("*", (req ,res)=>{
-      res.sendFile(path.join(publicPath, 'index.html'))
-    })
-    
-  }
     
 
 const connection = async ()=>{
@@ -61,3 +49,17 @@ connection().then(_=>{
   console.log(err)
 });
 
+
+
+// Serve static assets in production
+if(process.env.NODE_ENV === "production"){
+  // set static folder
+  const publicPath = path.join(__dirname, "./client/build");
+
+  app.use(express.static(publicPath));
+  
+  app.get("*", (req ,res)=>{
+    res.sendFile(path.join(publicPath, 'index.html'))
+  })
+  
+}
