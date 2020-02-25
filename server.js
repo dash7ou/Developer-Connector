@@ -40,7 +40,6 @@ connection().then(_=>{
   app.use('/api/v1/posts', posts)
 
 
-  app.use(error404);
 
   // handle any error
   app.use(errorHandler)
@@ -57,6 +56,9 @@ connection().then(_=>{
     })
     
   }
+
+  app.use(error404);
+
 
 }).catch((err)=>{
   console.log(err)
