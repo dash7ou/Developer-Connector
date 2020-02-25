@@ -22,7 +22,7 @@ export const loadUser = _ => async dispatch => {
 
     try{
         const res = await axios.get("/api/v1/auth");
-        if(typeof res.data !== "object"){
+        if(typeof res.data === 'string'){
             return
         }
         dispatch({

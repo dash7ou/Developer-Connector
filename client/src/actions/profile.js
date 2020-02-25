@@ -25,6 +25,9 @@ export const getProfile = _ => async dispatch =>{
             type: CHANGE_LOADING
         })
         const res = await axios.get("/api/v1/profile/me");
+        if(typeof res.data === 'string'){
+            return
+        }
         dispatch({
             type: GET_PROFILE,
             data: res.data
