@@ -14,7 +14,8 @@ import {
     GET_PROFILES,
     GET_REPOS,
     GET_PROFILEBYID,
-    CLEAR_REPOS
+    CLEAR_REPOS,
+    DELETE_PROFILE
 } from "./type";
 
 
@@ -227,6 +228,22 @@ export const deleteEducation = id => async dispatch =>{
         })
     }
 
+}
+
+export const deleteProfile = _ => async dispatch =>{
+    try{
+        await axios.delete("/api/v1/profile");
+        dispatch({
+            type: DELETE_PROFILE
+        })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
+    }
 }
 export const setLoading = _ => dispatch=>{
     dispatch({
