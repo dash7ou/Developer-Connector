@@ -4,6 +4,7 @@ const Profile = require('../models/Profile');
 const ErrorRespose = require('../utils/errorResponse');
 const { validationResult } = require('express-validator');
 const getGithubProfile = require('../utils/getGithubProfile');
+const Post = require("../models/Post");
 
 exports.getOwnProfile = asyncFun(async (req, res, next) => {
 	let error;
@@ -276,6 +277,7 @@ exports.deleteProfile = asyncFun(async (req, res, next) => {
 
 	await profile.remove();
 	await User.findByIdAndRemove({ _id: userId });
+	await Post.findByIdAndRemove({user : userId });
 	res.status(200).send({
 		message: 'Delete success'
 	});

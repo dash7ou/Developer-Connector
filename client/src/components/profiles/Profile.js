@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../layout/spinner/Spinner';
-import { getProfileById, getRepos, clearRepos } from '../../actions/profile';
+import { logout } from "../../actions/auth";
+import { getProfileById, getRepos, clearRepos, clearProfile, deleteProfile } from '../../actions/profile';
+import { clearPosts } from "../../actions/post";
 import { Button, ButtonToolbar, Icon } from 'rsuite';
 import ProfileRepos from './ProfileRepos';
 
@@ -11,7 +13,11 @@ const Profile = ({
 	getRepos,
 	getProfileById,
     auth: { isAuthenticated, user },
-    clearRepos
+	clearRepos,
+	logout,
+	clearPosts,
+	clearProfile,
+	deleteProfile
 }) => {
 	useEffect(() => {
 		const { location: { pathname } } = history;
@@ -22,6 +28,14 @@ const Profile = ({
             clearRepos();
         }
 	}, []);
+
+	const onDeleteProfile = async ()=>{
+		await deleteProfile()
+		logout();
+        clearProfile();
+		clearPosts();
+		history.push("/")
+	}
 
 	return !showProfile ? (
 		<Spinner />
@@ -37,6 +51,9 @@ const Profile = ({
 						<Icon icon='edit' /> Edit profile
 					</Button>
 				)}
+				<Button color="red" onClick={onDeleteProfile}>
+					<Icon icon='trash-o' /> Delete Profile
+				</Button>
 			</ButtonToolbar>
 			<article className='user-page'>
 				<div className='user-page__main'>
@@ -179,5 +196,9 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
 	getProfileById,
     getRepos,
-    clearRepos
+	clearRepos,
+	logout,
+	clearProfile,
+	clearPosts,
+	deleteProfile
 })(Profile);
