@@ -26,7 +26,7 @@ const AddCommentForm = ({ addComment , postId, getPost })=>{
                 onChange={onChange}
                 rows={5}
                 style={{ width: '100%' }} 
-                placeholder="Add Your Post" 
+                placeholder="Add Your Comment" 
                 value={text}
             />
             <Button 
