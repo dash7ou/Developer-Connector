@@ -12,7 +12,8 @@ import {
     GET_PROFILES,
     GET_REPOS,
     GET_PROFILEBYID,
-    CLEAR_REPOS
+    CLEAR_REPOS,
+    DELETE_PROFILE
 } from "../actions/type";
 
 
@@ -84,6 +85,11 @@ export default (state = initialState, action)=>{
                 ...state,
                 repos: null,
                 showProfile: null
+            }
+        case DELETE_PROFILE:
+            return{
+                ...state,
+                ...initialState
             }
         default:
             return state
