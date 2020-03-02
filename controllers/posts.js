@@ -164,6 +164,7 @@ exports.addCommit = asyncFun( async (req, res, next)=>{
         }
         throw new ErrorResponse('',error)
     }
+    console.log(userId)
     post.commit.unshift({
         user: userId,
         text,
@@ -172,7 +173,7 @@ exports.addCommit = asyncFun( async (req, res, next)=>{
     });
     await post.save();
     res.status(200).send({
-        message: "Liked post",
+        message: "Add Comment",
         post
     });
 

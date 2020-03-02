@@ -4,7 +4,7 @@ const Profile = require('../models/Profile');
 const ErrorRespose = require('../utils/errorResponse');
 const { validationResult } = require('express-validator');
 const getGithubProfile = require('../utils/getGithubProfile');
-const Post = require("../models/Post");
+const Post = require('../models/Post');
 
 exports.getOwnProfile = asyncFun(async (req, res, next) => {
 	let error;
@@ -275,9 +275,17 @@ exports.deleteProfile = asyncFun(async (req, res, next) => {
 		throw new ErrorRespose('', error);
 	}
 
-	await profile.remove();
-	await User.findByIdAndRemove({ _id: userId });
-	await Post.findByIdAndRemove({user : userId });
+	await Post.deleteMany({ user: userId });
+	const posts = await Post.find();
+	posts.forEach(async (post) => {
+		const editPost = { ...post._doc };
+		editPost.commit = [ ...editPost.commit.filter((comment) => comment.user.toString() !== userId.toString()) ];
+		await Post.findByIdAndUpdate(post._id, editPost);
+	});
+
+	// await profile.remove();
+	// await User.findByIdAndRemove({ _id: userId });
+
 	res.status(200).send({
 		message: 'Delete success'
 	});
