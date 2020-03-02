@@ -280,12 +280,6 @@ exports.deleteProfile = asyncFun(async (req, res, next) => {
 	posts.forEach(async (post) => {
 		const editPost = { ...post._doc };
 		editPost.commit = [ ...editPost.commit.filter((comment) => comment.user.toString() !== userId.toString()) ];
-		await Post.findByIdAndUpdate(post._id, editPost);
-	});
-
-	posts.forEach(async (post) => {
-		const editPost = { ...post._doc };
-		console.log(editPost.likes);
 		editPost.likes = [ ...editPost.likes.filter((like) => like.user.toString() !== userId.toString()) ];
 		await Post.findByIdAndUpdate(post._id, editPost);
 	});

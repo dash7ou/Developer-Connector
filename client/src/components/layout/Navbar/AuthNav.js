@@ -15,7 +15,7 @@ import {
     clearPosts
 } from "../../../actions/post"
 
-const AuthNav = ( {history, logout, clearProfile , clearPosts})=>{
+const AuthNav = ( { logout, clearProfile , clearPosts})=>{
     const clearAll = ()=>{
         logout();
         clearProfile();

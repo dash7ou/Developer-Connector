@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../layout/spinner/Spinner';
-import { logout } from "../../actions/auth";
-import { getProfileById, getRepos, clearRepos, clearProfile, deleteProfile } from '../../actions/profile';
-import { clearPosts } from "../../actions/post";
+import { getProfileById, getRepos, clearRepos} from '../../actions/profile';
 import { Button, ButtonToolbar, Icon } from 'rsuite';
 import ProfileRepos from './ProfileRepos';
 import {openModel } from "../../actions/modal";
@@ -17,10 +15,6 @@ const Profile = ({
 	getProfileById,
     auth: { isAuthenticated, user },
 	clearRepos,
-	logout,
-	clearPosts,
-	clearProfile,
-	deleteProfile,
 	openModel,
 }) => {
 	useEffect(() => {
@@ -33,34 +27,27 @@ const Profile = ({
         }
 	}, []);
 
-	// const onDeleteProfile = async ()=>{
-	// 	// await deleteProfile()
-	// 	// logout();
-    //     // clearProfile();
-	// 	// clearPosts();
-	// 	// history.push("/")
-	// }
-
-
-
 	return !showProfile ? (
 		<Spinner />
 	) : (
 		<section>
-			<DeleteProfileModel />
+			<DeleteProfileModel history={history}/>
 			<ButtonToolbar>
 				<Button onClick={() => history.push('/developers')}>
 					<Icon icon='arrow-circle-left' /> Back to developers
 				</Button>
 				{isAuthenticated &&
 				showProfile.user._id.toString() === user._id.toString() && (
+					<Fragment>
 					<Button color='blue' onClick={() => history.push('/update-profile')}>
 						<Icon icon='edit' /> Edit profile
 					</Button>
+
+					<Button color="red" onClick={openModel}>
+						<Icon icon='trash-o' /> Delete Profile
+					</Button>
+					</Fragment>
 				)}
-				<Button color="red" onClick={openModel}>
-					<Icon icon='trash-o' /> Delete Profile
-				</Button>
 			</ButtonToolbar>
 			<article className='user-page'>
 				<div className='user-page__main'>
@@ -204,9 +191,5 @@ export default connect(mapStateToProps, {
 	getProfileById,
     getRepos,
 	clearRepos,
-	logout,
-	clearProfile,
-	clearPosts,
-	deleteProfile,
 	openModel,
 })(Profile);

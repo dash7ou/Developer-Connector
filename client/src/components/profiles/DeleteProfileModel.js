@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { logout } from "../../actions/auth";
+import { clearPosts } from "../../actions/post";
+import { clearProfile, deleteProfile } from '../../actions/profile';
+
 import {
     connect
 } from "react-redux";
@@ -12,7 +16,15 @@ import {
     closeModel
 } from "../../actions/modal";
 
-const DeleteProfileModel = ({model: {show}, closeModel})=>{
+const DeleteProfileModel = ({model: {show}, closeModel, logout, clearPosts, clearProfile, deleteProfile ,history})=>{
+
+    const onDeleteProfile = async ()=>{
+		await deleteProfile()
+		logout();
+        clearProfile();
+		clearPosts();
+		history.push("/")
+	}
 
     const close = ()=>{
         closeModel()
@@ -34,7 +46,7 @@ const DeleteProfileModel = ({model: {show}, closeModel})=>{
                 Worn: All you data posts, comments and likes deleted.
             </Modal.Body>
             <Modal.Footer>
-                <Button appearance="primary">
+                <Button onClick={onDeleteProfile} appearance="primary">
                     Ok
                 </Button>
                 <Button onClick={close} appearance="subtle">
@@ -52,5 +64,9 @@ const mapStateToProps = state =>({
 
 
 export default connect(mapStateToProps,{
-    closeModel
+    closeModel,
+    logout,
+    clearPosts,
+    clearProfile,
+    deleteProfile
 })(DeleteProfileModel);
