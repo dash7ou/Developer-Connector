@@ -290,8 +290,8 @@ exports.deleteProfile = asyncFun(async (req, res, next) => {
 		await Post.findByIdAndUpdate(post._id, editPost);
 	});
 
-	// await profile.remove();
-	// await User.findByIdAndRemove({ _id: userId });
+	await profile.remove();
+	await User.findByIdAndRemove({ _id: userId });
 
 	res.status(200).send({
 		message: 'Delete success'
