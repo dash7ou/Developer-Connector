@@ -30,11 +30,11 @@ const Profile = ({
 	}, []);
 
 	const onDeleteProfile = async ()=>{
-		await deleteProfile()
-		logout();
-        clearProfile();
-		clearPosts();
-		history.push("/")
+		// await deleteProfile()
+		// logout();
+        // clearProfile();
+		// clearPosts();
+		// history.push("/")
 	}
 
 	return !showProfile ? (
