@@ -283,6 +283,13 @@ exports.deleteProfile = asyncFun(async (req, res, next) => {
 		await Post.findByIdAndUpdate(post._id, editPost);
 	});
 
+	posts.forEach(async (post) => {
+		const editPost = { ...post._doc };
+		console.log(editPost.likes);
+		editPost.likes = [ ...editPost.likes.filter((like) => like.user.toString() !== userId.toString()) ];
+		await Post.findByIdAndUpdate(post._id, editPost);
+	});
+
 	// await profile.remove();
 	// await User.findByIdAndRemove({ _id: userId });
 
