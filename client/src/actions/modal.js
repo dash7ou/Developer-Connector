@@ -11,6 +11,6 @@ export const openModel = ()=> dispatch=>{
 
 export const closeModel = ()=> dispatch=>{
     dispatch({
-        type:CLOSE_MODEL
+        type: CLOSE_MODEL
     })
 }

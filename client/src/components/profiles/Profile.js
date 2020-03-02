@@ -6,6 +6,9 @@ import { getProfileById, getRepos, clearRepos, clearProfile, deleteProfile } fro
 import { clearPosts } from "../../actions/post";
 import { Button, ButtonToolbar, Icon } from 'rsuite';
 import ProfileRepos from './ProfileRepos';
+import {openModel } from "../../actions/modal";
+import DeleteProfileModel from "./DeleteProfileModel";
+
 
 const Profile = ({
 	history,
@@ -17,7 +20,8 @@ const Profile = ({
 	logout,
 	clearPosts,
 	clearProfile,
-	deleteProfile
+	deleteProfile,
+	openModel,
 }) => {
 	useEffect(() => {
 		const { location: { pathname } } = history;
@@ -29,18 +33,21 @@ const Profile = ({
         }
 	}, []);
 
-	const onDeleteProfile = async ()=>{
-		// await deleteProfile()
-		// logout();
-        // clearProfile();
-		// clearPosts();
-		// history.push("/")
-	}
+	// const onDeleteProfile = async ()=>{
+	// 	// await deleteProfile()
+	// 	// logout();
+    //     // clearProfile();
+	// 	// clearPosts();
+	// 	// history.push("/")
+	// }
+
+
 
 	return !showProfile ? (
 		<Spinner />
 	) : (
 		<section>
+			<DeleteProfileModel />
 			<ButtonToolbar>
 				<Button onClick={() => history.push('/developers')}>
 					<Icon icon='arrow-circle-left' /> Back to developers
@@ -51,7 +58,7 @@ const Profile = ({
 						<Icon icon='edit' /> Edit profile
 					</Button>
 				)}
-				<Button color="red" onClick={onDeleteProfile}>
+				<Button color="red" onClick={openModel}>
 					<Icon icon='trash-o' /> Delete Profile
 				</Button>
 			</ButtonToolbar>
@@ -190,7 +197,7 @@ const Profile = ({
 
 const mapStateToProps = (state) => ({
 	profile: state.profile,
-	auth: state.auth
+	auth: state.auth,
 });
 
 export default connect(mapStateToProps, {
@@ -200,5 +207,6 @@ export default connect(mapStateToProps, {
 	logout,
 	clearProfile,
 	clearPosts,
-	deleteProfile
+	deleteProfile,
+	openModel,
 })(Profile);

@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import {
-    Modal
+    connect
+} from "react-redux";
+import {
+    Modal,
+    Button,
+    Icon
 } from "rsuite";
 
+import {
+    closeModel
+} from "../../actions/modal";
 
-const DeleteProfileModel = ()=>{
-    // const [show , setShow] = useState(false)
-    // const open = ()=>{
-    //     setShow(true)
-    // }
+const DeleteProfileModel = ({model: {show}, closeModel})=>{
 
-    // const close = ()=>{
-    //     setShow(false)
-    // }
+    const close = ()=>{
+        closeModel()
+    }
 
     return (
         <div className="modal-container">
-            <Modal backdrop="static" show={show} onHide={close} size="xs">
+            <Modal backdrop="static" show={show} onHide={close} size="xs" backdrop={true}>
             <Modal.Body>
                 <Icon
                 icon="remind"
@@ -30,7 +34,7 @@ const DeleteProfileModel = ()=>{
                 Worn: All you data posts, comments and likes deleted.
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={close} appearance="primary">
+                <Button appearance="primary">
                     Ok
                 </Button>
                 <Button onClick={close} appearance="subtle">
@@ -42,5 +46,11 @@ const DeleteProfileModel = ()=>{
     )
 }
 
+const mapStateToProps = state =>({
+    model: state.model
+})
 
-export default DeleteProfileModel;
+
+export default connect(mapStateToProps,{
+    closeModel
+})(DeleteProfileModel);
