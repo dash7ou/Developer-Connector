@@ -30,4 +30,6 @@ export const GET_POST = 'GET_POST';
 export const CLEAR_POST = 'CLEAR_POST';
 export const ADD_COMMENT= 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
-export const DELETE_PROFILE = "DELETE_PROFILE"
+export const DELETE_PROFILE = "DELETE_PROFILE";
+export const OPEN_MODEL = "OPEN_MODEL";
+export const CLOSE_MODEL = "CLOSE_MODEL";
