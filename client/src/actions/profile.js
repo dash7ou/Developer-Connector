@@ -216,6 +216,30 @@ export const updateExperience = (exp_id, data) => async dispatch=>{
     }
 }
 
+export const updateEducation = (edu_id, data) => async dispatch=>{
+    const config = {
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }
+
+    const body = JSON.stringify({...data});
+    try{
+        const res = await axios.put(`api/v1/profile/education/${edu_id}`, body, config);
+        dispatch({
+            type: UPDATE_EDUCATION,
+            data: res.data
+        })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            error:{
+                message: err.response.data.error
+            }
+        })
+    }
+}
+
 export const clearRepos = ()=> dispatch => {
     dispatch({
         type: CLEAR_REPOS
