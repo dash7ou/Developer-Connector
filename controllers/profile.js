@@ -259,14 +259,13 @@ exports.addEducation = asyncFun(async (req, res, next) => {
 	res.status(200).send(profile);
 });
 
-
 /**
  * @route   PUT api/v1/experience/exp_id
  * @desc    Update experience
  * @access Private
  */
 
-exports.editExperience = asyncFun(async (req, res, next)=>{
+exports.editExperience = asyncFun(async (req, res, next) => {
 	const errors = validationResult(req);
 	let error;
 	if (!errors.isEmpty()) {
@@ -278,31 +277,87 @@ exports.editExperience = asyncFun(async (req, res, next)=>{
 		throw new ErrorRespose('', error);
 	}
 
+	const { body: newExperience, user: { _id: userId }, params: { exp_id } } = req;
 
-	const { 
-		body: newExperience,
-		user: { _id: userId },
-		params: { exp_id }
-	} = req;
-
-	const [profile] = await Profile.find({
+	const [ profile ] = await Profile.find({
 		user: userId
 	});
 
-	if(!profile){
+	if (!profile) {
 		error = {
 			type: 'onlyMessage',
 			statusCode: 400,
 			message: 'No profile to edit experience'
 		};
-		throw new ErrorRespose("", profile);
+		throw new ErrorRespose('', error);
 	}
-	const [experience] = profile.experience.filter(exp => exp._id.toString() === exp_id);
+	const [ experience ] = profile.experience.filter((exp) => exp._id.toString() === exp_id);
+
+	if (!experience) {
+		error = {
+			type: 'onlyMessage',
+			statusCode: 400,
+			message: 'No experience to edit experience'
+		};
+		throw new ErrorRespose('', error);
+	}
+
 	const indexExperience = profile.experience.indexOf(experience);
 
 	profile.experience[indexExperience] = newExperience;
 	await profile.save();
-	res.status(200).send(profile)
+	res.status(200).send(profile);
+});
+
+
+/**
+ * @route   PUT api/v1/education/edu_id
+ * @desc    Update education
+ * @access 	Private
+*/
+
+exports.editEducation = asyncFun(async (req, res, next)=>{
+	const errors = validationResult(req);
+	let error;
+	if (!errors.isEmpty()) {
+		error = {
+			type: 'validationError',
+			statusCode: 400,
+			errors: errors.array()
+		};
+		throw new ErrorRespose('', error);
+	}
+
+	const { body: newEducation, user: { _id: userId }, params: { edu_id } } = req;
+
+	const [ profile ] = await Profile.find({
+		user: userId
+	});
+
+	if (!profile) {
+		error = {
+			type: 'onlyMessage',
+			statusCode: 400,
+			message: 'No profile to edit experience'
+		};
+		throw new ErrorRespose('', error);
+	}
+	const [ education ] = profile.education.filter((edu) => edu._id.toString() === edu_id);
+
+	if (!education) {
+		error = {
+			type: 'onlyMessage',
+			statusCode: 400,
+			message: 'Education Not found'
+		};
+		throw new ErrorRespose('', error);
+	}
+
+	const indexEducation = profile.education.indexOf(education);
+
+	profile.education[indexEducation] = newEducation;
+	await profile.save();
+	res.status(200).send(profile);
 })
 
 exports.deleteProfile = asyncFun(async (req, res, next) => {
