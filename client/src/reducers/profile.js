@@ -15,7 +15,8 @@ import {
     CLEAR_REPOS,
     DELETE_PROFILE,
     UPDATE_EDUCATION,
-    UPDATE_EXPERIENCE
+    UPDATE_EXPERIENCE,
+    START_UPDATE
 } from "../actions/type";
 
 
@@ -25,7 +26,8 @@ const initialState = {
     repos: null,
     showProfile: null,
     loading: true,
-    error: null
+    error: null,
+    objUpdate: null
 }
 
 
@@ -60,7 +62,8 @@ export default (state = initialState, action)=>{
             return{
                 ...state,
                 loading:false,
-                profile: action.data
+                profile: action.data,
+                objUpdate: null
             }
         case GET_PROFILES:
             return{
@@ -89,6 +92,12 @@ export default (state = initialState, action)=>{
                 ...state,
                 repos: null,
                 showProfile: null
+            }
+        case START_UPDATE:
+            return{
+                ...state,
+                loading: false,
+                objUpdate: action.data
             }
         case DELETE_PROFILE:
             return{

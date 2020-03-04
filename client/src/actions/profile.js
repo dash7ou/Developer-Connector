@@ -17,7 +17,8 @@ import {
     CLEAR_REPOS,
     DELETE_PROFILE,
     UPDATE_EDUCATION,
-    UPDATE_EXPERIENCE
+    UPDATE_EXPERIENCE,
+    START_UPDATE
 } from "./type";
 
 
@@ -188,6 +189,13 @@ export const addEducation = data => async dispatch=>{
             }
         })
     }
+}
+
+export const startUpdate = data => async dispatch =>{
+    dispatch({
+        type: START_UPDATE,
+        data
+    })
 }
 
 
