@@ -164,7 +164,7 @@ exports.updateProfile = asyncFun(async (req, res, next) => {
 });
 
 /**
- * @route   PUT api/v1/profile/experience
+ * @route   POST api/v1/profile/experience
  * @desc    Add experience
  * @access Private
  */
@@ -212,7 +212,7 @@ exports.addExperience = asyncFun(async (req, res, next) => {
 });
 
 /**
- * @route   PUT api/v1/profile/education
+ * @route   POST api/v1/profile/education
  * @desc    Add education
  * @access Private
  */
@@ -258,6 +258,52 @@ exports.addEducation = asyncFun(async (req, res, next) => {
 	await profile.save();
 	res.status(200).send(profile);
 });
+
+
+/**
+ * @route   PUT api/v1/experience/exp_id
+ * @desc    Update experience
+ * @access Private
+ */
+
+exports.editExperience = asyncFun(async (req, res, next)=>{
+	const errors = validationResult(req);
+	let error;
+	if (!errors.isEmpty()) {
+		error = {
+			type: 'validationError',
+			statusCode: 400,
+			errors: errors.array()
+		};
+		throw new ErrorRespose('', error);
+	}
+
+
+	const { 
+		body: newExperience,
+		user: { _id: userId },
+		params: { exp_id }
+	} = req;
+
+	const [profile] = await Profile.find({
+		user: userId
+	});
+
+	if(!profile){
+		error = {
+			type: 'onlyMessage',
+			statusCode: 400,
+			message: 'No profile to edit experience'
+		};
+		throw new ErrorRespose("", profile);
+	}
+	const [experience] = profile.experience.filter(exp => exp._id.toString() === exp_id);
+	const indexExperience = profile.experience.indexOf(experience);
+
+	profile.experience[indexExperience] = newExperience;
+	await profile.save();
+	res.status(200).send(profile)
+})
 
 exports.deleteProfile = asyncFun(async (req, res, next) => {
 	const { user: { _id: userId } } = req;

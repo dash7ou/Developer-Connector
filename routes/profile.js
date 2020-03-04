@@ -14,7 +14,8 @@ const {
     deleteExperience,
     addEducation,
     deleteEducation,
-    getGithubProfile
+    getGithubProfile,
+    editExperience
 } = require("../controllers/profile")
 
 
@@ -44,6 +45,11 @@ route.post("/",auth, [
 ],createProfile)
 
 
+route.put("/experience/:exp_id", auth,[
+    body("title", " title is required").not().isEmpty(),
+    body("company", " Your company is required").not().isEmpty(),
+    body("from", "From data is required").not().isEmpty()
+] , editExperience )
 route.put("/",auth,updateProfile)
 
 
