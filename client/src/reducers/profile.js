@@ -13,7 +13,9 @@ import {
     GET_REPOS,
     GET_PROFILEBYID,
     CLEAR_REPOS,
-    DELETE_PROFILE
+    DELETE_PROFILE,
+    UPDATE_EDUCATION,
+    UPDATE_EXPERIENCE
 } from "../actions/type";
 
 
@@ -53,6 +55,8 @@ export default (state = initialState, action)=>{
         case Add_EDUCATION:
         case DELETE_EXPERIENCE:
         case DELETE_EDUCATION:
+        case UPDATE_EXPERIENCE:
+        case UPDATE_EDUCATION:
             return{
                 ...state,
                 loading:false,
