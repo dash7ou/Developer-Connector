@@ -16,7 +16,7 @@ import {
     closeModel
 } from "../../actions/modal";
 
-const DeleteProfileModel = ({model: {show}, closeModel, logout, clearPosts, clearProfile, deleteProfile ,history})=>{
+const DeleteProfileModel = ({model: {showMessageDeleted}, closeModel, logout, clearPosts, clearProfile, deleteProfile ,history})=>{
 
     const onDeleteProfile = async ()=>{
 		await deleteProfile()
@@ -32,7 +32,7 @@ const DeleteProfileModel = ({model: {show}, closeModel, logout, clearPosts, clea
 
     return (
         <div className="modal-container">
-            <Modal backdrop="static" show={show} onHide={close} size="xs" backdrop={true}>
+            <Modal backdrop="static" show={showMessageDeleted} onHide={close} size="xs" backdrop={true}>
             <Modal.Body>
                 <Icon
                 icon="remind"

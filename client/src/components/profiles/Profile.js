@@ -43,7 +43,7 @@ const Profile = ({
 						<Icon icon='edit' /> Edit profile
 					</Button>
 
-					<Button color="red" onClick={openModel}>
+					<Button color="red" onClick={()=> openModel("deleted")}>
 						<Icon icon='trash-o' /> Delete Profile
 					</Button>
 					</Fragment>
