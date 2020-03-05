@@ -3,9 +3,10 @@ import {
     CLOSE_MODEL
 } from "./type";
 
-export const openModel = ()=> dispatch=>{
+export const openModel = (modalType)=> dispatch=>{
     dispatch({
-        type: OPEN_MODEL
+        type: OPEN_MODEL,
+        payload: modalType
     })
 }
 
