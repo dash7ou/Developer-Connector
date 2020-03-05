@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {
     Modal,
     Button,
@@ -18,7 +18,7 @@ import {
 
 //show={show} onHide={this.close}
 
-const UpdateEducation = ({ model: {showUpdateEdu}, closeModel })=>{
+const UpdateEducation = ({ model: {showUpdateEdu}, closeModel, profile:{objUpdate} })=>{
     const [ dataForm , setDataForm ] = useState({
         school:"",
         degree:"",
@@ -40,8 +40,25 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel })=>{
         closeModel()
     }
 
+    useEffect(()=>{
+        setDataForm({
+            ...dataForm,
+            ...objUpdate
+        })
+    }, []);
+
+    const {
+        school,
+        degree,
+        from,
+        to,
+        current,
+        description,
+        fieldofstudy
+    } = dataForm
+
     return(
-        <div>
+        objUpdate && (<div>
             <Modal overflow={true} show={showUpdateEdu} onHide={close}>
                 <Modal.Header>
                     <Modal.Title>
@@ -53,15 +70,15 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel })=>{
                 <Modal.Body>
                     <Form fluid onChange={(formValue) => onChange(formValue)}>
                         <FormGroup>
-                            <FormControl name='school' placeholder='*School or Bootcamp'  />
+                            <FormControl name='school' placeholder='*School or Bootcamp'  value={school}/>
                         </FormGroup>
         
                         <FormGroup>
-                            <FormControl name='degree'  placeholder='*Degree or Certificate'  />
+                            <FormControl name='degree'  placeholder='*Degree or Certificate'  value={degree}/>
                         </FormGroup>
         
                         <FormGroup>
-                            <FormControl name='fieldofstudy'  placeholder='*Field Of Study'  />
+                            <FormControl name='fieldofstudy'  placeholder='*Field Of Study'  value={fieldofstudy}/>
                         </FormGroup>
         
                         <FormGroup>
@@ -70,6 +87,7 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel })=>{
                                 oneTap
                                 size="md"
                                 style={{"width": "50%"}}
+                                value={from}
                                 format="YYYY-MM-DD"
                                 onChange={(value)=>{setDataForm({...dataForm, from:value.toDateString()})}}
                             />
@@ -77,7 +95,7 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel })=>{
         
                         <FormGroup>
                             <ControlLabel>Current Job</ControlLabel>
-                            <Toggle onChange={value => setDataForm({...dataForm, current: value})}/>
+                            <Toggle  value={current} onChange={value => setDataForm({...dataForm, current: value})}/>
                         </FormGroup>
         
         
@@ -87,6 +105,7 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel })=>{
                                 oneTap
                                 size="md"
                                 style={{"width": "50%"}}
+                                value={to}
                                 format="YYYY-MM-DD"
                                 onChange={(value)=>{setDataForm({...dataForm, to:value.toDateString()})}}
                             />
@@ -95,6 +114,7 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel })=>{
                         <FormGroup>
                             <FormControl
                                 name='description'
+                                value={description}
                                 rows={5}
                                 placeholder='Program Description'
                                 componentClass='textarea'
@@ -111,12 +131,13 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel })=>{
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </div>)
     )
 }
 
 const mapStateToProps = state =>({
-    model: state.model
+    model: state.model,
+    profile: state.profile
 })
 
 

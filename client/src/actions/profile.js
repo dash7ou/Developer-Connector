@@ -153,7 +153,7 @@ export const addExperience = data => async dispatch =>{
             }
         }
         const body = JSON.stringify({ ...data });
-        const res = await axios.put("/api/v1/profile/experience", body, config);
+        const res = await axios.post("/api/v1/profile/experience", body, config);
         dispatch({
             type: ADD_EXPERIENCE,
             data: res.data
@@ -176,7 +176,7 @@ export const addEducation = data => async dispatch=>{
             }
         }
         const body = JSON.stringify({ ...data });
-        const res = await axios.put("/api/v1/profile/education", body, config);
+        const res = await axios.post("/api/v1/profile/education", body, config);
         dispatch({
             type: Add_EDUCATION,
             data: res.data

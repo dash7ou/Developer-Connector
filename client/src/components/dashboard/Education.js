@@ -4,11 +4,14 @@ import { Table, Icon } from 'rsuite';
 import {
     deleteEducation
 } from "../../actions/profile";
+import {
+    startUpdate
+} from "../../actions/profile";
 import UpdateEducation from "./UpdateEducation";
 
 
 
-const Education = ({education, deleteEducation, openModel})=>{
+const Education = ({education, deleteEducation, openModel, startUpdate})=>{
     const { Column, HeaderCell, Cell } = Table;
 
     return (
@@ -62,6 +65,7 @@ const Education = ({education, deleteEducation, openModel})=>{
                                 deleteEducation(rowData._id)
                             }
                             function updateAction(){
+                                startUpdate(rowData)
                                 openModel("edu")
                             }
                             return (
@@ -81,5 +85,6 @@ const Education = ({education, deleteEducation, openModel})=>{
 
 
 export default connect(null, {
-    deleteEducation
+    deleteEducation,
+    startUpdate
 })(Education)
