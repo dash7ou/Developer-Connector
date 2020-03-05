@@ -3,15 +3,17 @@ import { connect } from "react-redux"
 import { Table, Icon } from 'rsuite';
 import {
     deleteEducation
-} from "../../actions/profile"
+} from "../../actions/profile";
+import UpdateEducation from "./UpdateEducation";
 
 
 
-const Education = ({education, deleteEducation})=>{
+const Education = ({education, deleteEducation, openModel})=>{
     const { Column, HeaderCell, Cell } = Table;
 
     return (
         <Fragment>
+        <UpdateEducation />
         <h3 className="table-header">Education Credentials</h3>
         <div className="table">
             <Table
@@ -55,17 +57,21 @@ const Education = ({education, deleteEducation})=>{
                 <Column width={70} fixed="right">
                     <HeaderCell>Action</HeaderCell>
                     <Cell>
-                    {rowData => {
-                      function handleAction() {
-                        deleteEducation(rowData._id)
-                      }
-                      return (
-                        <span>
-                          <a onClick={handleAction}> <Icon icon="trash-o"/> </a>
-                        </span>
-                      );
-                    }}
-                  </Cell>
+                        {rowData => {
+                            function deleteAction() {
+                                deleteEducation(rowData._id)
+                            }
+                            function updateAction(){
+                                openModel("edu")
+                            }
+                            return (
+                                <span>
+                                    <a onClick={updateAction}><Icon icon="edit"  /></a>{" | "}
+                                    <a onClick={deleteAction}> <Icon icon="trash-o"/> </a>
+                                </span>
+                            );
+                        }}
+                    </Cell> 
                 </Column>
             </Table>
       </div>

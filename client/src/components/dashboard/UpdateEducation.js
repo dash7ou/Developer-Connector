@@ -1,23 +1,48 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     Modal,
     Button,
-    Icon,
     Form,
     FormGroup,
     FormControl,
     DatePicker,
-    Button,
     ControlLabel,
     Toggle
 } from "rsuite";
+import {
+    connect
+} from "react-redux";
+import {
+    closeModel
+} from "../../actions/modal";
 
 //show={show} onHide={this.close}
 
-const UpdateEducation = ()=>{
+const UpdateEducation = ({ model: {showUpdateEdu}, closeModel })=>{
+    const [ dataForm , setDataForm ] = useState({
+        school:"",
+        degree:"",
+        fieldofstudy:"",
+        from:"",
+        to:"",
+        current:false,
+        description:""
+    })
+
+    const onChange = formValue =>{
+        setDataForm({
+            ...dataForm,
+            ...formValue
+        })
+    }
+
+    const close = ()=>{
+        closeModel()
+    }
+
     return(
         <div>
-            <Modal overflow={true} >
+            <Modal overflow={true} show={showUpdateEdu} onHide={close}>
                 <Modal.Header>
                     <Modal.Title>
                         Add An Education
@@ -78,10 +103,10 @@ const UpdateEducation = ()=>{
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.close} appearance="primary">
+                    <Button appearance="primary">
                         Ok
                     </Button>
-                    <Button onClick={this.close} appearance="subtle">
+                    <Button onClick={close} appearance="subtle">
                         Cancel
                     </Button>
                 </Modal.Footer>
@@ -90,5 +115,11 @@ const UpdateEducation = ()=>{
     )
 }
 
+const mapStateToProps = state =>({
+    model: state.model
+})
 
-export default UpdateEducation;
+
+export default connect(mapStateToProps, {
+    closeModel
+})(UpdateEducation);

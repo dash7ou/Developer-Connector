@@ -16,7 +16,6 @@ export default (state= initialState, action)=>{
     } = action
     switch(type){
         case OPEN_MODEL:
-            console.log(payload)
             if(payload === "deleted"){
                 return{
                     ...state,

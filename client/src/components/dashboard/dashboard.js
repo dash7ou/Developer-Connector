@@ -7,10 +7,14 @@ import {
 	setLoading
 } from '../../actions/profile';
 
+import {
+    openModel
+} from "../../actions/modal"
+
 import Experience from "./Experience";
 import Education from "./Education"
 
-const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , auth:{user, loading: userLoading } }) => {
+const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , auth:{user, loading: userLoading } , openModel}) => {
 	useEffect( () => {
 		setLoading()
 		getProfile();
@@ -36,7 +40,7 @@ const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , aut
 						</Button>
 					</ButtonToolbar>
 					<Experience experience ={profile.experience}/>
-					<Education education={profile.education}/>
+					<Education education={profile.education} openModel={openModel}/>
 				</section>
 			): (
 				<div className="para-button">
@@ -58,5 +62,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
 	getProfile,
-	setLoading
+	setLoading,
+	openModel
 })(Dashboard);

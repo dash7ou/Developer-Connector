@@ -56,12 +56,17 @@ const Experience = ({experience, deleteExperience})=>{
                     <HeaderCell>Action</HeaderCell>
                     <Cell>
                     {rowData => {
-                      function handleAction() {
+                      function deleteAction() {
                         deleteExperience(rowData._id)
+                      }
+
+                      function updateAction(){
+
                       }
                       return (
                         <span>
-                          <a onClick={handleAction}> <Icon icon="trash-o"/> </a>
+                            <a onClick={updateAction}><Icon icon="edit"  /></a>{" | "}
+                          <a onClick={deleteAction}> <Icon icon="trash-o"/> </a>
                         </span>
                       );
                     }}
