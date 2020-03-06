@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Modal, Button, Form, FormGroup, FormControl, DatePicker, ControlLabel, Toggle } from 'rsuite';
 import { connect } from 'react-redux';
 import { closeModel } from '../../actions/modal';
 
-import { endUpdate } from '../../actions/profile';
+import { endUpdate, updateEducation } from '../../actions/profile';
 
-
-//show={show} onHide={this.close}
-
-const UpdateEducation = ({ model: { showUpdateEdu }, closeModel, profile: { objUpdate }, endUpdate, startUpdate }) => {
+const UpdateEducation = ({
+	model: { showUpdateEdu },
+	closeModel,
+	profile: { objUpdate },
+	endUpdate,
+	updateEducation
+}) => {
 	const initialState = {
 		school: '',
 		degree: '',
@@ -27,6 +30,9 @@ const UpdateEducation = ({ model: { showUpdateEdu }, closeModel, profile: { objU
 	const [ dataForm, setDataForm ] = useState({
 		...startObj
 	});
+
+	const { _id: edu_id, school, degree, from, to, current, description, fieldofstudy } = dataForm;
+
 	const onChange = (formValue) => {
 		setDataForm({
 			...dataForm,
@@ -41,10 +47,10 @@ const UpdateEducation = ({ model: { showUpdateEdu }, closeModel, profile: { objU
 		closeModel();
 		endUpdate();
 	};
-
-
-    const { school, degree, from, to, current, description, fieldofstudy } = dataForm;
-    console.log(dataForm)
+	const onUpdateEdu = async () => {
+		await updateEducation(edu_id, { school, degree, from, to, current, description, fieldofstudy });
+		close();
+	};
 
 	return (
 		showUpdateEdu &&
@@ -118,7 +124,9 @@ const UpdateEducation = ({ model: { showUpdateEdu }, closeModel, profile: { objU
 						</Form>
 					</Modal.Body>
 					<Modal.Footer>
-						<Button appearance='primary'>Ok</Button>
+						<Button onClick={onUpdateEdu} appearance='primary'>
+							Ok
+						</Button>
 						<Button onClick={close} appearance='subtle'>
 							Cancel
 						</Button>
@@ -136,5 +144,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
 	closeModel,
-    endUpdate,
+	endUpdate,
+	updateEducation
 })(UpdateEducation);
