@@ -14,7 +14,7 @@ import {
 import Experience from "./Experience";
 import Education from "./Education"
 
-const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , auth:{user, loading: userLoading } , openModel}) => {
+const Dashboard = ({ setLoading , getProfile, profile: { profile, loading, objUpdate} , auth:{user, loading: userLoading } , openModel}) => {
 	useEffect( () => {
 		setLoading()
 		getProfile();
@@ -40,7 +40,7 @@ const Dashboard = ({ setLoading , getProfile, profile: { profile, loading} , aut
 						</Button>
 					</ButtonToolbar>
 					<Experience experience ={profile.experience}/>
-					<Education education={profile.education} openModel={openModel}/>
+					<Education education={profile.education} openModel={openModel} objUpdate={objUpdate}/>
 				</section>
 			): (
 				<div className="para-button">

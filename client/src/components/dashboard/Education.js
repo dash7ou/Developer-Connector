@@ -11,12 +11,12 @@ import UpdateEducation from "./UpdateEducation";
 
 
 
-const Education = ({education, deleteEducation, openModel, startUpdate})=>{
+const Education = ({education, deleteEducation, openModel, startUpdate, objUpdate})=>{
     const { Column, HeaderCell, Cell } = Table;
 
     return (
         <Fragment>
-        <UpdateEducation />
+        {objUpdate && <UpdateEducation />}
         <h3 className="table-header">Education Credentials</h3>
         <div className="table">
             <Table
