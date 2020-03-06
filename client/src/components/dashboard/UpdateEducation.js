@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, FormGroup, FormControl, DatePicker, ControlLabel, Toggle } from 'rsuite';
 import { connect } from 'react-redux';
 import { closeModel } from '../../actions/modal';
@@ -22,6 +22,14 @@ const UpdateEducation = ({
 		description: ''
 	};
 
+	useEffect(()=>{
+		return () =>{
+			setDataForm({
+			...initialState
+			});
+		}
+	} , [])
+
 	const startObj = {
 		...initialState,
 		...objUpdate
@@ -41,9 +49,6 @@ const UpdateEducation = ({
 	};
 
 	const close = () => {
-		setDataForm({
-			...initialState
-		});
 		closeModel();
 		endUpdate();
 	};
@@ -58,8 +63,8 @@ const UpdateEducation = ({
 			<div>
 				<Modal overflow={true} show={showUpdateEdu} onHide={close}>
 					<Modal.Header>
-						<Modal.Title>Add An Education</Modal.Title>
-						<p className='form__main-para--small'>Add any school or bootcamp that you have attended.</p>
+						<Modal.Title>Edit An Education</Modal.Title>
+						<p className='form__main-para--small'>Edit your school or bootcamp that you have attended.</p>
 						<p className='form__para'> * = required field</p>
 					</Modal.Header>
 					<Modal.Body>
