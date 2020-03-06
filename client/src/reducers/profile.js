@@ -16,7 +16,8 @@ import {
     DELETE_PROFILE,
     UPDATE_EDUCATION,
     UPDATE_EXPERIENCE,
-    START_UPDATE
+    START_UPDATE,
+    END_UPDATE
 } from "../actions/type";
 
 
@@ -103,6 +104,11 @@ export default (state = initialState, action)=>{
             return{
                 ...state,
                 ...initialState
+            }
+        case END_UPDATE:
+            return{
+                ...state,
+                objUpdate: null
             }
         default:
             return state

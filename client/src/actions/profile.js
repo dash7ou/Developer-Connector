@@ -18,7 +18,9 @@ import {
     DELETE_PROFILE,
     UPDATE_EDUCATION,
     UPDATE_EXPERIENCE,
-    START_UPDATE
+    START_UPDATE,
+    END_UPDATES,
+    END_UPDATE
 } from "./type";
 
 
@@ -198,6 +200,12 @@ export const startUpdate = data => async dispatch =>{
     })
 }
 
+
+export const endUpdate = _ => dispatch =>{
+    dispatch({
+        type: END_UPDATE
+    })
+}
 
 export const updateExperience = (exp_id, data) => async dispatch=>{
     const config = {

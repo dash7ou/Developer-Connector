@@ -16,19 +16,35 @@ import {
     closeModel
 } from "../../actions/modal";
 
+import {
+    endUpdate,
+    startUpdate
+} from "../../actions/profile"
+
+import Spinner from "../layout/spinner/Spinner";
+
 //show={show} onHide={this.close}
 
-const UpdateEducation = ({ model: {showUpdateEdu}, closeModel, profile:{objUpdate} })=>{
-    const [ dataForm , setDataForm ] = useState({
-        school:"",
+const UpdateEducation = ({ model: {showUpdateEdu}, closeModel, profile:{objUpdate} , endUpdate})=>{
+    const initialState = {
+        school: "",
         degree:"",
         fieldofstudy:"",
         from:"",
         to:"",
         current:false,
         description:""
-    })
+    }
 
+    const startObj = {
+        ...initialState,
+        ...objUpdate
+    }
+
+    const [ dataForm , setDataForm ] = useState({
+        ...initialState,
+        ...objUpdate
+    })
     const onChange = formValue =>{
         setDataForm({
             ...dataForm,
@@ -37,15 +53,12 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel, profile:{objUpdat
     }
 
     const close = ()=>{
-        closeModel()
-    }
-
-    useEffect(()=>{
         setDataForm({
-            ...dataForm,
-            ...objUpdate
+            ...initialState
         })
-    }, []);
+        closeModel()
+        endUpdate()
+    }
 
     const {
         school,
@@ -55,10 +68,11 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel, profile:{objUpdat
         current,
         description,
         fieldofstudy
-    } = dataForm
+    } = startObj;
+
 
     return(
-        objUpdate && (<div>
+        showUpdateEdu && objUpdate && (<div>
             <Modal overflow={true} show={showUpdateEdu} onHide={close}>
                 <Modal.Header>
                     <Modal.Title>
@@ -95,7 +109,7 @@ const UpdateEducation = ({ model: {showUpdateEdu}, closeModel, profile:{objUpdat
         
                         <FormGroup>
                             <ControlLabel>Current Job</ControlLabel>
-                            <Toggle  value={current} onChange={value => setDataForm({...dataForm, current: value})}/>
+                            <Toggle  defaultChecked={current} onChange={value => setDataForm({...dataForm, current: value})}/>
                         </FormGroup>
         
         
@@ -142,5 +156,6 @@ const mapStateToProps = state =>({
 
 
 export default connect(mapStateToProps, {
-    closeModel
+    closeModel,
+    endUpdate
 })(UpdateEducation);
