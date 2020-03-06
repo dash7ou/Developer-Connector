@@ -1,4 +1,3 @@
-import React from 'react';
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, FormGroup, FormControl, DatePicker, ControlLabel, Toggle } from 'rsuite';
 import { connect } from 'react-redux';
@@ -6,8 +5,8 @@ import { closeModel } from '../../actions/modal';
 
 import { endUpdate, updateExperience } from '../../actions/profile';
 
-const UpdateExperience = ({
-	model: { showUpdateEdu },
+const UpdateExperiences = ({
+	model: { showUpdateExp },
 	closeModel,
 	profile: { objUpdate },
 	endUpdate,
@@ -54,13 +53,13 @@ const UpdateExperience = ({
 		endUpdate();
 	};
 	const onUpdateEdu = async () => {
-		await updateEducation(exp_id, { title, company, location, from, to, current, description });
+		await updateExperience(exp_id, { title, company, location, from, to, current, description });
 		close();
 	};
 
 	return (
 		<div>
-			<Modal overflow={true} show={showUpdateEdu} onHide={close}>
+			<Modal overflow={true} show={showUpdateExp} onHide={close}>
 				<Modal.Header>
 					<Modal.Title>Edit An Experience</Modal.Title>
 					<p className='form__main-para--small'>
@@ -98,8 +97,8 @@ const UpdateExperience = ({
 
 						<FormGroup>
 							<ControlLabel>Current Job</ControlLabel>
-								defaultChecked={current}
-                                <Toggle  onChange={(value) => setDataForm({ ...dataForm, current: value })} 
+								
+                                <Toggle  defaultChecked={current} onChange={(value) => setDataForm({ ...dataForm, current: value })} 
                             />
 						</FormGroup>
 
@@ -150,4 +149,4 @@ export default connect(mapStateToProps, {
 	closeModel,
 	endUpdate,
 	updateExperience
-})(UpdateExperience);
+})(UpdateExperiences);

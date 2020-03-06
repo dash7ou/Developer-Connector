@@ -39,7 +39,7 @@ const Dashboard = ({ setLoading , getProfile, profile: { profile, loading, objUp
 							<Icon icon="mortar-board"  />  Add Education
 						</Button>
 					</ButtonToolbar>
-					<Experience experience ={profile.experience}/>
+					<Experience experience ={profile.experience} objUpdate={objUpdate}/>
 					<Education education={profile.education} openModel={openModel} objUpdate={objUpdate}/>
 				</section>
 			): (
