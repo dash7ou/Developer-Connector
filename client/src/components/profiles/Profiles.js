@@ -4,10 +4,9 @@ import Spinner from '../layout/spinner/Spinner';
 import ProfilesItem from './ProfilesItem';
 import { getProfiles } from '../../actions/profile';
 import {
-	Icon,
-	InputGroup,
-	Input
-} from "rsuite"
+	Icon
+} from "rsuite";
+import SearchInput from "./SearchInput";
 
 const Profiles = ({ profile: { profiles }, getProfiles, history }) => {
 	useEffect(() => {
@@ -20,12 +19,7 @@ const Profiles = ({ profile: { profiles }, getProfiles, history }) => {
 		<section>
 			<h1 className='header_form'>Developers</h1>
 			<p className='form__main-para'><Icon icon="search-peoples" size="2x"/> Browse and connect with developers </p>
-			<InputGroup inside style={{"marginTop": "1rem"}}>
-				<Input placeholder="Search Developer" size="lg"/>
-				<InputGroup.Button>
-			  		<Icon icon="search" />
-				</InputGroup.Button>
-		  	</InputGroup>
+			<SearchInput />
 			{profiles.map((profile) => <ProfilesItem profile={profile} history={history} key={profile._id} />)}
 		</section>
 	);
