@@ -7,8 +7,9 @@ import {
 	Icon
 } from "rsuite";
 import SearchInput from "./SearchInput";
+import profileSelector from "../../selectors/profile";
 
-const Profiles = ({ profile: { profiles }, getProfiles, history }) => {
+const Profiles = ({ profiles , getProfiles, history }) => {
 	useEffect(() => {
 		getProfiles();
 	}, [getProfiles]);
@@ -20,14 +21,17 @@ const Profiles = ({ profile: { profiles }, getProfiles, history }) => {
 			<h1 className='header_form'>Developers</h1>
 			<p className='form__main-para'><Icon icon="search-peoples" size="2x"/> Browse and connect with developers </p>
 			<SearchInput />
-			{profiles.map((profile) => <ProfilesItem profile={profile} history={history} key={profile._id} />)}
+			{profiles.length > 0 ? (profiles.map((profile) => <ProfilesItem profile={profile} history={history} key={profile._id} />)):(<h3>No profiles</h3>)}
 		</section>
 	);
 };
 
-const mapStateToProps = (state) => ({
-	profile: state.profile
-});
+const mapStateToProps = (state) => {
+	const visibleProfile = profileSelector(state.profile.profiles, state.filter)
+	return {
+		profiles: visibleProfile
+	}
+};
 
 export default connect(mapStateToProps, {
 	getProfiles
