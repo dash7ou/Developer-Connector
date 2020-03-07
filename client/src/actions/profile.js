@@ -220,6 +220,12 @@ export const updateExperience = (exp_id, data) => async (dispatch) => {
 			type: UPDATE_EXPERIENCE,
 			data: res.data
 		});
+
+		Notification.success({
+            title: "Update Experience",
+            placement:"topEnd",
+            description: "update your experience suceess."
+        });
 	} catch (err) {
 		dispatch({
 			type: PROFILE_ERROR,
@@ -244,6 +250,11 @@ export const updateEducation = (edu_id, data) => async (dispatch) => {
 			type: UPDATE_EDUCATION,
 			data: res.data
 		});
+		Notification.success({
+            title: "Update Education",
+            placement:"topEnd",
+            description: "update your education suceess."
+        });
 	} catch (err) {
 		dispatch({
 			type: PROFILE_ERROR,
