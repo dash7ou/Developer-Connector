@@ -445,3 +445,14 @@ a {
 .comment_delete {
 	vertical-align: bottom;
 }
+
+
+@media (max-width: 40rem) {
+	.container {
+		width: 90%;
+	}
+
+	.main-para {
+		top: 5rem
+	}
+}

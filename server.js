@@ -17,8 +17,12 @@ const PORT = process.env.PORT || 5000;
 const connection = async () => {
 	try {
 		await DBConnect();
-		await app.listen(PORT);
+		const server = await app.listen(PORT);
 		console.log(`Server started on port ${PORT}`);
+		const io = require("socket.io")(server)
+		io.on('connection', socket =>{
+			console.log("Client connected")
+		})
 	} catch (err) {
 		console.log(err);
 	}
