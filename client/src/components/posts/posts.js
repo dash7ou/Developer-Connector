@@ -9,7 +9,7 @@ import AddPostForm from "./AddPostForm";
 const Posts = ({ history ,getPosts,addLiked,deletePost,addPost, post: { posts }, auth:{user: {_id : author}}}) => {
 	useEffect(() => {
         getPosts();
-        openSocket("/")
+        openSocket("http://localhost:5000")
         return ()=>{
             clearPosts()
         }

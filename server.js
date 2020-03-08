@@ -17,19 +17,13 @@ const PORT = process.env.PORT || 5000;
 const connection = async () => {
 	try {
 		await DBConnect();
-		const server = await app.listen(PORT);
-		console.log(`Server started on port ${PORT}`);
-		const io = require("socket.io")(server)
-		io.on('connection', socket =>{
-			console.log("Client connected")
-		})
 	} catch (err) {
 		console.log(err);
 	}
 };
 
 connection()
-	.then((_) => {
+	.then(async (_) => {
 		// middleware to pass requset as json
 		app.use(express.json({ extended: false }));
 
@@ -55,6 +49,14 @@ connection()
 		}
 
 		app.use(error404);
+
+
+		const server = await app.listen(PORT);
+		console.log(`Server started on port ${PORT}`);
+		const io = require("socket.io")(server);
+		io.on("connection", _ =>{
+			console.log("client connection")
+		})
 	})
 	.catch((err) => {
 		console.log(err);
