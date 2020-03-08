@@ -53,7 +53,7 @@ connection()
 
 		const server = await app.listen(PORT);
 		console.log(`Server started on port ${PORT}`);
-		const io = require("socket.io")(server);
+		const io = require("./socket").init(server);
 		io.on("connection", _ =>{
 			console.log("client connection")
 		})
