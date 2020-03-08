@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import openSocket from "socket.io-client";
 import Spinner from '../layout/spinner/Spinner';
 import { getPosts, addLiked, clearPosts, deletePost, addPost } from '../../actions/post';
 import Post from "./postsItem";
@@ -8,6 +9,7 @@ import AddPostForm from "./AddPostForm";
 const Posts = ({ history ,getPosts,addLiked,deletePost,addPost, post: { posts }, auth:{user: {_id : author}}}) => {
 	useEffect(() => {
         getPosts();
+        openSocket("/")
         return ()=>{
             clearPosts()
         }
