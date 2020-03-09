@@ -1,8 +1,8 @@
 const ErrorResponse = require("../utils/errorResponse");
 const asyncFun = require("../middleware/async");
-const User = require("../models/User");
 const Post = require("../models/Post");
 const { validationResult } = require("express-validator");
+const io = require("../socket")
 
 
 
@@ -66,9 +66,11 @@ exports.createPost = asyncFun( async (req, res, next)=>{
         avatar
     }
 
+
     let post = new Post(newPost);
     await post.save()
     post = post.populate("user", ['name'])
+    io.getIo().emit("posts", {action: "create", post})
     res.status(200).send(post);
 })
 

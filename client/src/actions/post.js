@@ -9,7 +9,8 @@ import{
     GET_POST,
     CLEAR_POST,
     ADD_COMMENT,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    ADD_POST_SOCKET
 }from "./type";
 
 import { Notification } from "rsuite";
@@ -105,6 +106,13 @@ export const addPost = text => async dispatch =>{
             }
         })
     }
+}
+
+export const addPostSocket = post => dispatch =>{
+    dispatch({
+        type: ADD_POST_SOCKET,
+        data: post
+    })
 }
 
 

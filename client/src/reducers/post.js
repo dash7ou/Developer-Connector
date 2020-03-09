@@ -8,7 +8,8 @@ import {
     GET_POST,
     CLEAR_POST,
     ADD_COMMENT,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    ADD_POST_SOCKET
 } from "../actions/type";
 
 
@@ -58,12 +59,13 @@ export default (state = initialState, action)=>{
                 posts
             }
         case ADD_POST:
+        case ADD_POST_SOCKET:
             return{
                 ...state,
                 loading: false,
                 posts: [
-                    ...state.posts,
-                    action.data
+                    action.data,
+                    ...state.posts
                 ]
             }
         case DELETED_POST:
