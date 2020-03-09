@@ -166,7 +166,6 @@ exports.addCommit = asyncFun( async (req, res, next)=>{
         }
         throw new ErrorResponse('',error)
     }
-    console.log(userId)
     post.commit.unshift({
         user: userId,
         text,
@@ -174,6 +173,7 @@ exports.addCommit = asyncFun( async (req, res, next)=>{
         avatar
     });
     await post.save();
+    io.getIo().emit("comment", {action: "create", data: post})
     res.status(200).send({
         message: "Add Comment",
         post
