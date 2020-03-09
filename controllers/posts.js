@@ -115,6 +115,7 @@ exports.likedPost = asyncFun( async (req, res, next)=>{
         user: userId
     });
     await post.save();
+    io.getIo().emit("posts", {action: "addLike", post})
     res.status(200).send({
         message: "Liked post",
         post

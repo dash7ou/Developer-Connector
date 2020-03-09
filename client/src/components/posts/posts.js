@@ -16,6 +16,8 @@ const Posts = ({ history ,getPosts,addLiked,deletePost,addPost,addPostSocket,del
             }else if(data.action === "delete"){
                 deletePostSocket(data.post)
                 getPosts();
+            }else if(data.action === "addLike"){
+                getPosts()
             }
         })
 

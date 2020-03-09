@@ -13,7 +13,6 @@ const CommentItem = ({ history, comment, deleteComment, userLogin, post, getPost
 		const postId = post.toString();
 		const commentId = comment._id.toString();
 		await deleteComment(postId, commentId);
-		// await getPost(postId);
 	};
 	const onGetProfile = () => {
 		const userId = comment.user.toString();
