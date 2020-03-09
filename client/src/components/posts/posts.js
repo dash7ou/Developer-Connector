@@ -1,20 +1,25 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../layout/spinner/Spinner';
-import { getPosts, addLiked, clearPosts, deletePost, addPost, addPostSocket } from '../../actions/post';
+import { getPosts, addLiked, clearPosts, deletePost, addPost, addPostSocket, deletePostSocket } from '../../actions/post';
 import Post from "./postsItem";
 import AddPostForm from "./AddPostForm";
 import openSocket from "socket.io-client";
 
-const Posts = ({ history ,getPosts,addLiked,deletePost,addPost,addPostSocket, post: { posts }, auth:{user: {_id : author}}}) => {
+const Posts = ({ history ,getPosts,addLiked,deletePost,addPost,addPostSocket,deletePostSocket, post: { posts }, auth:{user: {_id : author}}}) => {
 	useEffect(() => {
-        getPosts();
         const socket = openSocket("http://localhost:5000");
         socket.on("posts", (data)=>{
             if(data.action === "create"){
                 addPostSocket(data.post)
+                getPosts();
+            }else if(data.action === "delete"){
+                deletePostSocket(data.post)
+                getPosts();
             }
         })
+
+
         return ()=>{
             clearPosts()
         }
@@ -44,5 +49,6 @@ export default connect(mapStateToProps, {
     addLiked,
     deletePost,
     addPost,
-    addPostSocket
+    addPostSocket,
+    deletePostSocket
 })(Posts);
