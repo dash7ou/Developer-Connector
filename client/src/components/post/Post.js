@@ -8,16 +8,24 @@ import {
     getPost,
     clearPost,
     addComment,
-    deleteComment
+    deleteComment,
+    addCommentSocket
 }from "../../actions/post";
 import AddCommentForm from "./AddCommentForm";
-import CommentItem from "./CommentItem"
+import CommentItem from "./CommentItem";
+import openSocket from "socket.io-client";
 
-const Post = ({ history, getPost, clearPost,addComment,deleteComment, post:{post, loading}, auth:{user: {_id : userLogin}}})=>{
+const Post = ({ history, getPost, clearPost,addComment,deleteComment,addCommentSocket, post:{post, posts}, auth:{user: {_id : userLogin}}})=>{
     const postId = history.location.pathname.split("/")[2].toString();
     useEffect(()=>{
-        getPost(postId)
-    }, [])
+        getPost(postId);
+        const socket = openSocket("http://localhost:5000");
+        socket.on("comment",data =>{
+            if(data.action === "create"){
+                addCommentSocket(data.post)
+            }
+        })
+    }, [posts])
     const backPostsPage = ()=>{
         history.push("/posts")
         clearPost()
@@ -81,5 +89,6 @@ export default connect(mapStateToProps, {
     getPost,
     clearPost,
     addComment,
-    deleteComment
+    deleteComment,
+    addCommentSocket
 })(Post);

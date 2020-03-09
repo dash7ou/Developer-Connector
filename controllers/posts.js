@@ -173,7 +173,7 @@ exports.addCommit = asyncFun( async (req, res, next)=>{
         avatar
     });
     await post.save();
-    io.getIo().emit("comment", {action: "create", data: post})
+    io.getIo().emit("comment", {action: "create", post})
     res.status(200).send({
         message: "Add Comment",
         post
