@@ -9,7 +9,8 @@ import {
     CLEAR_POST,
     ADD_COMMENT,
     DELETE_COMMENT,
-    ADD_POST_SOCKET
+    ADD_POST_SOCKET,
+    ADD_COMMENT_SOCKET
 } from "../actions/type";
 
 
@@ -60,6 +61,7 @@ export default (state = initialState, action)=>{
             }
         case ADD_POST:
         case ADD_POST_SOCKET:
+        case ADD_COMMENT_SOCKET:
             return{
                 ...state,
                 loading: false,

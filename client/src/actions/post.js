@@ -10,7 +10,8 @@ import{
     CLEAR_POST,
     ADD_COMMENT,
     DELETE_COMMENT,
-    ADD_POST_SOCKET
+    ADD_POST_SOCKET,
+    ADD_COMMENT_SOCKET
 }from "./type";
 
 import { Notification } from "rsuite";
@@ -108,13 +109,6 @@ export const addPost = text => async dispatch =>{
     }
 }
 
-export const addPostSocket = post => dispatch =>{
-    dispatch({
-        type: ADD_POST_SOCKET,
-        data: post
-    })
-}
-
 
 export const getPost = id => async dispatch=>{
     try{
@@ -198,5 +192,22 @@ export const clearPost = _ => dispatch=>{
 export const clearPosts = ()=> dispatch =>{
     dispatch({
         type: CLEAR_POSTS
+    })
+}
+
+// Real time app (sockets)
+
+export const addPostSocket = post => dispatch =>{
+    dispatch({
+        type: ADD_POST_SOCKET,
+        data: post
+    })
+}
+
+
+export const addCommentSocket = post => dispatch =>{
+    dispatch({
+        type: ADD_COMMENT_SOCKET,
+        data: post
     })
 }
