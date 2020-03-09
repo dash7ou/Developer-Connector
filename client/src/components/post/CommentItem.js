@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Button,
     Icon
-} from "rsuite"
+} from "rsuite";
+
 
 const CommentItem = ({history, comment, deleteComment, userLogin, post})=>{
     const {
@@ -15,7 +16,6 @@ const CommentItem = ({history, comment, deleteComment, userLogin, post})=>{
         const postId = post.toString();
         const commentId = comment._id.toString()
         await deleteComment(postId , commentId)
-        
     }
     const onGetProfile = ()=>{
         const userId = comment.user.toString();

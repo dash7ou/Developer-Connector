@@ -19,6 +19,9 @@ const Posts = ({ history ,getPosts,addLiked,deletePost,addPost,addPostSocket,del
             }
         })
 
+        getPosts();
+
+
 
         return ()=>{
             clearPosts()
