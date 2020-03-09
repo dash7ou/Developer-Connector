@@ -214,6 +214,8 @@ exports.deletePost = asyncFun(async (req, res , next)=>{
     }
 
     await post.remove();
+    const posts = await Post.find();
+    io.getIo().emit("posts", { action: "delete", post: postId })
     res.status(200).send({
         message: "Post deleted"
     })
