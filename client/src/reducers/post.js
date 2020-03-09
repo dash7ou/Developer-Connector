@@ -12,7 +12,6 @@ import {
     ADD_POST_SOCKET,
     ADD_COMMENT_SOCKET,
     DELETE_POST_SOCKET,
-    DELETE_COMMENT_SOCKET
 } from "../actions/type";
 
 
@@ -102,7 +101,6 @@ export default (state = initialState, action)=>{
                 error: null
             }
         case DELETE_COMMENT:
-        case DELETE_COMMENT_SOCKET:
             return{
                 ...state,
                 post: {

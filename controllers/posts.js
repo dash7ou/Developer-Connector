@@ -261,13 +261,20 @@ exports.deleteCommit = asyncFun(async(req, res, next)=>{
         throw new ErrorResponse('',error)
     }
 
+
+
     if(post.user.toString() === userId.toString()){
+
         const index = post.commit.map(com => com._id.toString()).indexOf(commitId.toString());
         post.commit.splice(index, 1);
     
         await post.save();
+        io.getIo().emit("comment", {action: "delete", comment: commitId})
+
         return res.status(200).send(post)
     }
+
+    
 
     if(commit.user.toString() !== userId.toString()){
         error = {
