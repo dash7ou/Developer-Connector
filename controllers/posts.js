@@ -282,5 +282,6 @@ exports.deleteCommit = asyncFun(async(req, res, next)=>{
     post.commit.splice(index, 1);
 
     await post.save();
+    io.getIo().emit("comment", {action: "delete", post})
     res.status(200).send(post)
 })
