@@ -11,7 +11,8 @@ import{
     ADD_COMMENT,
     DELETE_COMMENT,
     ADD_POST_SOCKET,
-    ADD_COMMENT_SOCKET
+    ADD_COMMENT_SOCKET,
+    DELETE_POST_SOCKET
 }from "./type";
 
 import { Notification } from "rsuite";
@@ -209,5 +210,12 @@ export const addCommentSocket = post => dispatch =>{
     dispatch({
         type: ADD_COMMENT_SOCKET,
         data: post
+    })
+}
+
+export const deletePostSocket = postId => dispatch =>{
+    dispatch({
+        type: DELETE_POST_SOCKET,
+        data: postId
     })
 }
